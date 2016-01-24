@@ -27,15 +27,20 @@ import java.io.File;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import io.github.GoldenDeveloper79.TheBasics.Commands.BanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BasicCommandExecutor;
+import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerChatEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerJoinEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerQuitEvent;
+import io.github.GoldenDeveloper79.TheBasics.Events.BasicServerPingEvent;
 import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
+import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
 public class TheBasics extends JavaPlugin
 {
@@ -54,14 +59,24 @@ public class TheBasics extends JavaPlugin
 	private static ConfigModule groupConfig;
 	private static ConfigModule textConfig;
 	
+	//Economy
+	private static Economy economy;
+	
+	//Permissions
+	private static Permissions permissions;
+	
 	public void onEnable()
 	{
 		plugin = this;
 		
-		loadCommands();
 		loadConfigs();
+		loadCommands();
 		loadEvents();
 		loadGroups();
+		loadPlayers();
+		
+		economy = new Economy();
+		permissions = new Permissions();
 	}
 	
 	public void onDisable()
@@ -74,12 +89,9 @@ public class TheBasics extends JavaPlugin
 	 */
 	private void loadCommands()
 	{
-		if(generalConfig.getBoolean("Modules.Commands"))
-		{
-			cmdExecutor = new BasicCommandExecutor();
-			
-			new BanCMD();
-		}
+		cmdExecutor = new BasicCommandExecutor();
+		
+		new BanCMD();
 	}
 	
 	/*
@@ -108,6 +120,8 @@ public class TheBasics extends JavaPlugin
 		
 		pm.registerEvents(new BasicPlayerJoinEvent(), this);
 		pm.registerEvents(new BasicPlayerQuitEvent(), this);
+		pm.registerEvents(new BasicPlayerChatEvent(), this);
+		pm.registerEvents(new BasicServerPingEvent(), this);
 	}
 	
 	/*
@@ -126,6 +140,54 @@ public class TheBasics extends JavaPlugin
 		{
 			mod.loadInheritance();
 		}
+	}
+	
+	/*
+	 * Loads all the players on the server. Incase someone does /reload -.-
+	 */
+	private void loadPlayers()
+	{
+		for(Player player : Bukkit.getOnlinePlayers())
+		{
+			new PlayerData(player);
+		}
+		
+		//Every 5 minutes
+		new BukkitRunnable()
+		{
+			public void run()
+			{
+				for(PlayerData player : Registery.players.values())
+				{
+					if(!player.isAfk())
+					{
+						player.set("PlayTime", player.getDouble("PlayTime") + 5);
+						
+						if(TheBasics.getGroupConfig().getString("Ranking.Method").equalsIgnoreCase("TIME"))
+						{
+							String groupName = null;
+							
+							for(String group : TheBasics.getGroupConfig().getStringList("Ranking.Ranks"))
+							{
+								if(permissions.groupExist(group))
+								{
+									if(TheBasics.getGroupConfig().getDouble("Ranking.Ranks." + group) <= player.getDouble("PlayTime"))
+									{
+										groupName = group;
+									}
+								}
+							}
+							
+							if(groupName != null && !permissions.getPlayerGroup(player.getPlayer()).getGroupName().equalsIgnoreCase(groupName))
+							{
+								GroupModule group = TheBasics.getPermissions().getGroup(groupName);
+								permissions.addPlayerToGroup(player.getPlayer(), group);
+							}
+						}
+					}
+				}
+			}
+		}.runTaskTimerAsynchronously(this, 0L, 6000L);
 	}
 	
 	/*
@@ -182,5 +244,15 @@ public class TheBasics extends JavaPlugin
 	public static ConfigModule getTextConfig() 
 	{
 		return textConfig;
+	}
+
+	public static Economy getEconomy() 
+	{
+		return economy;
+	}
+
+	public static Permissions getPermissions() 
+	{
+		return permissions;
 	}	
 }

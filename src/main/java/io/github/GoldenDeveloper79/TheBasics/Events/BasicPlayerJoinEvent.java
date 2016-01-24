@@ -43,7 +43,10 @@ public class BasicPlayerJoinEvent implements Listener
 		
 		if(!player.hasPermission("TheBasics.SilentJoin") || !TheBasics.getTextConfig().getBoolean("Join.SilentJoin"))
 		{
-			event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', TheBasics.getTextConfig().getString("Join.Message")));
+			event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', TheBasics.getTextConfig().getString("Join.Message").replace("%p", player.getName())));
+		}else
+		{
+			event.setJoinMessage(null);
 		}
 		
 		BasicUtils.sendMessage(player, TheBasics.getTextConfig().getString("JoinMOTD"));

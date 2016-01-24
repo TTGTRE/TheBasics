@@ -3,12 +3,6 @@
 #(Used for general stuff)#
 ##########################
 
-#To enable/disable certain aspects of TheBasics. (Default=true)
-Modules:
-  Commands: true
-  Groups: true
-  Chat: true
-  
 #The prefix for all messaging/broadcasting. (Default='&0&l[&6&lTheBasics&0&l]&6 ')
 Prefix: '&0&l[&6&lTheBasics&0&l]&6 '
 
@@ -47,12 +41,12 @@ Nickname:
 
 #The chat format for groups.
 #<World> = world name.
-#<Prefix> = prefix name (Must use TheBasics permissions or Vault).
+#<Prefix> = prefix name (Must use TheBasics permissions).
 #<Name> = player name.
 #<Message> = message.
 ChatFormat:
-  Member: '&f[&6<World>&f] <Prefix> &6name &f: &6message'
-  Admin: '&f[&c<World>&f] <Prefix> &cname &f: &cmessage'
+  Member: '&f[&6<World>&f] <Prefix> &6<Name> &f: &6<Message>'
+  Admin: '&f[&c<World>&f] <Prefix> &c<Name> &f: &c<Message>'
   
   
   

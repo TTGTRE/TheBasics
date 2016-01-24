@@ -26,25 +26,23 @@ package io.github.GoldenDeveloper79.TheBasics.Player;
 import java.io.File;
 
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
-import io.github.GoldenDeveloper79.TheBasics.API.BasicEconomy;
-import io.github.GoldenDeveloper79.TheBasics.API.BasicPermissions;
 import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
-import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 
-public abstract class PlayerBase extends ConfigModule implements BasicEconomy, BasicPermissions
+public abstract class PlayerBase extends ConfigModule
 {
 	private Player player;
+	private boolean afk = false;
 	
 	public PlayerBase(Player player)
 	{
 		super(new File("plugins/TheBasics/Players/" + player.getUniqueId().toString() + ".yml"));
 		
 		this.player = player;
+		
+		TheBasics.getLog().severe(getString("Group"));
 	}
 	
 	public boolean homeExist(String name)
@@ -75,187 +73,15 @@ public abstract class PlayerBase extends ConfigModule implements BasicEconomy, B
 		
 		return false;
 	}
-	
-	public double getBalance(OfflinePlayer player)
+
+
+	public boolean isAfk()
 	{
-		return getDouble("Balance");
+		return afk;
 	}
 
-	public double getStartingBalance() 
+	public void setAfk(boolean afk) 
 	{
-		return TheBasics.getGeneralConfig().getDouble("StartingBalance");
-	}
-
-	public double getMaxLoanAmount()
-	{
-		return TheBasics.getGeneralConfig().getDouble("Loaning.MaxAmount");
-	}
-	
-	public void setBalance(OfflinePlayer player, double amount) 
-	{
-		set("Balance", amount);
-	}
-
-	public void resetBalance(OfflinePlayer player) 
-	{
-		set("Balance", getStartingBalance());
-	}
-
-	public void depositBalance(OfflinePlayer player, double amount)
-	{
-		set("Balance", getBalance(player) + amount);
-	}
-
-	public boolean withdrawBalance(OfflinePlayer player, double amount) 
-	{
-		if(hasBalance(player, amount))
-		{
-			set("Balance", getBalance(player) - amount);
-			
-			return true;
-		}
-		
-		return false;
-	}
-
-	public boolean hasBalance(OfflinePlayer player, double amount) 
-	{
-		if(canLoan())
-		{
-			if((getBalance(player) - amount) >= getMaxLoanAmount())
-			{
-				return true;
-			}
-		}else 
-		{
-			if((getBalance(player) - amount) >= 0)
-			{
-				return true;
-			}
-		}
-		
-		return false;
-	}
-
-	public boolean loanAmount(OfflinePlayer player, double amount)
-	{
-		return withdrawBalance(player, amount);
-	}
-	
-	public boolean canLoan()
-	{	
-		return TheBasics.getGeneralConfig().getBoolean("Loaning.Enabled");
-	}
-	
-	public GroupModule getGroup(String groupName) 
-	{
-		if(Registery.groups.containsKey(groupName))
-		{
-			return Registery.groups.get(groupName);
-		}
-		
-		return null;
-	}
-
-	public GroupModule getPlayerGroup(Player player)
-	{
-		return getGroup(getString("Group"));
-	}
-	
-	public GroupModule getDefaultGroup()
-	{
-		for(GroupModule group : Registery.groups.values())
-		{
-			if(group.isDefault())
-			{
-				return group;
-			}
-		}
-		
-		return null;
-	}
-	
-	public boolean addPlayerToGroup(Player player, GroupModule group) 
-	{
-		if(!playerInGroup(player, group))
-		{
-			group.getPlayers().add(player.getName());
-			
-			return true;
-		}
-		
-		return false;
-	}
-
-	public boolean removePlayerFromGroup(Player player, GroupModule group) 
-	{
-		if(playerInGroup(player, group))
-		{
-			group.getPlayers().remove(player.getName());
-			
-			return true;
-		}
-		
-		return false;
-	}
-
-	public boolean playerInGroup(Player player, GroupModule group) 
-	{
-		return group.getPlayers().contains(player.getName());
-	}
-	
-	public boolean groupHasPermission(GroupModule group, String permission)
-	{
-		return group.getPermissions().contains(permission);
-	}
-	
-	public boolean addPermissionToGroup(GroupModule group, String permission)
-	{
-		if(!groupHasPermission(group, permission))
-		{
-			group.addPermission(permission);
-			
-			return true;
-		}
-		
-		return false;
-	}
-
-	public boolean removePermissionFromGroup(GroupModule group, String permission) 
-	{
-		if(groupHasPermission(group, permission))
-		{
-			group.removePermission(permission);
-			
-			return true;
-		}
-		
-		return false;
-	}
-
-	public boolean groupExist(String name)
-	{
-		return Registery.groups.containsKey(name);
-	}
-
-	public boolean createGroup(String name) 
-	{
-		if(!groupExist(name))
-		{
-			ConfigModule conf = TheBasics.getGroupConfig();
-			
-			conf.set("Groups." + name + ".Default", false);
-			conf.set("Groups." + name + ".Prefix", "[" + name + "] ");
-			conf.set("Groups." + name + ".Permissions", new String[] {});
-			
-			return true;
-		}
-		
-		return false;
-	}
-	
-	public void setInheritance(GroupModule to, GroupModule from) 
-	{
-		to.getPermissions().addAll(from.getPermissions());
+		this.afk = afk;
 	}
 }

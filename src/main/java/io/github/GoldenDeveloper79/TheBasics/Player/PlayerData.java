@@ -25,18 +25,20 @@ package io.github.GoldenDeveloper79.TheBasics.Player;
 
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.PermissionAttachment;
 
 import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
+import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 
 public class PlayerData extends PlayerBase
 {
 	private Player player;
 	private String name;
 	private UUID uuid;
+	private PermissionAttachment perm;
 	
 	public PlayerData(Player player)
 	{
@@ -51,12 +53,13 @@ public class PlayerData extends PlayerBase
 		
 		Location loc = player.getLocation();
 		
-		if(!Bukkit.getOfflinePlayer(player.getUniqueId()).hasPlayedBefore())
+		if(!TheBasics.getDataConfig().contains("Players." + name))
 		{
 			set("Name", player.getName());
 			set("LastLogin", System.currentTimeMillis());
 			set("LastLogOut", 0);
-			set("Balance", getStartingBalance());
+			set("PlayTime", 0);
+			set("Balance", TheBasics.getEconomy().getStartingBalance());
 
 			set("LastLocation.World", loc.getWorld().getName());
 			set("LastLocation.X", loc.getX());
@@ -77,7 +80,7 @@ public class PlayerData extends PlayerBase
 			set("Banned.Time", 0);
 			set("Banned.Reason", "none");
 			
-			set("Group", getDefaultGroup());
+			set("Group", TheBasics.getPermissions().getDefaultGroup().getGroupName());
 		}
 		
 		//Only will update on quit/join.
@@ -92,14 +95,28 @@ public class PlayerData extends PlayerBase
 		update("LastLocation.Yaw", loc.getYaw());
 		update("LastLocation.Pitch", loc.getPitch());
 		
-		getPlayerGroup(player).getPlayers().add(name);
+		GroupModule group = TheBasics.getPermissions().getPlayerGroup(player);
+		group.getPlayers().add(name);
+		
+		perm = player.addAttachment(TheBasics.getPlugin());
+		
+		for(String permission : group.getPermissions())
+		{
+			if(!permission.contains("-"))
+			{
+				perm.setPermission(permission.toLowerCase(), true);
+			}else if(permission.contains("-"))
+			{
+				perm.setPermission(permission.toLowerCase(), false);
+			}
+		}
 		
 		TheBasics.getDataConfig().update("Players." + name, player.getUniqueId().toString());
 	}
 	
 	public void quit()
 	{
-		getPlayerGroup(player).getPlayers().remove(name);
+		TheBasics.getPermissions().getPlayerGroup(player).getPlayers().remove(name);
 		update("LastLogOut", System.currentTimeMillis());
 		
 		Location loc = player.getLocation();

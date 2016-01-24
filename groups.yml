@@ -13,3 +13,12 @@ Groups:
     - '*'
     Inheritance:
     - Member
+
+Ranking:
+  #The method of ranking. You get two choices: COST or TIME.(Default=COST)
+  Method: TIME
+  
+  #Depending on the method, these values can either be time in minutes or cost in ingame currency.
+  Ranks:
+    Member: 50
+    Admin: 100

@@ -1,0 +1,8 @@
+name: TheBasics
+version: 1.0
+main: io.github.GoldenDeveloper79.TheBasics.TheBasics
+description: A basic set of functions for Minecraft servers.
+commands:
+  ban:
+    description: Bans a player from the server.
+    usage: /ban <name> <reason>

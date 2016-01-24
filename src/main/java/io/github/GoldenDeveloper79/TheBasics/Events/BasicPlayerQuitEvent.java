@@ -45,7 +45,10 @@ public class BasicPlayerQuitEvent implements Listener
 		
 		if(!player.hasPermission("TheBasics.SilentQuit") || !TheBasics.getTextConfig().getBoolean("Quit.SilentQuit"))
 		{
-			event.setQuitMessage(ChatColor.translateAlternateColorCodes('&', TheBasics.getTextConfig().getString("Quit.Message")));
+			event.setQuitMessage(ChatColor.translateAlternateColorCodes('&', TheBasics.getTextConfig().getString("Quit.Message").replace("%p", player.getName())));
+		}else
+		{
+			event.setQuitMessage(null);
 		}
 	}
 	

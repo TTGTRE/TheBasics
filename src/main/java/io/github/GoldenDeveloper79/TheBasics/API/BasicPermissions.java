@@ -23,7 +23,7 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.API;
 
-import org.bukkit.entity.Player;
+import org.bukkit.OfflinePlayer;
 
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 
@@ -37,7 +37,7 @@ public interface BasicPermissions
 	/*
 	 * Gets a the group a player is in.
 	 */
-	GroupModule getPlayerGroup(Player player);
+	GroupModule getPlayerGroup(OfflinePlayer player);
 	
 	/*
 	 * Gets the default group.
@@ -47,17 +47,17 @@ public interface BasicPermissions
 	/*
 	 * Adds a player to a group.
 	 */
-	boolean addPlayerToGroup(Player player, GroupModule group);
+	boolean addPlayerToGroup(OfflinePlayer player, GroupModule group);
 	
 	/*
 	 * Removes a player from a group.
 	 */
-	boolean removePlayerFromGroup(Player player, GroupModule group);
+	boolean removePlayerFromGroup(OfflinePlayer player, GroupModule group);
 	
 	/*
 	 * Checks if a player is in a group.
 	 */
-	boolean playerInGroup(Player player, GroupModule group);
+	boolean playerInGroup(OfflinePlayer player, GroupModule group);
 	
 	/*
 	 * Checks if a group has a certain permission.

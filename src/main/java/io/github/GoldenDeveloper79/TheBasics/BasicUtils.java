@@ -102,10 +102,10 @@ public class BasicUtils
 	 */
 	public static FileConfiguration getConfig(String offlinePlayer)
 	{
-		if(TheBasics.getDataConfig().contains("Players." + offlinePlayer))
+		File file = getFile(offlinePlayer);
+		
+		if(file != null)
 		{
-			File file = new File("plugins/TheBasics/Players/" + TheBasics.getDataConfig().getString("Players." + offlinePlayer) + ".yml");
-			
 			if(file.exists())
 			{
 				return YamlConfiguration.loadConfiguration(file);
@@ -113,6 +113,35 @@ public class BasicUtils
 		}
 		
 		return null;
+	}
+	
+	/*
+	 * Gets the file for offline players.
+	 */
+	public static File getFile(String offlinePlayer)
+	{
+		if(TheBasics.getDataConfig().contains("Players." + offlinePlayer))
+		{
+			return new File("plugins/TheBasics/Players/" + TheBasics.getDataConfig().getString("Players." + offlinePlayer) + ".yml");
+		}
+		
+		return null;
+	}
+	
+	/*
+	 * Saves the file for offline players.
+	 */
+	public static boolean saveFile(String offlinePlayer)
+	{
+		try
+		{
+			getConfig(offlinePlayer).save(getFile(offlinePlayer));
+			return true;
+		}catch(Exception e)
+		{
+			TheBasics.getLog().severe("Could not save the config for the offline player " + offlinePlayer + "!");
+			return false;
+		}
 	}
 	
 	/*
