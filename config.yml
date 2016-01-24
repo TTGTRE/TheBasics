@@ -1,0 +1,59 @@
+##########################
+#    General Settings    #
+#(Used for general stuff)#
+##########################
+
+#To enable/disable certain aspects of TheBasics. (Default=true)
+Modules:
+  Commands: true
+  Groups: true
+  Chat: true
+  
+#The prefix for all messaging/broadcasting. (Default='&0&l[&6&lTheBasics&0&l]&6 ')
+Prefix: '&0&l[&6&lTheBasics&0&l]&6 '
+
+#List of command to disable, can include any of this plugin and others.
+DisabledCommmands: []
+#- slap
+#- hug
+
+##########################
+#    Economy Settings    #
+#(Used for economy stuff)#
+##########################
+
+#The balance that all players start with. (Default=250)
+StartingBalance: 250
+
+Loaning:
+  #If players should be allowed to loan. (Defualt=true)
+  Enabled: true
+  
+  #The maximum amount a player can loan for. (Default=500)
+  MaxAmount: 500
+
+#######################
+#    Chat Settings    #
+#(Used for chat stuff)#
+#######################
+
+Nickname:
+  #If the command /nick should be allowed.(Default=true)
+  Enabled: true
+  #The maximum length of a nick. Includes coloring/style. Ex: &6&lGoldenDeveloper is 19. (Default = 20)
+  MaxLength: 20
+  #The minimum length of a nick. Includes coloring/style. Ex: &6&lAu_79 is 9. (Default = 8) 
+  MinLength: 8
+
+#The chat format for groups.
+#<World> = world name.
+#<Prefix> = prefix name (Must use TheBasics permissions or Vault).
+#<Name> = player name.
+#<Message> = message.
+ChatFormat:
+  Member: '&f[&6<World>&f] <Prefix> &6name &f: &6message'
+  Admin: '&f[&c<World>&f] <Prefix> &cname &f: &cmessage'
+  
+  
+  
+  

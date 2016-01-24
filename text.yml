@@ -1,0 +1,30 @@
+#The server motd on the server list.
+ListMOTD: '&6Welcome to -=Server=-. It is powered by TheBasics.'
+
+#The join message motd.
+JoinMOTD: '&6Welcome back to -=Server=-!'
+
+Rules:
+  #The amount of rules to list per page. (Default = 3)
+  PerPage: 3
+  #The list of actual rules.
+  List:
+  - '&4Please do not swear!'
+  - '&4Please do not grief!'
+  - '&4Please smile more!'
+  #The formating of the rules.
+  Format:
+    #What should be displayed on the top.
+    Top: '&6&l----------[Rules]----------'
+    Bottom: '&6&l---------------------------'
+
+Join:
+  #The message to be broadcasted when a player joins the server.
+  Message: '&6%p has joined the server!'
+  #If players with the permission 'TheBasics.SilentJoin' should not be broadcasted on join. (Defaut = true)
+  SilentJoin: true
+Quit:
+  #The message to be broadcasted when a player quits the 
+  Message: '&6%p has left the server!'
+  #If players with the permission 'TheBasics.SilentQuit' should not be broadcasted on quit. (Default = true)
+  SilentQuit: true
