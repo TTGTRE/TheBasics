@@ -2,13 +2,13 @@
 Groups:
   Member:
     Default: true
-    Prefix: '&f[&6Member&f] '
+    Prefix: '&f[&6Member&f]'
     Permissions:
     - TheBasics.Help
     - TheBasics.Kit.Starter
   Admin:
     Default: false
-    Prefix: '&f[&cAdmin&f] '
+    Prefix: '&f[&cAdmin&f]'
     Permissions:
     - '*'
     Inheritance:

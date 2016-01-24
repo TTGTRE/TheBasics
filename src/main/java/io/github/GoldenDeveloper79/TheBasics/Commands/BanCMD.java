@@ -44,6 +44,7 @@ public class BanCMD extends CommandModule
 	public void performCommand(Player player, String[] args)
 	{
 		PlayerData data = BasicUtils.getData(args[0]);
+
 		String reason = "&cYou have been banned by " + player.getName() + "!";
 		
 		if(args.length > 1)
@@ -57,6 +58,9 @@ public class BanCMD extends CommandModule
 		
 		Bukkit.getBanList(Type.NAME).addBan(args[0], reason, null, player.getName());
 		data.getPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
+		
+		BasicUtils.notify("TheBasics.Ban.Notify", "&6The player " + player.getName() + " has banned the player " + args[0] + " for " + reason + "!");
+		BasicUtils.sendMessage(player, "&6You have banned " + args[0] + "!");
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
@@ -75,5 +79,8 @@ public class BanCMD extends CommandModule
 		
 		Bukkit.getBanList(Type.NAME).addBan(args[0], reason, null, console.getName());
 		data.getPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
+		
+		BasicUtils.notify("TheBasics.Ban.Notify", "&6The player " + console.getName() + " has banned the player " + args[0] + " for " + reason + "!");
+		BasicUtils.sendMessage(console, "You have banned " + args[0] + "!");
 	}
 }

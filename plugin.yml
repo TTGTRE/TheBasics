@@ -5,4 +5,25 @@ description: A basic set of functions for Minecraft servers.
 commands:
   ban:
     description: Bans a player from the server.
-    usage: /ban <name> <reason>
+    usage: /ban <name> <reason>.
+  feed:
+    description: Feeds yourself or another player.
+    usage: /feed <name>.
+  fly:
+    description: Toggles flying for yourself or another player.
+    usage: /fly <name>.
+  heal:
+    description: Heals yourself or another player.
+    usage: /heal <name>.
+  kick:
+    description: Kicks a player from the server.
+    usage: /kick <name> <reason>.
+  playtime:
+    description: Gets the play time of yourself or another player.
+    usage: /playtime <name>.
+  ptime:
+    description: Gets the play time of yourself or another player.
+    usage: /ptime <name>.
+  reload:
+    description: Blocks reloading on the server.
+    usage: /reload

@@ -1,6 +1,7 @@
 package io.github.GoldenDeveloper79.TheBasics;
 
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 import io.github.GoldenDeveloper79.TheBasics.API.BasicPermissions;
 import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
@@ -23,7 +24,9 @@ public class Permissions implements BasicPermissions
 	{
 		if(player.isOnline())
 		{
-			return Registery.groups.get(BasicUtils.getData(player.getName()).get("Group"));
+			String groupName = BasicUtils.getData((Player) player).getString("Group");
+			
+			return getGroup(groupName);
 		}else
 		{
 			return getGroup(BasicUtils.getConfig(player.getName()).getString("Group"));

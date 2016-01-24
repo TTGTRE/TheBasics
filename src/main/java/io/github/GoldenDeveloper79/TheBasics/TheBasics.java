@@ -34,6 +34,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import io.github.GoldenDeveloper79.TheBasics.Commands.BanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BasicCommandExecutor;
+import io.github.GoldenDeveloper79.TheBasics.Commands.FeedCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.FlyCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.HealCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.KickCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.PlayTime;
+import io.github.GoldenDeveloper79.TheBasics.Commands.ReloadCMD;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerChatEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerJoinEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerQuitEvent;
@@ -82,17 +88,12 @@ public class TheBasics extends JavaPlugin
 	public void onDisable()
 	{
 		plugin = null;
+		
+		Registery.commands.clear();
+		Registery.groups.clear();
+		Registery.players.clear();
 	}
 
-	/*
-	 * Loads all the commands and the executor.
-	 */
-	private void loadCommands()
-	{
-		cmdExecutor = new BasicCommandExecutor();
-		
-		new BanCMD();
-	}
 	
 	/*
 	 * Loads all the configs, files, and directories.
@@ -111,6 +112,22 @@ public class TheBasics extends JavaPlugin
 		textConfig = new ConfigModule(new File(mainDir, "text.yml"));
 	}
 	
+	/*
+	 * Loads all the commands and the executor.
+	 */
+	private void loadCommands()
+	{
+		cmdExecutor = new BasicCommandExecutor();
+		
+		new BanCMD();
+		new FeedCMD();
+		new FlyCMD();
+		new HealCMD();
+		new KickCMD();
+		new PlayTime();
+		new ReloadCMD();
+	}
+
 	/*
 	 * Loads all the events, listeners, and registers them.
 	 */

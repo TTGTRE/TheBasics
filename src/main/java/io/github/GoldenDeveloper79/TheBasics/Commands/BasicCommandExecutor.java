@@ -72,9 +72,12 @@ public class BasicCommandExecutor implements CommandExecutor
 					{
 						mod.performCommand((Player) sender, args);
 					//If the sender is a console.
-					}else if(sender instanceof ConsoleCommandSender)
+					}else if(sender instanceof ConsoleCommandSender && args.length >= 1)
 					{
 						mod.performCommand((ConsoleCommandSender) sender, args);
+					}else
+					{
+						BasicUtils.sendMessage(sender, "&cYou must be a player to perform this command!");
 					}
 				}else
 				{
