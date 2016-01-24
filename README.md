@@ -12,6 +12,11 @@ A set of basic functions for Minecraft servers. More details coming.
 
 **Commands**
 - /ban (Bans a player from the server).
+- /feed (Feeds yourself or another player).
+- /fly (Toggles flying for yourself or another player)
+- /heal (Heals yourself or another player).
+- /kick (Kicks a player from the server).
+- /playtime (/ptime) (Checks the playtime for yourself or another player).
 
 **Permissions**
 - The permissions are 'TheBasics.CommandLabel".
