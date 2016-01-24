@@ -30,6 +30,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import io.github.GoldenDeveloper79.TheBasics.Registery;
+import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 
 public class PlayerData extends PlayerBase
 {
@@ -92,6 +93,8 @@ public class PlayerData extends PlayerBase
 		update("LastLocation.Pitch", loc.getPitch());
 		
 		getPlayerGroup(player).getPlayers().add(name);
+		
+		TheBasics.getDataConfig().update("Players." + name, player.getUniqueId().toString());
 	}
 	
 	public void quit()

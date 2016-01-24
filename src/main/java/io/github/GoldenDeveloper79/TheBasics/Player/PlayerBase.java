@@ -203,4 +203,59 @@ public abstract class PlayerBase extends ConfigModule implements BasicEconomy, B
 	{
 		return group.getPlayers().contains(player.getName());
 	}
+	
+	public boolean groupHasPermission(GroupModule group, String permission)
+	{
+		return group.getPermissions().contains(permission);
+	}
+	
+	public boolean addPermissionToGroup(GroupModule group, String permission)
+	{
+		if(!groupHasPermission(group, permission))
+		{
+			group.addPermission(permission);
+			
+			return true;
+		}
+		
+		return false;
+	}
+
+	public boolean removePermissionFromGroup(GroupModule group, String permission) 
+	{
+		if(groupHasPermission(group, permission))
+		{
+			group.removePermission(permission);
+			
+			return true;
+		}
+		
+		return false;
+	}
+
+	public boolean groupExist(String name)
+	{
+		return Registery.groups.containsKey(name);
+	}
+
+	public boolean createGroup(String name) 
+	{
+		if(!groupExist(name))
+		{
+			ConfigModule conf = TheBasics.getGroupConfig();
+			
+			conf.set("Groups." + name + ".Default", false);
+			conf.set("Groups." + name + ".Prefix", "[" + name + "] ");
+			conf.set("Groups." + name + ".Permissions", new String[] {});
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public void setInheritance(GroupModule to, GroupModule from) 
+	{
+		to.getPermissions().addAll(from.getPermissions());
+	}
 }

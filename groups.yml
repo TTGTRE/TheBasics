@@ -11,3 +11,5 @@ Groups:
     Prefix: '&f[&cAdmin&f] '
     Permissions:
     - '*'
+    Inheritance:
+    - Member

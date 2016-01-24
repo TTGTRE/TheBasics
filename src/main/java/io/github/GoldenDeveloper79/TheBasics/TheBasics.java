@@ -50,6 +50,7 @@ public class TheBasics extends JavaPlugin
 	private static File mainDir;
 	private static File playerDir;
 	private static ConfigModule generalConfig;
+	private static ConfigModule dataConfig;
 	private static ConfigModule groupConfig;
 	private static ConfigModule textConfig;
 	
@@ -93,6 +94,7 @@ public class TheBasics extends JavaPlugin
 		if(!playerDir.exists()) playerDir.mkdirs();
 		
 		generalConfig = new ConfigModule(new File(mainDir, "config.yml"));
+		dataConfig = new ConfigModule(new File(mainDir, "data.yml"));
 		groupConfig = new ConfigModule(new File(mainDir, "groups.yml"));
 		textConfig = new ConfigModule(new File(mainDir, "text.yml"));
 	}
@@ -113,9 +115,16 @@ public class TheBasics extends JavaPlugin
 	 */
 	private void loadGroups()
 	{
+		//Loads the groups up.
 		for(String groupNames : groupConfig.getConfig().getConfigurationSection("Groups").getKeys(false))
 		{
 			new GroupModule(groupNames);
+		}
+		
+		//Loads the inheritances.
+		for(GroupModule mod : Registery.groups.values())
+		{
+			mod.loadInheritance();
 		}
 	}
 	
@@ -150,9 +159,17 @@ public class TheBasics extends JavaPlugin
 	{
 		return generalConfig;
 	}
+	
+	/*
+	 * Gets the data config for the plugin. Includes things like offline players. (data.yml)
+	 */
+	public static ConfigModule getDataConfig()
+	{
+		return dataConfig;
+	}
 
 	/*
-	 * Gets the group config for the plugin. Includes groups, permissions, and ranking system.
+	 * Gets the group config for the plugin. Includes groups, permissions, and ranking system. (groups.yml)
 	 */
 	public static ConfigModule getGroupConfig()
 	{

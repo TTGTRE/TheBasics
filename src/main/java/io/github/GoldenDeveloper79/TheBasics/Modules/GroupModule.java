@@ -38,6 +38,7 @@ public class GroupModule
 	private String prefix;
 	private List<String> permissions;
 	private List<String> players;
+	private List<String> inheritance;
 	private boolean isDefault = false;
 	
 	public GroupModule(String name)
@@ -47,9 +48,17 @@ public class GroupModule
 			this.groupName = name;
 			this.config = TheBasics.getGroupConfig().getConfig().getConfigurationSection("Groups." + name);
 			this.prefix = config.getString("Prefix");
-			this.players = new ArrayList<String>();
 			this.permissions = config.getStringList("Permissions");
-		
+			this.players = new ArrayList<String>();
+			
+			if(config.contains("Inheritance"))
+			{
+				this.inheritance = config.getStringList("Inheritance");
+			}else
+			{
+				this.inheritance = new ArrayList<String>();
+			}
+			
 			if(config.contains("Default") && config.getBoolean("Default"))
 			{
 				this.isDefault = true;
@@ -60,6 +69,39 @@ public class GroupModule
 		{
 			TheBasics.getLog().severe("Could not create the group " + name + "! Please check groups.yml!");
 		}
+	}
+	
+	public void loadInheritance()
+	{
+		for(String inherit : inheritance)
+		{
+			if(Registery.groups.containsKey(inherit))
+			{
+				GroupModule mod = Registery.groups.get(inherit);
+				permissions.addAll(mod.getPermissions());
+			}
+		}
+	}
+	
+	public void addPermission(String permission)
+	{
+		permissions.add(permission);
+		
+		TheBasics.getGroupConfig().set("Groups." + groupName + ".Permissions", permissions);
+	}
+	
+	public void removePermission(String permission)
+	{
+		permissions.remove(permission);
+		
+		TheBasics.getGroupConfig().set("Groups." + groupName + ".Permissions", permissions);
+	}
+	
+	public void setPrefix(String prefix)
+	{
+		this.prefix = prefix;
+		
+		TheBasics.getGroupConfig().set("Groups." + groupName + ".Prefix", prefix);
 	}
 	
 	public String getGroupName() 

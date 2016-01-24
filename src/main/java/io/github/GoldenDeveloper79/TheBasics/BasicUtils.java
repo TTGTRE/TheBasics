@@ -23,8 +23,12 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics;
 
+import java.io.File;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
@@ -89,6 +93,23 @@ public class BasicUtils
 		if(Registery.players.containsKey(player))
 		{
 			return Registery.players.get(player);
+		}
+		return null;
+	}
+	
+	/*
+	 * Gets the config for offline players.
+	 */
+	public static FileConfiguration getConfig(String offlinePlayer)
+	{
+		if(TheBasics.getDataConfig().contains("Players." + offlinePlayer))
+		{
+			File file = new File("plugins/TheBasics/Players/" + TheBasics.getDataConfig().getString("Players." + offlinePlayer) + ".yml");
+			
+			if(file.exists())
+			{
+				return YamlConfiguration.loadConfiguration(file);
+			}
 		}
 		
 		return null;
