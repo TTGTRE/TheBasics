@@ -14,7 +14,7 @@ A set of basic functions for Minecraft servers. More details coming.
 - /ban (Bans a player from the server).
 
 **Permissions**
-- The permissions are 'TheBasics.<CommandLabel>".
+- The permissions are 'TheBasics.CommandLabel".
 
 **Economy**
 - Can easily exchange money.
