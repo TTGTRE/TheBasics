@@ -17,7 +17,8 @@ A set of basic functions for Minecraft servers. More details coming.
 - /heal (Heals yourself or another player).
 - /kick (Kicks a player from the server).
 - /playtime (/ptime) (Checks the playtime for yourself or another player).
-
+- More...
+- 
 **Permissions**
 - The permissions are 'TheBasics.CommandLabel".
 
@@ -31,6 +32,7 @@ A set of basic functions for Minecraft servers. More details coming.
 - Easily can create groups.
 - Easily modify the permissions, prefix, and default group.
 - Can modify what group players are in.
+- Easy configurable ranking system. Can either be paid to rankup or over time to rankup (Configurable).
 
 **Chat**
 - Easily modify chat format per group.
