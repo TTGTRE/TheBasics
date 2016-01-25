@@ -12,11 +12,15 @@ A set of basic functions for Minecraft servers. More details coming.
 
 **Commands**
 - /ban (Bans a player from the server).
+- /clearinventory (/ci) (Clears yours or another players inventory).
 - /feed (Feeds yourself or another player).
-- /fly (Toggles flying for yourself or another player)
+- /fly (Toggles flying for yourself or another player).
+- /give (Gives yourself or another player an item).
 - /heal (Heals yourself or another player).
 - /kick (Kicks a player from the server).
 - /playtime (/ptime) (Checks the playtime for yourself or another player).
+- /rules (Sends yourself or another player a list of rules).
+- /time (Gets or sets the time of the world you are in).
 - More...
 - 
 **Permissions**
