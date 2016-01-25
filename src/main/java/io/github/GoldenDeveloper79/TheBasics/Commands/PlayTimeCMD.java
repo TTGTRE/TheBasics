@@ -10,11 +10,11 @@ import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
 
-public class PlayTime extends CommandModule
+public class PlayTimeCMD extends CommandModule
 {
-	public PlayTime() 
+	public PlayTimeCMD() 
 	{
-		super(new String[] {"playtime"}, 0, 1, MultiPlayer.SOMETIMES);
+		super(new String[] {"playtime", "ptime"}, 0, 1, MultiPlayer.SOMETIMES);
 	}
 
 	public void performCommand(Player player, String[] args) 

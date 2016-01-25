@@ -4,6 +4,9 @@ ListMOTD: '&6Welcome to -=Server=-. It is powered by TheBasics.'
 #The join message motd.
 JoinMOTD: '&6Welcome back to -=Server=-!'
 
+#The join message motd for new players.
+FirstJoinMOTD: '&6Welcome to -=Server=-!'
+
 Rules:
   #The amount of rules to list per page. (Default = 3)
   PerPage: 3

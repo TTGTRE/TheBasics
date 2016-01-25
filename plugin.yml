@@ -6,6 +6,10 @@ commands:
   ban:
     description: Bans a player from the server.
     usage: /ban <name> <reason>.
+  clearinventory:
+    description: Clears your or another players inventory.
+    usage: /clearinventory <name>
+    aliases: [ci]
   feed:
     description: Feeds yourself or another player.
     usage: /feed <name>.
@@ -24,6 +28,7 @@ commands:
   playtime:
     description: Gets the play time of yourself or another player.
     usage: /playtime <name>.
-  ptime:
-    description: Gets the play time of yourself or another player.
-    usage: /ptime <name>.
+    aliases: [ptime]
+  time:
+    description: Gets the time or sets the time of the world you are in.
+    usage: /time set <day/night>

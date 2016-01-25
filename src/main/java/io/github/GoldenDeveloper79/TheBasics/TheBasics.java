@@ -34,12 +34,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import io.github.GoldenDeveloper79.TheBasics.Commands.BanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BasicCommandExecutor;
+import io.github.GoldenDeveloper79.TheBasics.Commands.ClearInventory;
 import io.github.GoldenDeveloper79.TheBasics.Commands.FeedCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.FlyCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.GiveCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.HealCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.KickCMD;
-import io.github.GoldenDeveloper79.TheBasics.Commands.PlayTime;
+import io.github.GoldenDeveloper79.TheBasics.Commands.PlayTimeCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.TimeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerChatEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerJoinEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerQuitEvent;
@@ -128,12 +130,14 @@ public class TheBasics extends JavaPlugin
 		cmdExecutor = new BasicCommandExecutor();
 		
 		new BanCMD();
+		new ClearInventory();
 		new FeedCMD();
 		new FlyCMD();
 		new GiveCMD();
 		new HealCMD();
 		new KickCMD();
-		new PlayTime();
+		new PlayTimeCMD();
+		new TimeCMD();
 	}
 
 	/*
