@@ -36,10 +36,10 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.BanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BasicCommandExecutor;
 import io.github.GoldenDeveloper79.TheBasics.Commands.FeedCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.FlyCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.GiveCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.HealCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.KickCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.PlayTime;
-import io.github.GoldenDeveloper79.TheBasics.Commands.ReloadCMD;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerChatEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerJoinEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerQuitEvent;
@@ -57,7 +57,7 @@ public class TheBasics extends JavaPlugin
 	//Commands
 	private static BasicCommandExecutor cmdExecutor;
 	
-	//Configs & Files
+	//Configurations & Files
 	private static File mainDir;
 	private static File playerDir;
 	private static ConfigModule generalConfig;
@@ -79,19 +79,27 @@ public class TheBasics extends JavaPlugin
 		loadCommands();
 		loadEvents();
 		loadGroups();
-		loadPlayers();
-		
+
 		economy = new Economy();
 		permissions = new Permissions();
+		
+		loadPlayers();
 	}
 	
 	public void onDisable()
 	{
-		plugin = null;
+		for(PlayerData data : Registery.players.values())
+		{
+			data.quit();
+		}
 		
-		Registery.commands.clear();
-		Registery.groups.clear();
+		plugin = null;
+		economy = null;
+		permissions = null;
+		
 		Registery.players.clear();
+		Registery.groups.clear();
+		Registery.commands.clear();
 	}
 
 	
@@ -122,10 +130,10 @@ public class TheBasics extends JavaPlugin
 		new BanCMD();
 		new FeedCMD();
 		new FlyCMD();
+		new GiveCMD();
 		new HealCMD();
 		new KickCMD();
 		new PlayTime();
-		new ReloadCMD();
 	}
 
 	/*
@@ -160,7 +168,7 @@ public class TheBasics extends JavaPlugin
 	}
 	
 	/*
-	 * Loads all the players on the server. Incase someone does /reload -.-
+	 * Loads all the players on the server. In case someone does /reload -.-
 	 */
 	private void loadPlayers()
 	{
@@ -204,7 +212,7 @@ public class TheBasics extends JavaPlugin
 					}
 				}
 			}
-		}.runTaskTimerAsynchronously(this, 0L, 6000L);
+		}.runTaskTimerAsynchronously(this, 60L, 6000L);
 	}
 	
 	/*

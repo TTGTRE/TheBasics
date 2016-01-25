@@ -40,7 +40,7 @@ public class BasicPlayerJoinEvent implements Listener
 	{
 		Player player = event.getPlayer();
 		new PlayerData(player);
-		
+	
 		if(!player.hasPermission("TheBasics.SilentJoin") || !TheBasics.getTextConfig().getBoolean("Join.SilentJoin"))
 		{
 			event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', TheBasics.getTextConfig().getString("Join.Message").replace("%p", player.getName())));

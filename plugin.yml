@@ -12,6 +12,9 @@ commands:
   fly:
     description: Toggles flying for yourself or another player.
     usage: /fly <name>.
+  give:
+    description: Gives yourself or another player an item.
+    usage: /give <name> <itemID:itemData/itemName> <amount>.
   heal:
     description: Heals yourself or another player.
     usage: /heal <name>.
@@ -24,6 +27,3 @@ commands:
   ptime:
     description: Gets the play time of yourself or another player.
     usage: /ptime <name>.
-  reload:
-    description: Blocks reloading on the server.
-    usage: /reload

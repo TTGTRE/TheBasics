@@ -14,7 +14,7 @@ public class PlayTime extends CommandModule
 {
 	public PlayTime() 
 	{
-		super(new String[] {"playtime, ptime"}, 0, 1, MultiPlayer.SOMETIMES);
+		super(new String[] {"playtime"}, 0, 1, MultiPlayer.SOMETIMES);
 	}
 
 	public void performCommand(Player player, String[] args) 

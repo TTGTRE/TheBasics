@@ -26,10 +26,12 @@ package io.github.GoldenDeveloper79.TheBasics;
 import java.io.File;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 import net.md_5.bungee.api.ChatColor;
@@ -157,5 +159,55 @@ public class BasicUtils
 		}
 		
 		return sb.toString();
+	}
+	
+	/*
+	 * Makes a string an itemstack magically.
+	 */
+	public static ItemStack getItem(String item, String quantity)
+	{
+		int amount = 0;
+		
+		try
+		{
+			amount = Integer.parseInt(quantity);
+		}catch(NumberFormatException e)
+		{
+			return null;
+		}
+		
+		try
+		{
+			if(item.contains(":"))
+			{
+				String[] itemSplit = item.split(":");
+				byte data = Byte.parseByte(itemSplit[1]);
+				
+				return new ItemStack(Material.matchMaterial(itemSplit[0]), amount, data);
+			}else
+			{
+				return new ItemStack(Material.matchMaterial(item), amount);
+			}
+		}catch(NumberFormatException e)
+		{
+			return new ItemStack(Material.matchMaterial(item), amount);
+		}catch(NullPointerException e)
+		{
+			return null;
+		}
+	}
+	
+	/*
+	 * Adds an item to a players inventory safely.
+	 */
+	public static void addItem(Player player, ItemStack item)
+	{
+		if(player.getInventory().firstEmpty() != -1)
+		{
+			player.getInventory().addItem(item);
+		}else
+		{
+			player.getWorld().dropItemNaturally(player.getLocation(), item);
+		}
 	}
 }

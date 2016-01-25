@@ -27,5 +27,6 @@ public enum MultiPlayer
 {
 	NEVER,
 	SOMETIMES,
-	ALWAYS;
+	ALWAYS,
+	OTHER;
 }

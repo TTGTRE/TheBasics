@@ -45,15 +45,20 @@ public class PlayerData extends PlayerBase
 		super(player);
 		
 		this.player = player;
-	
 		this.name = player.getName();
 		this.uuid = player.getUniqueId();
 		
+		join();
+	}
+	
+	public void join()
+	{
 		Registery.players.put(name, this);
+		TheBasics.getDataConfig().update("Players." + name, player.getUniqueId().toString());
 		
 		Location loc = player.getLocation();
 		
-		if(!TheBasics.getDataConfig().contains("Players." + name))
+		if(!contains("Name"))
 		{
 			set("Name", player.getName());
 			set("LastLogin", System.currentTimeMillis());
@@ -95,7 +100,7 @@ public class PlayerData extends PlayerBase
 		update("LastLocation.Yaw", loc.getYaw());
 		update("LastLocation.Pitch", loc.getPitch());
 		
-		GroupModule group = TheBasics.getPermissions().getPlayerGroup(player);
+		GroupModule group = TheBasics.getPermissions().getGroup(getString("Group"));
 		group.getPlayers().add(name);
 		
 		perm = player.addAttachment(TheBasics.getPlugin());
@@ -110,13 +115,10 @@ public class PlayerData extends PlayerBase
 				perm.setPermission(permission.toLowerCase(), false);
 			}
 		}
-		
-		TheBasics.getDataConfig().update("Players." + name, player.getUniqueId().toString());
 	}
 	
 	public void quit()
 	{
-		TheBasics.getPermissions().getPlayerGroup(player).getPlayers().remove(name);
 		update("LastLogOut", System.currentTimeMillis());
 		
 		Location loc = player.getLocation();
@@ -127,8 +129,6 @@ public class PlayerData extends PlayerBase
 		update("LastLocation.Z", loc.getZ());
 		update("LastLocation.Yaw", loc.getYaw());
 		update("LastLocation.Pitch", loc.getPitch());
-		
-		Registery.players.remove(name);
 	}
 		
 	

@@ -23,6 +23,8 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.API;
 
+import java.util.Collection;
+
 import org.bukkit.OfflinePlayer;
 
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
@@ -43,6 +45,11 @@ public interface BasicPermissions
 	 * Gets the default group.
 	 */
 	GroupModule getDefaultGroup();
+	
+	/*
+	 * Gets a list of the groups.
+	 */
+	Collection<GroupModule> getGroups();
 	
 	/*
 	 * Adds a player to a group.
