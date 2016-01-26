@@ -22,9 +22,10 @@ A set of basic functions for Minecraft servers. More details coming.
 - /rules (Sends yourself or another player a list of rules).
 - /time (Gets or sets the time of the world you are in).
 - More...
-- 
+
 **Permissions**
 - The permissions are 'TheBasics.CommandLabel".
+- More permissions coming for subcommands & other additional uses.
 
 **Economy**
 - Can easily exchange money.
@@ -36,11 +37,12 @@ A set of basic functions for Minecraft servers. More details coming.
 - Easily can create groups.
 - Easily modify the permissions, prefix, and default group.
 - Can modify what group players are in.
+- Can modify the config easily via ingame.
 - Easy configurable ranking system. Can either be paid to rankup or over time to rankup (Configurable).
 
 **Chat**
 - Easily modify chat format per group.
 - Simple and configurable chat guard.
-
+- Can modify the config easily via ingame.
 
 Way more coming...
