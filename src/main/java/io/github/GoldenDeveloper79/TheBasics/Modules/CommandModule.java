@@ -23,9 +23,6 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Modules;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
@@ -52,21 +49,14 @@ public abstract class CommandModule
 		this.minArgs = minArgs;
 		this.maxArgs = maxArgs;
 		this.multiPlayer = multiPlayer;
-
-		List<String> cmds = Arrays.asList(labels);
-		cmds.remove(labels[0]);
 		
-		for(int i = 1; i < labels.length; i++)
-		{
-			Registery.commands.put(labels[0], this);
-			
-			PluginCommand cmd = TheBasics.getPlugin().getCommand(labels[0]);
-			cmd.setAliases(cmds);
-			cmd.setExecutor(TheBasics.getCommandExecutor());
-			
-			this.description = cmd.getDescription();
-			this.usage = cmd.getUsage();
-		}
+		Registery.commands.put(labels[0], this);
+
+		PluginCommand cmd = TheBasics.getPlugin().getCommand(labels[0]);
+		cmd.setExecutor(TheBasics.getCommandExecutor());
+		
+		this.description = cmd.getDescription();
+		this.usage = cmd.getUsage();
 	}
 	
 	/*

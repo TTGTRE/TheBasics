@@ -29,6 +29,9 @@ commands:
     description: Gets the play time of yourself or another player.
     usage: /playtime <name>.
     aliases: [ptime]
+  rules:
+    description: Sends the rules to yourself or another player.
+    usage: /rules <name> <page>
   time:
     description: Gets the time or sets the time of the world you are in.
     usage: /time set <day/night>

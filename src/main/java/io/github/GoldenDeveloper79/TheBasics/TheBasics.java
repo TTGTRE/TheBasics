@@ -41,6 +41,7 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.GiveCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.HealCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.KickCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.PlayTimeCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.RulesCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TimeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerChatEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerJoinEvent;
@@ -95,16 +96,16 @@ public class TheBasics extends JavaPlugin
 			data.quit();
 		}
 		
-		plugin = null;
-		economy = null;
-		permissions = null;
-		
 		Registery.players.clear();
 		Registery.groups.clear();
 		Registery.commands.clear();
+		
+		
+		plugin = null;
+		economy = null;
+		permissions = null;
 	}
 
-	
 	/*
 	 * Loads all the configs, files, and directories.
 	 */
@@ -137,6 +138,7 @@ public class TheBasics extends JavaPlugin
 		new HealCMD();
 		new KickCMD();
 		new PlayTimeCMD();
+		new RulesCMD();
 		new TimeCMD();
 	}
 
