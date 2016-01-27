@@ -80,11 +80,7 @@ public class PlayerData extends PlayerBase
 			set("Home.Default.Z", loc.getZ());
 			set("Home.Default.Yaw", loc.getYaw());
 			set("Home.Default.Pitch", loc.getPitch());
-			
-			set("Banned.Is", false);
-			set("Banned.Time", 0);
-			set("Banned.Reason", "none");
-			
+
 			set("Group", TheBasics.getPermissions().getDefaultGroup().getGroupName());
 		}
 		

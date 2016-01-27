@@ -53,11 +53,11 @@ public class GiveCMD extends CommandModule
 		{
 			if(receiver == player)
 			{
-				BasicUtils.sendMessage(player, "&6You received " + item.getAmount() + "x " + item.getType().toString().toLowerCase() + ".");
+				BasicUtils.sendMessage(player, "&6You received &7" + item.getAmount() + "x " + item.getType().toString().toLowerCase() + "&6.");
 			}else
 			{
-				BasicUtils.sendMessage(player, "&6You gave " + args[0] + item.getAmount() + "x " + item.getType().toString().toLowerCase() + ".");
-				BasicUtils.sendMessage(receiver, "&6You received " + item.getAmount() + "x " + item.getType().toString().toLowerCase() + " from " + player.getName() + ".");
+				BasicUtils.sendMessage(player, "&6You gave &7" + args[0] + item.getAmount() + "x " + item.getType().toString().toLowerCase() + "&6.");
+				BasicUtils.sendMessage(receiver, "&6You received &7" + item.getAmount() + "x " + item.getType().toString().toLowerCase() + " &6from&7 " + player.getName() + "&6.");
 			}
 			
 			BasicUtils.addItem(receiver, item);
@@ -84,8 +84,8 @@ public class GiveCMD extends CommandModule
 			
 			if(item != null)
 			{
-				BasicUtils.sendMessage(console, "&6You gave " + args[0] + item.getAmount() + "x " + item.getType().toString().toLowerCase() + ".");
-				BasicUtils.sendMessage(player, "&6You received " + item.getAmount() + "x " + item.getType().toString().toLowerCase() + " from " + player.getName() + ".");
+				BasicUtils.sendMessage(console, "&6You gave &7" + args[0] + item.getAmount() + "x " + item.getType().toString().toLowerCase() + "&6.");
+				BasicUtils.sendMessage(player, "&6You received &7" + item.getAmount() + "x " + item.getType().toString().toLowerCase() + " &6from&7 " + player.getName() + "&6.");
 				BasicUtils.addItem(player, item);
 			}else
 			{

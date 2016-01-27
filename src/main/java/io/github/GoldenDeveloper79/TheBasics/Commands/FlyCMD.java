@@ -43,15 +43,15 @@ public class FlyCMD extends CommandModule
 					player2.setAllowFlight(false);
 					player2.setFlying(false);
 					
-					BasicUtils.sendMessage(player, "&6You have disabled flying for " + args[0] + ".");
-					BasicUtils.sendMessage(player2, "&6Flying has been disabled for you by " + player.getName() + ".");
+					BasicUtils.sendMessage(player, "&6You have disabled flying for &7" + args[0] + "&6.");
+					BasicUtils.sendMessage(player2, "&6Flying has been disabled for you by &7" + player.getName() + "&7.");
 				}else
 				{
 					player2.setAllowFlight(true);
 					player2.setFlying(true);
 					
-					BasicUtils.sendMessage(player, "&6You have enabled flying for " + args[0] + ".");
-					BasicUtils.sendMessage(player2, "&6Flying has been enabled for you by " + player.getName() + ".");
+					BasicUtils.sendMessage(player, "&6You have enabled flying for &7" + args[0] + "&6.");
+					BasicUtils.sendMessage(player2, "&6Flying has been enabled for you by &7" + player.getName() + "&6.");
 				}
 			}else
 			{
@@ -72,15 +72,15 @@ public class FlyCMD extends CommandModule
 				player2.setAllowFlight(false);
 				player2.setFlying(false);
 				
-				BasicUtils.sendMessage(console, "You have disabled flying for " + args[0] + ".");
-				BasicUtils.sendMessage(player2, "&6Flying has been disabled for you by " + console.getName() + ".");
+				BasicUtils.sendMessage(console, "You have disabled flying for &7" + args[0] + "&6.");
+				BasicUtils.sendMessage(player2, "&6Flying has been disabled for you by &7console.");
 			}else
 			{
 				player2.setAllowFlight(true);
 				player2.setFlying(true);
 				
-				BasicUtils.sendMessage(console, "You have enabled flying for " + args[0] + ".");
-				BasicUtils.sendMessage(player2, "&6Flying has been enabled for you by " + console.getName() + ".");
+				BasicUtils.sendMessage(console, "You have enabled flying for &7" + args[0] + "&6.");
+				BasicUtils.sendMessage(player2, "&6Flying has been enabled for you by &7console.");
 			}
 		}else
 		{

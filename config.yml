@@ -11,6 +11,15 @@ DisabledCommmands: []
 #- slap
 #- hug
 
+#The delay for teleporting in seconds. Use the permission'TheBasics.Teleport.Override' to ignore the timer. (Default=3)
+TeleportDelay: 3
+
+#The max homes per a group. Must use TheBasics permissions/groups. If no value is set, its assumed unlimited.
+#Can also use 'TheBasics.Home.Unlimited' for max homes.
+Homes:
+  Member: 2
+  Admin: 3
+
 ##########################
 #    Economy Settings    #
 #(Used for economy stuff)#

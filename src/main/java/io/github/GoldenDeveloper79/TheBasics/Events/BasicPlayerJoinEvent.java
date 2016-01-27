@@ -23,6 +23,7 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Events;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,7 +32,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
-import net.md_5.bungee.api.ChatColor;
 
 public class BasicPlayerJoinEvent implements Listener
 {
@@ -41,12 +41,18 @@ public class BasicPlayerJoinEvent implements Listener
 		Player player = event.getPlayer();
 		new PlayerData(player);
 	
-		if(!player.hasPermission("TheBasics.SilentJoin") || !TheBasics.getTextConfig().getBoolean("Join.SilentJoin"))
+		if(player.hasPlayedBefore())
 		{
-			event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', TheBasics.getTextConfig().getString("Join.Message").replace("%p", player.getName())));
+			if(!player.hasPermission("TheBasics.SilentJoin") || !TheBasics.getTextConfig().getBoolean("Join.SilentJoin"))
+			{
+				event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', TheBasics.getTextConfig().getString("Join.Message").replace("%p", player.getName())));
+			}else
+			{
+				event.setJoinMessage(null);
+			}
 		}else
 		{
-			event.setJoinMessage(null);
+			event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', TheBasics.getTextConfig().getString("FirstJoinMOTD").replace("%p", player.getName())));
 		}
 		
 		BasicUtils.sendMessage(player, TheBasics.getTextConfig().getString("JoinMOTD"));

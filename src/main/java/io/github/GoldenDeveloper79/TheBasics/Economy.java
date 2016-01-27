@@ -87,7 +87,19 @@ public class Economy implements BasicEconomy
 	 */
 	public boolean withdrawBalance(OfflinePlayer player, double amount) 
 	{
-		if(hasBalance(player, amount) || canLoan())
+		if(hasBalance(player, amount))
+		{
+			if(player.isOnline())
+			{
+				BasicUtils.getData(player.getName()).set("Balance", getBalance(player) - amount);
+			}else
+			{
+				BasicUtils.getConfig(player.getName()).set("Balance", getBalance(player) - amount);
+				BasicUtils.saveFile(player.getName());
+			}
+			
+			return true;
+		}else if(canLoan() && amount <= getMaxLoanAmount())
 		{
 			if(player.isOnline())
 			{

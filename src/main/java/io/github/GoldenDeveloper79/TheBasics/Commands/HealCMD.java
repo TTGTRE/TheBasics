@@ -32,8 +32,8 @@ public class HealCMD extends CommandModule
 			player2.setFoodLevel(20);
 			player2.setFireTicks(0);
 			
-			BasicUtils.sendMessage(player, "&6You have healed " + args[0] + ".");
-			BasicUtils.sendMessage(player2, "&6You have been healed by " + player.getName() + ".");
+			BasicUtils.sendMessage(player, "&6You have healed &7" + args[0] + "&6.");
+			BasicUtils.sendMessage(player2, "&6You have been healed by &7" + player.getName() + "&6.");
 		}
 	}
 
@@ -45,7 +45,7 @@ public class HealCMD extends CommandModule
 		player2.setFoodLevel(20);
 		player2.setFireTicks(0);
 		
-		BasicUtils.sendMessage(console, "You have healed " + args[0] + ".");
-		BasicUtils.sendMessage(player2, "&6You have been healed by " + console.getName() + ".");
+		BasicUtils.sendMessage(console, "&6You have healed &7" + args[0] + "&6.");
+		BasicUtils.sendMessage(player2, "&6You have been healed by &7console.");
 	}
 }

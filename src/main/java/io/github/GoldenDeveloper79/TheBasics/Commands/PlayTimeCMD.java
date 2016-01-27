@@ -35,7 +35,7 @@ public class PlayTimeCMD extends CommandModule
 				formatTime = String.valueOf(bd.doubleValue()) + "h";
 			}
 			
-			BasicUtils.sendMessage(player, "&6You have played on the server for " + formatTime + ".");
+			BasicUtils.sendMessage(player, "&6You have played on the server for &7" + formatTime + "&6.");
 		}else
 		{
 			Player player2 = Bukkit.getPlayer(args[0]);
@@ -53,7 +53,7 @@ public class PlayTimeCMD extends CommandModule
 				formatTime = String.valueOf(bd.doubleValue()) + "h";
 			}
 			
-			BasicUtils.sendMessage(player, "&6The player " + args[0] + " has played on the server for " + formatTime + ".");
+			BasicUtils.sendMessage(player, "&6The player &7" + args[0] + " &6has played on the server for&7 " + formatTime + "&6.");
 		}
 	}
 
@@ -74,6 +74,6 @@ public class PlayTimeCMD extends CommandModule
 			formatTime = String.valueOf(bd.doubleValue()) + "h";
 		}
 		
-		BasicUtils.sendMessage(console, "The player " + args[0] + " has played on the server for " + formatTime + ".");
+		BasicUtils.sendMessage(console, "&6The player &7" + args[0] + " &6has played on the server for&7 " + formatTime + "&6.");
 	}
 }

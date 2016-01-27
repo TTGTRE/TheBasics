@@ -27,7 +27,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
@@ -53,17 +52,5 @@ public class BasicPlayerQuitEvent implements Listener
 		}
 	}
 	
-	//Just need to included it somewhere.
-	@EventHandler
-	public void onPlayerKick(PlayerKickEvent event)
-	{
-		Player player = event.getPlayer();
-		PlayerData data = BasicUtils.getData(player);
-		data.quit();
-		
-		if(!player.hasPermission("TheBasics.SilentQuit") || !TheBasics.getTextConfig().getBoolean("Quit.SilentQuit"))
-		{
-			event.setLeaveMessage(ChatColor.translateAlternateColorCodes('&', TheBasics.getTextConfig().getString("Quit.Message")));
-		}
-	}
+	//To add kick event or not to add kick event is the question.
 }

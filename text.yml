@@ -12,13 +12,14 @@ Rules:
   PerPage: 3
   #The list of actual rules.
   List:
-  - '&4Please do not swear!'
-  - '&4Please do not grief!'
-  - '&4Please smile more!'
+  - '&7Please do not swear!'
+  - '&7Please do not grief!'
+  - '&7Please smile more!'
   #The formating of the rules.
   Format:
     #What should be displayed on the top.
     Top: '&6&l----------[Rules]----------'
+    #What should be displayed on the bottom.
     Bottom: '&6&l---------------------------'
 
 Join:

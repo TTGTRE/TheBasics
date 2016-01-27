@@ -20,7 +20,7 @@ public class KickCMD extends CommandModule
 	{
 		Player player2 = Bukkit.getPlayer(args[0]);
 
-		String reason = "&cYou have been kicked by " + player.getName() + "!";
+		String reason = "&cYou have been kicked by &7" + player.getName() + "&6!";
 		
 		if(args.length > 1)
 		{
@@ -28,15 +28,15 @@ public class KickCMD extends CommandModule
 		}
 		
 		player2.kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
-		BasicUtils.notify("TheBasics.Kick.Notify", "&6The player " + player.getName() + " has kicked the player " + args[0] + " for " + reason + "!");
-		BasicUtils.sendMessage(player, "&6You have kicked " + args[0] + "!");
+		BasicUtils.notify("TheBasics.Kick.Notify", "&6The player &7" + player.getName() + " &6has kicked the player &7" + args[0] + " &6for " + reason + "&6!");
+		BasicUtils.sendMessage(player, "&6You have kicked &7" + args[0] + "&6!");
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
 		Player player2 = Bukkit.getPlayer(args[0]);
 	
-		String reason = "&cYou have been kicked by " + console.getName() + "!";
+		String reason = "&cYou have been kicked by &7console&6!";
 		
 		if(args.length > 1)
 		{
@@ -45,7 +45,7 @@ public class KickCMD extends CommandModule
 
 		player2.kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
 		
-		BasicUtils.notify("TheBasics.Kick.Notify", "&6The player " + console.getName() + " has kicked the player " + args[0] + " for " + reason + "!");
-		BasicUtils.sendMessage(console, "&6You have kicked " + args[0] + "!");
+		BasicUtils.notify("TheBasics.Kick.Notify", "&6The player &7console&6 has kicked the player &7" + args[0] + " &6for " + reason + "&6!");
+		BasicUtils.sendMessage(console, "&6You have kicked &7" + args[0] + "&6!");
 	}
 }

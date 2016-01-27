@@ -57,7 +57,7 @@ public class RulesCMD extends CommandModule
 							player2.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 						}
 						
-						BasicUtils.sendMessage(player, "&6You sent rules to " + args[0] + ".");
+						BasicUtils.sendMessage(player, "&6You sent rules to &7" + args[0] + "&6.");
 						
 					}else
 					{
@@ -86,7 +86,7 @@ public class RulesCMD extends CommandModule
 							{
 								player2.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 							}
-							BasicUtils.sendMessage(player, "&6You sent rules to " + args[0] + ".");
+							BasicUtils.sendMessage(player, "&6You sent rules to &7" + args[0] + "&6.");
 						}else
 						{
 							BasicUtils.sendMessage(player, "&cYou do not have enough permission to perform this command!");
@@ -137,7 +137,7 @@ public class RulesCMD extends CommandModule
 								player2.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 							}
 							
-							BasicUtils.sendMessage(console, "You sent rules to " + args[0] + ".");
+							BasicUtils.sendMessage(console, "You sent rules to &7" + args[0] + "&6.");
 						}else
 						{
 							BasicUtils.sendMessage(console, "You do not have enough permission to perform this command!");
@@ -166,7 +166,7 @@ public class RulesCMD extends CommandModule
 									player.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 								}
 								
-								BasicUtils.sendMessage(console, "&6You sent rules to " + args[0] + ".");
+								BasicUtils.sendMessage(console, "&6You sent rules to &7" + args[0] + "&6.");
 							}else
 							{
 								BasicUtils.sendMessage(console, "&cYou do not have enough permission to perform this command!");

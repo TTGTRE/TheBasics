@@ -18,7 +18,7 @@ public class TimeCMD extends CommandModule
 	{
 		if(args.length < 1)
 		{
-			BasicUtils.sendMessage(player, "&6The current time is " + formatTime(player.getWorld().getTime()));
+			BasicUtils.sendMessage(player, "&6The current time is &7" + formatTime(player.getWorld().getTime()) + "&6.");
 		}else if(args.length == 2 && args[0].equalsIgnoreCase("set"))
 		{
 			if(player.hasPermission("TheBasics.Time.Set"))
@@ -27,7 +27,7 @@ public class TimeCMD extends CommandModule
 				{
 					long time = Long.parseLong(args[1]);
 					player.getWorld().setTime(time);
-					BasicUtils.sendMessage(player, "&6You have changed the time to " + formatTime(time));
+					BasicUtils.sendMessage(player, "&6You have changed the time to &7" + formatTime(time) + "&6.");
 				}catch(NumberFormatException e)
 				{
 					if(args[1].equalsIgnoreCase("Night"))
@@ -55,7 +55,7 @@ public class TimeCMD extends CommandModule
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
-		BasicUtils.sendMessage(console, "You must be a player to perform this command!");
+		BasicUtils.sendMessage(console, "cYou must be a player to perform this command!");
 	}
 	
 	private String formatTime(long time)
@@ -75,6 +75,6 @@ public class TimeCMD extends CommandModule
 		String mm = "0" + minutes; 
 		mm = mm.substring(mm.length() - 2, mm.length());
 		
-		return hours + ":" + mm + ampm + ".";
+		return hours + ":" + mm + ampm;
 	}
 }

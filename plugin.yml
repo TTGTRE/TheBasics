@@ -3,13 +3,21 @@ version: 1.0
 main: io.github.GoldenDeveloper79.TheBasics.TheBasics
 description: A basic set of functions for Minecraft servers.
 commands:
+  balance:
+    description: Retrieves or modifies the balance of yourself or another player.
+    usage: /balance <set/take/add> <name> <amount>.
+    aliases: [bal]
   ban:
     description: Bans a player from the server.
     usage: /ban <name> <reason>.
   clearinventory:
     description: Clears your or another players inventory.
-    usage: /clearinventory <name>
+    usage: /clearinventory <name>.
     aliases: [ci]
+  deletehome:
+    description: Deletes one of your homes.
+    usage: /deletehome <name>.
+    aliases: [delhome]
   feed:
     description: Feeds yourself or another player.
     usage: /feed <name>.
@@ -22,6 +30,9 @@ commands:
   heal:
     description: Heals yourself or another player.
     usage: /heal <name>.
+  home:
+    description: Teleports yourself to a home.
+    usage: /home <name>.
   kick:
     description: Kicks a player from the server.
     usage: /kick <name> <reason>.
@@ -29,9 +40,12 @@ commands:
     description: Gets the play time of yourself or another player.
     usage: /playtime <name>.
     aliases: [ptime]
+  sethome:
+    description: Sets a home at your location.
+    usage: /sethome <name>.
   rules:
     description: Sends the rules to yourself or another player.
-    usage: /rules <name> <page>
+    usage: /rules <name> <page>.
   time:
     description: Gets the time or sets the time of the world you are in.
-    usage: /time set <day/night>
+    usage: /time set <day/night>.

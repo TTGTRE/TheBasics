@@ -8,9 +8,9 @@ import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
 
-public class ClearInventory extends CommandModule
+public class ClearInventoryCMD extends CommandModule
 {
-	public ClearInventory() 
+	public ClearInventoryCMD() 
 	{
 		super(new String[] {"clearinventory", "ci"}, 0, 1, MultiPlayer.SOMETIMES);
 	}
@@ -26,8 +26,8 @@ public class ClearInventory extends CommandModule
 			Player player2 = Bukkit.getPlayer(args[0]);
 			
 			player2.getInventory().clear();
-			BasicUtils.sendMessage(player, "&6You have cleared " + args[0] + " inventory.");
-			BasicUtils.sendMessage(player2, "&6Your inventory has been cleared by " + player.getName() + ".");
+			BasicUtils.sendMessage(player, "&6You have cleared &7" + args[0] + "'s &6inventory.");
+			BasicUtils.sendMessage(player2, "&6Your inventory has been cleared by &7" + player.getName() + "&6.");
 		}
 	}
 
@@ -36,7 +36,7 @@ public class ClearInventory extends CommandModule
 		Player player2 = Bukkit.getPlayer(args[0]);
 		
 		player2.getInventory().clear();
-		BasicUtils.sendMessage(console, "You have cleared " + args[0] + " inventory.");
-		BasicUtils.sendMessage(player2, "&6Your inventory has been cleared by " + console.getName() + ".");
+		BasicUtils.sendMessage(console, "You have cleared &7" + args[0] + "'s &6inventory.");
+		BasicUtils.sendMessage(player2, "&6Your inventory has been cleared by &7console.");
 	}
 }

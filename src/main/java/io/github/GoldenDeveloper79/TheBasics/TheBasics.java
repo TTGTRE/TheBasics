@@ -32,16 +32,20 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import io.github.GoldenDeveloper79.TheBasics.Commands.BalanceCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BasicCommandExecutor;
-import io.github.GoldenDeveloper79.TheBasics.Commands.ClearInventory;
+import io.github.GoldenDeveloper79.TheBasics.Commands.ClearInventoryCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.DeleteHomeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.FeedCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.FlyCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.GiveCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.HealCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.HomeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.KickCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.PlayTimeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.RulesCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.SetHomeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TimeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerChatEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerJoinEvent;
@@ -100,7 +104,6 @@ public class TheBasics extends JavaPlugin
 		Registery.groups.clear();
 		Registery.commands.clear();
 		
-		
 		plugin = null;
 		economy = null;
 		permissions = null;
@@ -130,15 +133,19 @@ public class TheBasics extends JavaPlugin
 	{
 		cmdExecutor = new BasicCommandExecutor();
 		
+		new BalanceCMD();
 		new BanCMD();
-		new ClearInventory();
+		new ClearInventoryCMD();
+		new DeleteHomeCMD();
 		new FeedCMD();
 		new FlyCMD();
 		new GiveCMD();
 		new HealCMD();
+		new HomeCMD();
 		new KickCMD();
 		new PlayTimeCMD();
 		new RulesCMD();
+		new SetHomeCMD();
 		new TimeCMD();
 	}
 

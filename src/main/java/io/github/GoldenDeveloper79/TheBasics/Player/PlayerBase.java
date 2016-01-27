@@ -42,8 +42,6 @@ public abstract class PlayerBase extends ConfigModule
 		super(new File("plugins/TheBasics/Players/" + player.getUniqueId().toString() + ".yml"));
 		
 		this.player = player;
-		
-		TheBasics.getLog().severe(getString("Group"));
 	}
 	
 	public boolean homeExist(String name)
@@ -56,25 +54,56 @@ public abstract class PlayerBase extends ConfigModule
 		return false;
 	}
 	
-	public boolean createHome(String name)
+	public void createHome(String name)
 	{
-		if(!homeExist(name))
+		Location loc = player.getLocation();
+		
+		set("Home." + name + ".World", loc.getWorld().getName());
+		set("Home." + name + ".X", loc.getX());
+		set("Home." + name + ".Y", loc.getY());
+		set("Home." + name + ".Z", loc.getZ());
+		set("Home." + name + ".Yaw", loc.getYaw());
+		set("Home." + name + ".Pitch", loc.getPitch());
+	}
+	
+	public boolean removeHome(String name)
+	{
+		if(homeExist(name))
 		{
-			Location loc = player.getLocation();
-			
-			set("Home."+ name + ".World", loc.getWorld().getName());
-			set("Home."+ name + ".X", loc.getX());
-			set("Home."+ name + ".Y", loc.getY());
-			set("Home."+ name + ".Z", loc.getZ());
-			set("Home."+ name + ".Yaw", loc.getYaw());
-			set("Home."+ name + ".Pitch", loc.getPitch());
+			set("Home." + name + ".World", null);
+			set("Home." + name + ".X", null);
+			set("Home." + name + ".Y", null);
+			set("Home." + name + ".Z", null);
+			set("Home." + name + ".Yaw", null);
+			set("Home." + name + ".Pitch", null);
+			set("Home." + name, null);
 			
 			return true;
 		}
 		
 		return false;
 	}
-
+	
+	public double getHomes()
+	{
+		return getConfig().getConfigurationSection("Home").getKeys(false).size();
+	}
+	
+	public double getMaxHomes()
+	{
+		if(player.hasPermission("TheBasics.Home.Unlimited"))
+		{
+			return Double.MAX_VALUE;
+		}else if(TheBasics.getGeneralConfig().contains("Home." + TheBasics.getPermissions().getPlayerGroup(player).getGroupName()))
+		{
+			double maxHomes = TheBasics.getGeneralConfig().getDouble("Home." + TheBasics.getPermissions().getPlayerGroup(player).getGroupName());
+			
+			return maxHomes;
+		}else
+		{
+			return Double.MAX_VALUE;
+		}
+	}
 
 	public boolean isAfk()
 	{

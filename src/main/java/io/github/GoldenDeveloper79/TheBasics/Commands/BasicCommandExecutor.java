@@ -40,9 +40,9 @@ public class BasicCommandExecutor implements CommandExecutor
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
 		//If the command is one of ours.
-		if(Registery.commands.containsKey(label.toLowerCase()))
+		if(Registery.commands.containsKey(cmd.getLabel()))
 		{
-			CommandModule mod = Registery.commands.get(label.toLowerCase());
+			CommandModule mod = Registery.commands.get(cmd.getLabel());
 			
 			//If the sender has the permission.
 			if(sender.hasPermission("thebasics." + label.toLowerCase()))
@@ -59,11 +59,6 @@ public class BasicCommandExecutor implements CommandExecutor
 					}else if(mod.getMultiPlayer().equals(MultiPlayer.SOMETIMES) && args.length >= 1 && Bukkit.matchPlayer(args[0]) == null)
 					{
 						BasicUtils.sendMessage(sender, "&cThat player is not online!");
-						return true;
-					//If the command is to never be multiplayer when the args are greater or equal to 1 and the player is offline.
-					}else if(mod.getMultiPlayer().equals(MultiPlayer.NEVER) && args.length >= 1 && Bukkit.matchPlayer(args[0]) != null)
-					{
-						BasicUtils.sendMessage(sender, "&cThis command does not required an additional player!");
 						return true;
 					}
 					

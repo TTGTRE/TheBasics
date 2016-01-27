@@ -51,7 +51,7 @@ public abstract class CommandModule
 		this.multiPlayer = multiPlayer;
 		
 		Registery.commands.put(labels[0], this);
-
+		
 		PluginCommand cmd = TheBasics.getPlugin().getCommand(labels[0]);
 		cmd.setExecutor(TheBasics.getCommandExecutor());
 		
