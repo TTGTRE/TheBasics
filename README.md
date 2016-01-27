@@ -50,4 +50,8 @@ A set of basic functions for Minecraft servers. More details coming.
 - Simple and configurable chat guard.
 - Can modify the config easily via ingame.
 
+**Website**
+- http://goldendeveloper79.github.io/TheBasics
+
 Way more coming...
+
