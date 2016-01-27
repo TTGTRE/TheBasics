@@ -5,21 +5,26 @@ A set of basic functions for Minecraft servers. More details coming.
 - Easy to use commands.
 - Easy to configure configs.
 - Economy with commands.
+- Homes, Warps, and Spawns.
 - Permissions with commands.
 - Groups with commands.
 - Configurable chat.
 - Light weight module setup.
 
 **Commands**
+- /balance (/bal) (Get or modify the balance of yourself or another player).
 - /ban (Bans a player from the server).
 - /clearinventory (/ci) (Clears yours or another players inventory).
+- /deletehome (/delhome) (Delete a home of yours).
 - /feed (Feeds yourself or another player).
 - /fly (Toggles flying for yourself or another player).
 - /give (Gives yourself or another player an item).
 - /heal (Heals yourself or another player).
+- /home (Teleports yourself to your home).
 - /kick (Kicks a player from the server).
 - /playtime (/ptime) (Checks the playtime for yourself or another player).
 - /rules (Sends yourself or another player a list of rules).
+- /sethome (Sets a home at your location).
 - /time (Gets or sets the time of the world you are in).
 - More...
 
