@@ -22,36 +22,29 @@ A set of basic functions for Minecraft servers. More details coming.
 - /group (Gets a player group, Sets a player group, Creates a group)
 - /heal (Heals yourself or another player).
 - /home (Teleports yourself to your home).
-<<<<<<< HEAD
 - /help (Sends yourself or another player the help list).
-=======
->>>>>>> origin/master
 - /kick (Kicks a player from the server).
 - /nick (Modify the displayname of yourself).
 - /pay (Pays a player a balance).
 - /playtime (/ptime) (Checks the playtime for yourself or another player).
 - /rules (Sends yourself or another player a list of rules).
 - /sethome (Sets a home at your location).
-<<<<<<< HEAD
 - /setspawn (Sets the world spawn at your location).
 - /setwarp (Sets a warp at your location).
 - /spawn (Teleports yourself to spawn).
 - /teleport (Forcefully teleports yourself to a player).
 - /teleportrequest (/tr) (Request to teleport to another player).
 - /teleportrequestaccept (/traccept) (Accept a request to be teleported too).
-- /teleportrequestdeny (/trdeny) (Deny a request to be teleported too).
-=======
->>>>>>> origin/master
 - /time (Gets or sets the time of the world you are in).
 - /warp (List or teleport yourself to a warp).
 - /weather (Change the weather in your world).
 - More...
 
-==== **Permissions **====
+**Permissions **
 - The permissions are 'TheBasics.CommandLabel'.
 - If a command has a subcommand, it will look like 'TheBasics.CommandLabel.Subcommand)'.
 
-==== **Economy **====
+**Economy **
 - Can easily exchange money.
 - Can easily store money.
 - Can easily check balance of online players.
