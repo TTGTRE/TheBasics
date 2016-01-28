@@ -5,6 +5,7 @@ A set of basic functions for Minecraft servers. More details coming.
 - Easy to use commands.
 - Easy to configure configurations.
 - Economy with commands.
+- Homes, Warps, and Spawns.
 - Permissions with commands.
 - Groups with commands.
 - Configurable chat.
@@ -21,13 +22,17 @@ A set of basic functions for Minecraft servers. More details coming.
 - /group (Gets a player group, Sets a player group, Creates a group)
 - /heal (Heals yourself or another player).
 - /home (Teleports yourself to your home).
+<<<<<<< HEAD
 - /help (Sends yourself or another player the help list).
+=======
+>>>>>>> origin/master
 - /kick (Kicks a player from the server).
 - /nick (Modify the displayname of yourself).
 - /pay (Pays a player a balance).
 - /playtime (/ptime) (Checks the playtime for yourself or another player).
 - /rules (Sends yourself or another player a list of rules).
 - /sethome (Sets a home at your location).
+<<<<<<< HEAD
 - /setspawn (Sets the world spawn at your location).
 - /setwarp (Sets a warp at your location).
 - /spawn (Teleports yourself to spawn).
@@ -35,6 +40,8 @@ A set of basic functions for Minecraft servers. More details coming.
 - /teleportrequest (/tr) (Request to teleport to another player).
 - /teleportrequestaccept (/traccept) (Accept a request to be teleported too).
 - /teleportrequestdeny (/trdeny) (Deny a request to be teleported too).
+=======
+>>>>>>> origin/master
 - /time (Gets or sets the time of the world you are in).
 - /warp (List or teleport yourself to a warp).
 - /weather (Change the weather in your world).
@@ -75,4 +82,8 @@ A set of basic functions for Minecraft servers. More details coming.
 - Simple and configurable chat guard.
 - Can modify the config easily via ingame.
 
+**Website**
+- http://goldendeveloper79.github.io/TheBasics
+
 Way more coming...
+
