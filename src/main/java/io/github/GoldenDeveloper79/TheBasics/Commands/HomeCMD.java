@@ -5,10 +5,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
-import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
@@ -49,48 +47,7 @@ public class HomeCMD extends CommandModule
 			
 			Location loc = new Location(world, x, y, z, (float) yaw, (float) pitch);
 			
-			if(loc != null)
-			{
-				if(player.hasPermission("TheBasics.Teleport.Override"))
-				{
-					player.teleport(loc);
-					BasicUtils.sendMessage(player, "&6You have teleported to your home.");
-				}else
-				{
-					int delay = TheBasics.getGeneralConfig().getInt("TeleportDelay");
-					
-					if(delay > 0)
-					{
-						BasicUtils.sendMessage(player, "&6You will teleport in &7" + delay + "s&6.");
-						
-						new BukkitRunnable()
-						{
-							int counter = 0;
-							
-							public void run()
-							{
-								counter++;
-								
-								if((delay - counter) <= 0)
-								{
-									player.teleport(loc);
-									BasicUtils.sendMessage(player, "&6You have teleported to your home.");
-									
-									this.cancel();
-									return;
-								}else
-								{
-									BasicUtils.sendMessage(player, "&7" + (delay-counter) + "s&6...");
-								}
-							}
-						}.runTaskTimer(TheBasics.getPlugin(), 0L, 20L);
-					}else
-					{
-						player.teleport(loc);
-						BasicUtils.sendMessage(player, "&6You have teleported to your home.");
-					}
-				}
-			}
+			data.initTeleport(loc, "&6your home &7" + home);
 		}else
 		{
 			String homes = data.getConfig().getConfigurationSection("Home").getKeys(false)

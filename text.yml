@@ -5,7 +5,7 @@ ListMOTD: '&6Welcome to -=Server=-. It is powered by TheBasics.'
 JoinMOTD: '&6Welcome back to -=Server=-!'
 
 #The join message motd for new players.
-FirstJoinMOTD: '&6Welcome to -=Server=-!'
+FirstJoinMOTD: '&6Welcome to the -=Server=- %p!'
 
 Rules:
   #The amount of rules to list per page. (Default = 3)
@@ -17,18 +17,26 @@ Rules:
   - '&7Please smile more!'
   #The formating of the rules.
   Format:
-    #What should be displayed on the top.
-    Top: '&6&l----------[Rules]----------'
+    #What should be displayed on the top.(%p = page #, %m = maxPage) 
+    Top: '&6&l----------[Rules - %p/%m]----------'
     #What should be displayed on the bottom.
-    Bottom: '&6&l---------------------------'
+    Bottom: '&6&l-----------------------------'
 
+Help:
+  #The amount of help to list per page. (Default = 5)
+  PerPage: 5
+  Format:
+    #What should be displayed on the top. (%p = page #, %m = maxPage) 
+    Top: '&6&l----------[Help - %p/%m]-----------'
+    #What should be displayed on the bottom.
+    Bottom: '&6&l-----------------------------'
 Join:
-  #The message to be broadcasted when a player joins the server.
+  #The message to be broadcasted when a player joins the server. (%p = playerName) 
   Message: '&6%p has joined the server!'
   #If players with the permission 'TheBasics.SilentJoin' should not be broadcasted on join. (Defaut = true)
   SilentJoin: true
 Quit:
-  #The message to be broadcasted when a player quits the 
+  #The message to be broadcasted when a player quits the server. (%p = playerName) 
   Message: '&6%p has left the server!'
   #If players with the permission 'TheBasics.SilentQuit' should not be broadcasted on quit. (Default = true)
   SilentQuit: true

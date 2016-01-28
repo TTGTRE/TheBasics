@@ -55,6 +55,6 @@ public class BasicPlayerJoinEvent implements Listener
 			event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', TheBasics.getTextConfig().getString("FirstJoinMOTD").replace("%p", player.getName())));
 		}
 		
-		BasicUtils.sendMessage(player, TheBasics.getTextConfig().getString("JoinMOTD"));
+		BasicUtils.sendMessage(player, TheBasics.getTextConfig().getString("JoinMOTD").replace("%p", player.getName()));
 	}
 }

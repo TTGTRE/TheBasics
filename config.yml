@@ -3,16 +3,17 @@
 #(Used for general stuff)#
 ##########################
 
+#If autoupdating should be allowed. (Default=true)
+AutoUpdating: true
+
 #The prefix for all messaging/broadcasting. (Default='&0&l[&6&lTheBasics&0&l]&6 ')
 Prefix: '&0&l[&6&lTheBasics&0&l]&6 '
 
-#List of command to disable, can include any of this plugin and others.
-DisabledCommmands: []
-#- slap
-#- hug
-
 #The delay for teleporting in seconds. Use the permission'TheBasics.Teleport.Override' to ignore the timer. (Default=3)
 TeleportDelay: 3
+
+#The time for a player to accept a teleport request. Will cancel after that time in seconds. (Default=60)
+TeleportRequestTime: 60
 
 #The max homes per a group. Must use TheBasics permissions/groups. If no value is set, its assumed unlimited.
 #Can also use 'TheBasics.Home.Unlimited' for max homes.
@@ -56,7 +57,3 @@ Nickname:
 ChatFormat:
   Member: '&f[&6<World>&f] <Prefix> &6<Name> &f: &6<Message>'
   Admin: '&f[&c<World>&f] <Prefix> &c<Name> &f: &c<Message>'
-  
-  
-  
-  

@@ -30,7 +30,8 @@ public class BasicPlayerChatEvent implements Listener
 			}
 			
 			String format = TheBasics.getGeneralConfig().getString("ChatFormat." + group.getGroupName());
-			format = format.replaceAll("<World>", player.getWorld().getName());
+			String worldName = player.getWorld().getName();
+			format = format.replaceAll("<World>", worldName.substring(0, 1).toUpperCase() + worldName.substring(1));
 			format = format.replaceAll("<Prefix>", group.getPrefix());
 			format = format.replaceAll("<Name>", player.getDisplayName());
 			format = format.replaceAll("<Message>", message);

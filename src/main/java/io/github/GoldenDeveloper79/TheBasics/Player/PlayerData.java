@@ -96,6 +96,11 @@ public class PlayerData extends PlayerBase
 		update("LastLocation.Yaw", loc.getYaw());
 		update("LastLocation.Pitch", loc.getPitch());
 		
+		loadPermissions();
+	}
+	
+	public void loadPermissions()
+	{
 		GroupModule group = TheBasics.getPermissions().getGroup(getString("Group"));
 		group.getPlayers().add(name);
 		
@@ -126,7 +131,16 @@ public class PlayerData extends PlayerBase
 		update("LastLocation.Yaw", loc.getYaw());
 		update("LastLocation.Pitch", loc.getPitch());
 	}
-		
+	
+	public void addPermission(String permission)
+	{
+		perm.setPermission(permission.toLowerCase(), true);
+	}
+	
+	public void removePermission(String permission)
+	{
+		perm.setPermission(permission.toLowerCase(), false);
+	}
 	
 	public Player getPlayer()
 	{

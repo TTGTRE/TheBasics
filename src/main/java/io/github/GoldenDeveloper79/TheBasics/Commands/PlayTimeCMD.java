@@ -7,8 +7,11 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
+import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
+import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
+import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
 public class PlayTimeCMD extends CommandModule
 {
@@ -29,13 +32,41 @@ public class PlayTimeCMD extends CommandModule
 				formatTime = String.valueOf(time) + "m";
 			}else
 			{
-				BigDecimal bd = new BigDecimal(Double.toString(time));
+				BigDecimal bd = new BigDecimal(Double.toString(time / 60));
 				bd = bd.setScale(1, BigDecimal.ROUND_HALF_UP);
 				
 				formatTime = String.valueOf(bd.doubleValue()) + "h";
 			}
 			
 			BasicUtils.sendMessage(player, "&6You have played on the server for &7" + formatTime + "&6.");
+			
+			if(TheBasics.getGroupConfig().getString("Ranking.Method").equalsIgnoreCase("TIME"))
+			{
+				PlayerData data = BasicUtils.getData(player);
+				String groupName = null;
+				
+				for(String group : TheBasics.getGroupConfig().getConfig().getConfigurationSection("Ranking.Ranks").getKeys(false))
+				{
+					if(TheBasics.getPermissions().groupExist(group))
+					{
+						if(TheBasics.getGroupConfig().getDouble("Ranking.Ranks." + group) <= data.getDouble("PlayTime"))
+						{
+							groupName = group;
+						}
+					}
+				}
+				
+				if(groupName != null)
+				{	
+					if(!TheBasics.getPermissions().getPlayerGroup(player).getGroupName().equalsIgnoreCase(groupName))
+					{
+						GroupModule group = TheBasics.getPermissions().getGroup(groupName);
+						TheBasics.getPermissions().addPlayerToGroup(player.getPlayer(), group);
+						
+						BasicUtils.sendMessage(player, "&6You have ranked up to &7" + groupName + "&6.");	
+					}
+				}
+			}
 		}else
 		{
 			Player player2 = Bukkit.getPlayer(args[0]);

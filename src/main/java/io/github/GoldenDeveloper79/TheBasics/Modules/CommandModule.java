@@ -53,6 +53,7 @@ public abstract class CommandModule
 		Registery.commands.put(labels[0], this);
 		
 		PluginCommand cmd = TheBasics.getPlugin().getCommand(labels[0]);
+		cmd.setPermission("TheBasics." + labels[0]);
 		cmd.setExecutor(TheBasics.getCommandExecutor());
 		
 		this.description = cmd.getDescription();

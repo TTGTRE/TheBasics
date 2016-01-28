@@ -30,6 +30,7 @@ import java.util.List;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
@@ -50,7 +51,7 @@ public class ConfigModule
 			try
 			{
 				file.createNewFile();
-				
+
 				if(!(this instanceof PlayerData))
 				{
 					TheBasics.getPlugin().saveResource(file.getName(), true);
@@ -60,8 +61,13 @@ public class ConfigModule
 				TheBasics.getLog().severe("Could not create the file " + file.getName() + "!");
 			}
 		}
-		
+
 		config = YamlConfiguration.loadConfiguration(file);
+
+		if(!(this instanceof PlayerData))
+		{
+			BasicUtils.updateConfig(config, file);
+		}
 	}
 
 	/*
@@ -70,7 +76,7 @@ public class ConfigModule
 	public void set(String key, Object value)
 	{
 		config.set(key, value);
-		
+
 		try 
 		{
 			config.save(file);
@@ -79,7 +85,7 @@ public class ConfigModule
 			TheBasics.getLog().severe("Could not save the config for " + file.getName() + "!");
 		}
 	}
-	
+
 	/*
 	 * Sets a value to the specified key when the value does not equal the same in the config.
 	 */
@@ -90,7 +96,7 @@ public class ConfigModule
 			set(key, value);
 		}
 	}
-	
+
 	/*
 	 * Gets an object from a specified key.
 	 */
@@ -98,7 +104,7 @@ public class ConfigModule
 	{
 		return config.get(key);
 	}
-	
+
 	/*
 	 * Gets a string from a specified key.
 	 */
@@ -106,7 +112,7 @@ public class ConfigModule
 	{
 		return config.getString(key);
 	}
-	
+
 	/*
 	 * Gets an integer from a specified key.
 	 */
@@ -114,7 +120,7 @@ public class ConfigModule
 	{
 		return config.getInt(key);
 	}
-	
+
 	/*
 	 * Gets a double from a specified key.
 	 */
@@ -122,7 +128,7 @@ public class ConfigModule
 	{
 		return config.getDouble(key);
 	}
-	
+
 	/*
 	 * Gets a boolean from a specified key.
 	 */
@@ -130,7 +136,7 @@ public class ConfigModule
 	{
 		return config.getBoolean(key);
 	}
-	
+
 	/*
 	 * Checks if a path exist from a specified key.
 	 */
@@ -138,7 +144,7 @@ public class ConfigModule
 	{
 		return config.contains(key);
 	}
-	
+
 	/*
 	 * Gets a string list from a specified key.
 	 */
@@ -146,7 +152,7 @@ public class ConfigModule
 	{
 		return config.getStringList(key);
 	}
-	
+
 	/*
 	 * Gets the file associated with the configuration.
 	 */

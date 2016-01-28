@@ -4,21 +4,42 @@ Groups:
     Default: true
     Prefix: '&f[&6Member&f]'
     Permissions:
-    - TheBasics.Help
-    - TheBasics.Kit.Starter
+    - thebasics.balance
+    - thebasics.deletehome
+    - thebasics.help
+    - thebasics.home
+    - thebasics.playtime
+    - thebasics.rules
+    - thebasics.sethome
+    - thebasics.spawn
+    - thebasics.time
+    - thebasics.warp
+    - thebasics.teleportrequest
+    - thebasics.teleportrequestaccept
+    - thebasics.teleportrequestdeny
   Admin:
     Default: false
     Prefix: '&f[&cAdmin&f]'
     Permissions:
-    - '*'
+    - thebasics.ban
+    - thebasics.clearinventory
+    - thebasics.feed
+    - thebasics.fly
+    - thebasics.gamemode
+    - thebasics.group.set
+    - thebasics.heal
+    - thebasics.kick
+    - thebasics.setspawn
+    - thebasics.setwarp
+    - thebasics.time.set
     Inheritance:
     - Member
 
 Ranking:
-  #The method of ranking. You get two choices: COST or TIME.(Default=COST)
+  #Different methods coming. (Default=TIME)
   Method: TIME
   
-  #Depending on the method, these values can either be time in minutes or cost in ingame currency.
+  #Time in seconds. (New method will include cost in $). To not allow a player to rankup to a group just don't include the rank in this list.
   Ranks:
     Member: 50
     Admin: 100

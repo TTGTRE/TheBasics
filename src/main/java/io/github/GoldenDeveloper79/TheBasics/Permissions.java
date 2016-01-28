@@ -34,10 +34,10 @@ public class Permissions implements BasicPermissions
 	{
 		if(player.isOnline())
 		{
-			return getGroup(BasicUtils.getData(player.getName()).getString("Group").toLowerCase());
+			return getGroup(BasicUtils.getData(player.getName()).getString("Group"));
 		}else
 		{
-			return getGroup(BasicUtils.getConfig(player.getName()).getString("Group").toLowerCase());
+			return getGroup(BasicUtils.getConfig(player.getName()).getString("Group"));
 		}
 	}
 	
@@ -75,13 +75,15 @@ public class Permissions implements BasicPermissions
 	{
 		if(!playerInGroup(player, group))
 		{
-			group.getPlayers().add(player.getName());
 			removePlayerFromGroup(player, getGroup(BasicUtils.getConfig(player.getName()).getString("Group")));
 			
 			if(player.isOnline())
 			{
+				group.getPlayers().add(player.getName());
 				PlayerData data = BasicUtils.getData(player.getName());
 				data.set("Group", group.getGroupName());
+				
+				data.loadPermissions();
 			}else
 			{
 				BasicUtils.getConfig(player.getName()).set("Group", group.getGroupName());
@@ -107,10 +109,10 @@ public class Permissions implements BasicPermissions
 			if(player.isOnline())
 			{
 				PlayerData data = BasicUtils.getData(player.getName());
-				data.set("Group", TheBasics.getPermissions().getDefaultGroup().getGroupName());
+				data.set("Group", null);
 			}else
 			{
-				BasicUtils.getConfig(player.getName()).set("Group", TheBasics.getPermissions().getDefaultGroup().getGroupName());
+				BasicUtils.getConfig(player.getName()).set("Group", null);
 				BasicUtils.saveFile(player.getName());
 			}
 			

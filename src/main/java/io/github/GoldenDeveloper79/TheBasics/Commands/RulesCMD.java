@@ -109,82 +109,81 @@ public class RulesCMD extends CommandModule
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
 		 if(args.length == 1)
+		 {
+			try
 			{
-				try
+				int page = Integer.parseInt(args[0]) - 1;
+			
+				if(page > 0 && page <= getMaxPages())
 				{
-					int page = Integer.parseInt(args[0]) - 1;
-				
-					if(page > 0 && page <= getMaxPages())
+					for(String m : formatRules(page))
 					{
-						for(String m : formatRules(page))
-						{
-							console.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
-						}
-					}else
-					{
-						BasicUtils.sendMessage(console, "Please specify a valid page number.");
+						console.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 					}
-				}catch(NumberFormatException e)
+				}else
 				{
-					Player player2 = Bukkit.getPlayer(args[0]);
-					
-					if(player2 != null)
-					{
-						if(console.hasPermission("TheBasics.Rules.Send"))
-						{	
-							for(String m : formatRules(0))
-							{
-								player2.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
-							}
-							
-							BasicUtils.sendMessage(console, "You sent rules to &7" + args[0] + "&6.");
-						}else
-						{
-							BasicUtils.sendMessage(console, "You do not have enough permission to perform this command!");
-						}
-					}else
-					{
-						BasicUtils.sendMessage(console, "Please specify a valid page number.");
-					}
+					BasicUtils.sendMessage(console, "Please specify a valid page number.");
 				}
-			}else if(args.length == 2)
+			}catch(NumberFormatException e)
 			{
-				try
-				{
-					int page = Integer.parseInt(args[1]) - 1;
+				Player player2 = Bukkit.getPlayer(args[0]);
 				
-					if(page > 0 && page <= getMaxPages())
-					{
-						Player player = Bukkit.getPlayer(args[0]);
-						
-						if(player != null)
+				if(player2 != null)
+				{
+					if(console.hasPermission("TheBasics.Rules.Send"))
+					{	
+						for(String m : formatRules(0))
 						{
-							if(console.hasPermission("TheBasics.Rules.Send"))
-							{	
-								for(String m : formatRules(page))
-								{
-									player.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
-								}
-								
-								BasicUtils.sendMessage(console, "&6You sent rules to &7" + args[0] + "&6.");
-							}else
-							{
-								BasicUtils.sendMessage(console, "&cYou do not have enough permission to perform this command!");
-							}
-						}else
-						{
-							BasicUtils.sendMessage(player, "That player is not online!");
+							player2.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 						}
+						
+						BasicUtils.sendMessage(console, "You sent rules to &7" + args[0] + "&6.");
 					}else
 					{
-						BasicUtils.sendMessage(console, "Please specify a valid page number.");
+						BasicUtils.sendMessage(console, "You do not have enough permission to perform this command!");
 					}
-				}catch(NumberFormatException e)
+				}else
 				{
 					BasicUtils.sendMessage(console, "Please specify a valid page number.");
 				}
 			}
-		
+		}else if(args.length == 2)
+		{
+			try
+			{
+				int page = Integer.parseInt(args[1]) - 1;
+			
+				if(page > 0 && page <= getMaxPages())
+				{
+					Player player = Bukkit.getPlayer(args[0]);
+					
+					if(player != null)
+					{
+						if(console.hasPermission("TheBasics.Rules.Send"))
+						{	
+							for(String m : formatRules(page))
+							{
+								player.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
+							}
+							
+							BasicUtils.sendMessage(console, "&6You sent rules to &7" + args[0] + "&6.");
+						}else
+						{
+							BasicUtils.sendMessage(console, "&cYou do not have enough permission to perform this command!");
+						}
+					}else
+					{
+						BasicUtils.sendMessage(player, "That player is not online!");
+					}
+				}else
+				{
+					BasicUtils.sendMessage(console, "Please specify a valid page number.");
+				}
+			}catch(NumberFormatException e)
+			{
+				BasicUtils.sendMessage(console, "Please specify a valid page number.");
+			}
+		}
 	}
 	
 	private List<String> formatRules(int page)
@@ -192,7 +191,7 @@ public class RulesCMD extends CommandModule
 		int perPage = TheBasics.getTextConfig().getInt("Rules.PerPage");
 		List<String> rulesList = TheBasics.getTextConfig().getStringList("Rules.List");
 		List<String> formatedRules = new ArrayList<String>();
-		String top = TheBasics.getTextConfig().getString("Rules.Format.Top");
+		String top = TheBasics.getTextConfig().getString("Rules.Format.Top").replace("%p", String.valueOf(page + 1)).replace("%m", String.valueOf(getMaxPages() + 1));;
 		String bottom = TheBasics.getTextConfig().getString("Rules.Format.Bottom");
 		
 		formatedRules.add(top);

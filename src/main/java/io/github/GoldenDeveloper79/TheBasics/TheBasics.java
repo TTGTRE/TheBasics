@@ -24,6 +24,7 @@
 package io.github.GoldenDeveloper79.TheBasics;
 
 import java.io.File;
+import java.net.URL;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -32,6 +33,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import io.github.GoldenDeveloper79.TheBasics.Updater.UpdateType;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BalanceCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BasicCommandExecutor;
@@ -39,14 +41,28 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.ClearInventoryCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.DeleteHomeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.FeedCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.FlyCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.GamemodeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.GiveCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.GroupCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.HealCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.HelpCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.HomeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.KickCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.NickCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.PayCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.PlayTimeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.RulesCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.SetHomeCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.SetSpawnCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.SetWarpCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.SpawnCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportRequestAcceptCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportRequestCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportRequestDenyCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TimeCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.WarpCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.WeatherCMD;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerChatEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerJoinEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerQuitEvent;
@@ -87,6 +103,11 @@ public class TheBasics extends JavaPlugin
 		loadEvents();
 		loadGroups();
 
+		if(TheBasics.getGeneralConfig().getBoolean("AutoUpdating"))
+		{
+			//new Updater(this, 0, this.getFile(), UpdateType.DEFAULT, false);
+		}
+		
 		economy = new Economy();
 		permissions = new Permissions();
 		
@@ -103,6 +124,8 @@ public class TheBasics extends JavaPlugin
 		Registery.players.clear();
 		Registery.groups.clear();
 		Registery.commands.clear();
+		Registery.teleportRequest.clear();
+		Registery.teleportQue.clear();
 		
 		plugin = null;
 		economy = null;
@@ -139,14 +162,28 @@ public class TheBasics extends JavaPlugin
 		new DeleteHomeCMD();
 		new FeedCMD();
 		new FlyCMD();
+		new GamemodeCMD();
 		new GiveCMD();
+		new GroupCMD();
 		new HealCMD();
+		new HelpCMD();
 		new HomeCMD();
 		new KickCMD();
+		new NickCMD();
+		new PayCMD();
 		new PlayTimeCMD();
 		new RulesCMD();
 		new SetHomeCMD();
+		new SetSpawnCMD();
+		new SetWarpCMD();
+		new SpawnCMD();
+		new TeleportCMD();
+		new TeleportRequestAcceptCMD();
+		new TeleportRequestCMD();
+		new TeleportRequestDenyCMD();
 		new TimeCMD();
+		new WarpCMD();
+		new WeatherCMD();
 	}
 
 	/*
@@ -205,7 +242,7 @@ public class TheBasics extends JavaPlugin
 						{
 							String groupName = null;
 							
-							for(String group : TheBasics.getGroupConfig().getStringList("Ranking.Ranks"))
+							for(String group : TheBasics.getGroupConfig().getConfig().getConfigurationSection("Ranking.Ranks").getKeys(false))
 							{
 								if(permissions.groupExist(group))
 								{
@@ -220,12 +257,22 @@ public class TheBasics extends JavaPlugin
 							{
 								GroupModule group = TheBasics.getPermissions().getGroup(groupName);
 								permissions.addPlayerToGroup(player.getPlayer(), group);
+								
+								BasicUtils.sendMessage(player.getPlayer(), "&6You have ranked up to &7" + groupName + "&6.");	
 							}
 						}
 					}
 				}
 			}
-		}.runTaskTimerAsynchronously(this, 60L, 6000L);
+		}.runTaskTimerAsynchronously(this, 6000L, 6000L);
+	}
+	
+	/*
+	 * Get a url by its filename.
+	 */
+	public static URL getResourceURL(String fileName)
+	{
+		return plugin.getClassLoader().getResource(fileName); 
 	}
 	
 	/*

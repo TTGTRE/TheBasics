@@ -23,6 +23,7 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
@@ -51,4 +52,17 @@ public class Registery
 	 * V: Group Module
 	 */
 	public static HashMap<String, GroupModule> groups = new HashMap<String, GroupModule>();
+	
+	/*
+	 * WIll store all teleport request.
+	 * K: Player Send
+	 * V: Player Receive
+	 */
+	public static HashMap<String, String> teleportRequest = new HashMap<String, String>();
+	
+	/*
+	 * Will store players in teleport que.
+	 * K: Player Name
+	 */
+	public static ArrayList<String> teleportQue = new ArrayList<String>();
 }

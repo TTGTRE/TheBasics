@@ -24,28 +24,76 @@ commands:
   fly:
     description: Toggles flying for yourself or another player.
     usage: /fly <name>.
+  gamemode:
+    description: Change the gamemode of yourself or another player.
+    usage: /gamemode <name> <mode>.
+    aliases: [gm]
   give:
     description: Gives yourself or another player an item.
     usage: /give <name> <itemID:itemData/itemName> <amount>.
+  group:
+    description: Create groups, set a player to group, and get a player group.
+    usage: /group <set/create/get> <player/group> <group>
   heal:
     description: Heals yourself or another player.
     usage: /heal <name>.
+  help:
+    description: Sends the help pages to yourself or another player.
+    usage: /help <name> <page>.
+    aliases: [?]
   home:
     description: Teleports yourself to a home.
     usage: /home <name>.
   kick:
     description: Kicks a player from the server.
     usage: /kick <name> <reason>.
+  nick:
+    description: Changes the displayname of yourself.
+    usage: /nick <name>
+  pay:
+    description: Give another player money.
+    usage: /pay <name>.
   playtime:
     description: Gets the play time of yourself or another player.
     usage: /playtime <name>.
     aliases: [ptime]
-  sethome:
-    description: Sets a home at your location.
-    usage: /sethome <name>.
   rules:
     description: Sends the rules to yourself or another player.
     usage: /rules <name> <page>.
+  sethome:
+    description: Sets a home at your location.
+    usage: /sethome <name>.
+  setspawn:
+    description: Sets a spawn for the world at your location.
+    usage: /setspawn.
+  setwarp:
+    description: Sets a warp at your location.
+    usage: /setwarp <name>.
+  spawn:
+    description: Teleport yourself to spawn.
+    usage: /spawn.
+  teleport:
+    description: Teleport yourself to a player forcefully.
+    usage: /teleport <name>.
+    aliases: [tp]
+  teleportrequest:
+    description: Request to teleport to another player.
+    usage: /teleportrequest <name>.
+    aliases: [tr]
+  teleportrequestaccept:
+    description: Accept a teleport request.
+    usage: /teleportrequestaccept.
+    aliases: [traccept]
+  teleportrequestdeny:
+    description: Deny a teleport request.
+    usage: /teleportrequestdeny.
+    aliases: [trdeny]    
   time:
     description: Gets the time or sets the time of the world you are in.
     usage: /time set <day/night>.
+  warp:
+    description: Gets a list of warps or teleport yourself to a warp.
+    usage: /warp <name>.
+  weather:
+    description: Changes the weather in your world.
+    usage: /weather <sun/rain>.

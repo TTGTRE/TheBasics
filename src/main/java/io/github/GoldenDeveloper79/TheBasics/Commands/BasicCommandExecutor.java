@@ -42,24 +42,37 @@ public class BasicCommandExecutor implements CommandExecutor
 		//If the command is one of ours.
 		if(Registery.commands.containsKey(cmd.getLabel()))
 		{
+			boolean hasPermission = false;
 			CommandModule mod = Registery.commands.get(cmd.getLabel());
+		
+			for(String labels : mod.getLabels())
+			{
+				if(sender.hasPermission("thebasics." + labels))
+				{
+					hasPermission = true;
+					break;
+				}
+			}
 			
 			//If the sender has the permission.
-			if(sender.hasPermission("thebasics." + label.toLowerCase()))
+			if(hasPermission)
 			{
 				//If the arguments are within the modules defined amounts.
 				if(args.length <= mod.getMaxArgs() && mod.getMinArgs() <= args.length)
 				{
-					//If the command is to be multiplayer always and if the player is online.
-					if(mod.getMultiPlayer().equals(MultiPlayer.ALWAYS) && Bukkit.matchPlayer(args[0]) == null)
+					if(args.length >= 1)
 					{
-						BasicUtils.sendMessage(sender, "&cThat player it not online!");
-						return true;
-					//If the command is to be multiplayer when the args are greater or equal to 1 and the player is online.
-					}else if(mod.getMultiPlayer().equals(MultiPlayer.SOMETIMES) && args.length >= 1 && Bukkit.matchPlayer(args[0]) == null)
-					{
-						BasicUtils.sendMessage(sender, "&cThat player is not online!");
-						return true;
+						//If the command is to be multiplayer always and if the player is online.
+						if(mod.getMultiPlayer().equals(MultiPlayer.ALWAYS)  && Bukkit.matchPlayer(args[0]) == null)
+						{
+							BasicUtils.sendMessage(sender, "&cThat player it not online!");
+							return true;
+						//If the command is to be multiplayer when the args are greater or equal to 1 and the player is online.
+						}else if(mod.getMultiPlayer().equals(MultiPlayer.SOMETIMES) && Bukkit.matchPlayer(args[0]) == null)
+						{
+							BasicUtils.sendMessage(sender, "&cThat player is not online!");
+							return true;
+						}
 					}
 					
 					//If the sender is a player.

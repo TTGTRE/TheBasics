@@ -19,18 +19,24 @@ public class FlyCMD extends CommandModule
 	{
 		if(args.length < 1)
 		{
-			if(player.getAllowFlight())
+			if(player.hasPermission("TheBasics.Fly"))
 			{
-				player.setAllowFlight(false);
-				player.setFlying(false);
-				
-				BasicUtils.sendMessage(player, "&6You have disabled flying for yourself.");
+				if(player.getAllowFlight())
+				{
+					player.setAllowFlight(false);
+					player.setFlying(false);
+					
+					BasicUtils.sendMessage(player, "&6You have disabled flying for yourself.");
+				}else
+				{
+					player.setAllowFlight(true);
+					player.setFlying(true);
+					
+					BasicUtils.sendMessage(player, "&6You have enabled flying for yourself.");
+				}
 			}else
 			{
-				player.setAllowFlight(true);
-				player.setFlying(true);
-				
-				BasicUtils.sendMessage(player, "&6You have enabled flying for yourself.");
+				BasicUtils.sendMessage(player, "&cYou do not have enough permission to perform this command!");
 			}
 		}else 
 		{

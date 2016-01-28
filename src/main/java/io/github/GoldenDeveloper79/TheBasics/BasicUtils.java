@@ -24,6 +24,11 @@
 package io.github.GoldenDeveloper79.TheBasics;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Scanner;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -44,7 +49,7 @@ public class BasicUtils
 	public static void sendMessage(CommandSender sender, String message)
 	{
 		String prefix = TheBasics.getGeneralConfig().getString("Prefix");
-		
+
 		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + message));
 	}
 
@@ -61,7 +66,7 @@ public class BasicUtils
 			}
 		}
 	}
-	
+
 	/*
 	 * Broadcast a message to all players on the server with a prefix.
 	 */
@@ -72,7 +77,7 @@ public class BasicUtils
 			sendMessage(player, message);
 		}
 	}
-	
+
 	/*
 	 * Gets a player data by the player.
 	 */
@@ -82,10 +87,10 @@ public class BasicUtils
 		{
 			return Registery.players.get(player.getName());
 		}
-		
+
 		return null;
 	}
-	
+
 	/*
 	 * Gets a player data by the player name.
 	 * Use only if your 100% confident it won't return null.
@@ -98,14 +103,14 @@ public class BasicUtils
 		}
 		return null;
 	}
-	
+
 	/*
 	 * Gets the config for offline players.
 	 */
 	public static FileConfiguration getConfig(String offlinePlayer)
 	{
 		File file = getFile(offlinePlayer);
-		
+
 		if(file != null)
 		{
 			if(file.exists())
@@ -113,10 +118,10 @@ public class BasicUtils
 				return YamlConfiguration.loadConfiguration(file);
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	/*
 	 * Gets the file for offline players.
 	 */
@@ -126,10 +131,10 @@ public class BasicUtils
 		{
 			return new File("plugins/TheBasics/Players/" + TheBasics.getDataConfig().getString("Players." + offlinePlayer) + ".yml");
 		}
-		
+
 		return null;
 	}
-	
+
 	/*
 	 * Saves the file for offline players.
 	 */
@@ -145,29 +150,29 @@ public class BasicUtils
 			return false;
 		}
 	}
-	
+
 	/*
 	 * Combines an an array of strings. Used mostly for punishment reasons.
 	 */
 	public static String combineString(int start, String[] strings)
 	{
 		StringBuilder sb = new StringBuilder();
-		
+
 		for(int i = start; i < strings.length; i++)
 		{
 			sb.append(strings[i] + " ");
 		}
-		
+
 		return sb.toString();
 	}
-	
+
 	/*
 	 * Makes a string an itemstack magically.
 	 */
 	public static ItemStack getItem(String item, String quantity)
 	{
 		int amount = 0;
-		
+
 		try
 		{
 			amount = Integer.parseInt(quantity);
@@ -175,14 +180,14 @@ public class BasicUtils
 		{
 			return null;
 		}
-		
+
 		try
 		{
 			if(item.contains(":"))
 			{
 				String[] itemSplit = item.split(":");
 				byte data = Byte.parseByte(itemSplit[1]);
-				
+
 				return new ItemStack(Material.matchMaterial(itemSplit[0]), amount, data);
 			}else
 			{
@@ -196,7 +201,7 @@ public class BasicUtils
 			return null;
 		}
 	}
-	
+
 	/*
 	 * Adds an item to a players inventory safely.
 	 */
@@ -209,5 +214,65 @@ public class BasicUtils
 		{
 			player.getWorld().dropItemNaturally(player.getLocation(), item);
 		}
+	}
+
+	/*
+	 * Updates the config values.
+	 */
+	public static void updateConfig(FileConfiguration config, File file) 
+	{
+		HashMap<String, Object> newConfig = getConfigValues(file);
+		
+		for(String var : config.getKeys(false))
+		{
+			newConfig.remove(var);
+		}
+		
+		if(newConfig.size() != 0)
+		{
+			for(String key : newConfig.keySet())
+			{
+				config.set(key, newConfig.get(key));
+			}
+			
+			try 
+			{
+				config.save(file);
+			} catch(IOException e) 
+			{
+				TheBasics.getLog().severe("Could not save " + file.getName() + ".");
+			}
+		}
+	}
+	
+	/*
+	 * Gets the content of that file as a hashmap.
+	 */
+	public static HashMap<String, Object> getConfigValues(File file) 
+	{
+		HashMap<String, Object> var = new HashMap<>();
+		YamlConfiguration config = new YamlConfiguration();
+		
+		try 
+		{
+			config.loadFromString(stringFromInputStream(file.getName()));
+		} catch(Exception e) {} //Just ignore it.
+		
+		for(String key : config.getKeys(false)) 
+		{
+			var.put(key, config.get(key));
+		}
+		
+		return var;
+	}
+	
+	/*
+	 * Gets the contents of that file as a string.
+	 */
+	@SuppressWarnings("resource")
+	public static String stringFromInputStream(String fileName) throws URISyntaxException, IOException
+	{
+		InputStream stream = TheBasics.getResourceURL(fileName).openStream();
+		return new Scanner(stream).useDelimiter("\\A").next();
 	}
 }

@@ -27,7 +27,10 @@ import java.io.File;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
+import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
 
@@ -42,6 +45,56 @@ public abstract class PlayerBase extends ConfigModule
 		super(new File("plugins/TheBasics/Players/" + player.getUniqueId().toString() + ".yml"));
 		
 		this.player = player;
+	}
+	
+	public void initTeleport(Location loc, String locName)
+	{
+		if(loc != null)
+		{
+			if(player.hasPermission("TheBasics.Teleport.Override"))
+			{
+				player.teleport(loc);
+				BasicUtils.sendMessage(player, "&6You have teleported to " + locName + ".");
+			}else
+			{
+				int delay = TheBasics.getGeneralConfig().getInt("TeleportDelay");
+				
+				if(delay > 0)
+				{
+					BasicUtils.sendMessage(player, "&6You will teleport in &7" + delay + "s&6.");
+					Registery.teleportQue.add(player.getName());
+					
+					new BukkitRunnable()
+					{
+						int counter = 0;
+						
+						public void run()
+						{
+							if(Registery.teleportQue.contains(player.getName()))
+							{
+								counter++;
+								
+								if((delay - counter) <= 0)
+								{
+									player.teleport(loc);
+									BasicUtils.sendMessage(player, "&6You have teleported to " + locName + ".");;
+									
+									this.cancel();
+									return;
+								}else
+								{
+									BasicUtils.sendMessage(player, "&7" + (delay-counter) + "s&6...");
+								}
+							}
+						}
+					}.runTaskTimer(TheBasics.getPlugin(), 20L, 20L);
+				}else
+				{
+					player.teleport(loc);
+					BasicUtils.sendMessage(player, "&6You have teleported to "  + locName + ".");
+				}
+			}
+		}
 	}
 	
 	public boolean homeExist(String name)
@@ -91,12 +144,12 @@ public abstract class PlayerBase extends ConfigModule
 	
 	public double getMaxHomes()
 	{
-		if(player.hasPermission("TheBasics.Home.Unlimited"))
+		if(player.hasPermission("thebasics.home.unlimited"))
 		{
 			return Double.MAX_VALUE;
-		}else if(TheBasics.getGeneralConfig().contains("Home." + TheBasics.getPermissions().getPlayerGroup(player).getGroupName()))
+		}else if(TheBasics.getGeneralConfig().contains("Homes." + TheBasics.getPermissions().getPlayerGroup(player).getGroupName()))
 		{
-			double maxHomes = TheBasics.getGeneralConfig().getDouble("Home." + TheBasics.getPermissions().getPlayerGroup(player).getGroupName());
+			double maxHomes = TheBasics.getGeneralConfig().getDouble("Homes." + TheBasics.getPermissions().getPlayerGroup(player).getGroupName());
 			
 			return maxHomes;
 		}else
