@@ -26,6 +26,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import io.github.GoldenDeveloper79.TheBasics.Updater.UpdateType;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BalanceCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BasicCommandExecutor;
@@ -43,6 +44,7 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.KickCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.NickCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.PayCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.PlayTimeCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.RepairCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.RulesCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.SetHomeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.SetSpawnCMD;
@@ -52,7 +54,9 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportRequestAcceptCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportRequestCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportRequestDenyCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.TempBanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TimeCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.UnbanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.WarpCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.WeatherCMD;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerChatEvent;
@@ -97,7 +101,7 @@ public class TheBasics extends JavaPlugin
 
 		if(TheBasics.getGeneralConfig().getBoolean("AutoUpdating"))
 		{
-			//new Updater(this, 0, this.getFile(), UpdateType.DEFAULT, false);
+			new Updater(this, 97487, this.getFile(), UpdateType.DEFAULT, false);
 		}
 		
 		economy = new Economy();
@@ -164,6 +168,7 @@ public class TheBasics extends JavaPlugin
 		new NickCMD();
 		new PayCMD();
 		new PlayTimeCMD();
+		new RepairCMD();
 		new RulesCMD();
 		new SetHomeCMD();
 		new SetSpawnCMD();
@@ -173,7 +178,9 @@ public class TheBasics extends JavaPlugin
 		new TeleportRequestAcceptCMD();
 		new TeleportRequestCMD();
 		new TeleportRequestDenyCMD();
+		new TempBanCMD();
 		new TimeCMD();
+		new UnbanCMD();
 		new WarpCMD();
 		new WeatherCMD();
 	}

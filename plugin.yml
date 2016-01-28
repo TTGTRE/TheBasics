@@ -1,5 +1,5 @@
 name: TheBasics
-version: 1.0
+version: 1.01
 main: io.github.GoldenDeveloper79.TheBasics.TheBasics
 description: A basic set of functions for Minecraft servers.
 commands:
@@ -57,6 +57,9 @@ commands:
     description: Gets the play time of yourself or another player.
     usage: /playtime <name>.
     aliases: [ptime]
+  repair:
+    description: Repairs an item that you are holding in your hand.
+    usage: /repair.
   rules:
     description: Sends the rules to yourself or another player.
     usage: /rules <name> <page>.
@@ -88,9 +91,15 @@ commands:
     description: Deny a teleport request.
     usage: /teleportrequestdeny.
     aliases: [trdeny]    
+  tempban:
+    description: Temporarily ban a player from the server.
+    usage: /tempban <name> <time><unit y/w/d/h/m/s> <reason>
   time:
     description: Gets the time or sets the time of the world you are in.
     usage: /time set <day/night>.
+  unban:
+    description: Unbans a player from the server.
+    usage: /unban <name>.
   warp:
     description: Gets a list of warps or teleport yourself to a warp.
     usage: /warp <name>.

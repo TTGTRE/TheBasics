@@ -32,6 +32,7 @@ public abstract class PlayerBase extends ConfigModule
 	private Player player;
 	private boolean afk = false;
 	private boolean vanished = false;
+	private boolean muted = false;
 	
 	public PlayerBase(Player player)
 	{
@@ -169,5 +170,15 @@ public abstract class PlayerBase extends ConfigModule
 	public void setVanished(boolean vanished) 
 	{
 		this.vanished = vanished;
+	}
+
+	public boolean isMuted() 
+	{
+		return muted;
+	}
+
+	public void setMuted(boolean muted) 
+	{
+		this.muted = muted;
 	}
 }

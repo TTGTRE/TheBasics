@@ -16,6 +16,39 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
-public class RepairCMD {
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
+import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
+import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
+import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
+
+public class RepairCMD extends CommandModule
+{
+	public RepairCMD() 
+	{
+		super(new String[] {"repair"}, 0, 0, MultiPlayer.OTHER);
+	}
+
+	public void performCommand(Player player, String[] args) 
+	{
+		ItemStack item = player.getItemInHand();
+		
+		if(item != null)
+		{
+			item.setDurability(item.getType().getMaxDurability());
+			
+			BasicUtils.sendMessage(player, "&6You have repaired the item &7" + item.getType().toString() + "&6.");
+		}else
+		{
+			BasicUtils.sendMessage(player, "&cYou must be holding an item to use this command!");
+		}
+	}
+
+	public void performCommand(ConsoleCommandSender console, String[] args) 
+	{
+		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+	}
 }
+
