@@ -39,19 +39,7 @@ A set of basic functions for Minecraft servers. More details coming.
 - /warp (List or teleport yourself to a warp).
 - /weather (Change the weather in your world).
 - More...
-
-**Permissions **
-- The permissions are 'TheBasics.CommandLabel'.
-- If a command has a subcommand, it will look like 'TheBasics.CommandLabel.Subcommand)'.
-
-**Economy **
-- Can easily exchange money.
-- Can easily store money.
-- Can easily check balance of online players.
-- Can easily modify the balance of players.
-
-- More...
-
+- 
 **Permissions**
 - The permissions are 'TheBasics.CommandLabel'.
 - Sub commands are typically 'TheBasics.CommandLabel.SubCommand'.
