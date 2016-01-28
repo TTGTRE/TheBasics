@@ -27,6 +27,7 @@ A set of basic functions for Minecraft servers. More details coming.
 - /nick (Modify the displayname of yourself).
 - /pay (Pays a player a balance).
 - /playtime (/ptime) (Checks the playtime for yourself or another player).
+- /repair (Repairs the item you are holding in your hand).
 - /rules (Sends yourself or another player a list of rules).
 - /sethome (Sets a home at your location).
 - /setspawn (Sets the world spawn at your location).
@@ -35,7 +36,9 @@ A set of basic functions for Minecraft servers. More details coming.
 - /teleport (Forcefully teleports yourself to a player).
 - /teleportrequest (/tr) (Request to teleport to another player).
 - /teleportrequestaccept (/traccept) (Accept a request to be teleported too).
+- /tempban (Temporarily bans a player from the server).
 - /time (Gets or sets the time of the world you are in).
+- /unban (Unbans a player from the server).
 - /warp (List or teleport yourself to a warp).
 - /weather (Change the weather in your world).
 - More...
