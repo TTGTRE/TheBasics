@@ -39,7 +39,7 @@ A set of basic functions for Minecraft servers. More details coming.
 - /warp (List or teleport yourself to a warp).
 - /weather (Change the weather in your world).
 - More...
-- 
+
 **Permissions**
 - The permissions are 'TheBasics.CommandLabel'.
 - Sub commands are typically 'TheBasics.CommandLabel.SubCommand'.
