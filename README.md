@@ -9,6 +9,7 @@ A set of basic functions for Minecraft servers. More details coming.
 - Permissions with commands.
 - Groups with commands.
 - Configurable chat.
+- Configurable Messaging in Language.yml.
 - Light weight module setup.
 
 **Commands**
@@ -59,13 +60,10 @@ A set of basic functions for Minecraft servers. More details coming.
 - Easily modify the permissions, prefix, and default group.
 - Can modify what group players are in.
 - Can modify the config easily via ingame.
-- Easy configurable ranking system. Can either be paid to rankup or over time to rankup (Configurable).
+- Easy configurable ranking system over time. (Configurable).
 
 **Chat**
 - Easily modify chat format per group.
-- Simple and configurable chat guard.
-- Can modify the config easily via ingame.
-
 **Website**
 - http://goldendeveloper79.github.io/TheBasics
 
