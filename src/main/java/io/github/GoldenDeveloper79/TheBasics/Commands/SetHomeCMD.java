@@ -38,15 +38,15 @@ public class SetHomeCMD extends CommandModule
 		if((data.getHomes() + 1) <= data.getMaxHomes())
 		{
 			data.createHome(args[0]);
-			BasicUtils.sendMessage(player, "&6You have created a home called &7" + args[0] + " &6at your location.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("SetHome").replace("%a", args[0]));
 		}else
 		{
-			BasicUtils.sendMessage(player, "&cYou have reached your max home limit!");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("SetHomeMaxHome"));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args)
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
 }

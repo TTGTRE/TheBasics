@@ -25,7 +25,7 @@ public class TempBanCMD extends CommandModule
 	{
 		PlayerData data = BasicUtils.getData(args[0]);
 		
-		String reason = "&cYou have been tempbanned by &7" + player.getName() + "&6!";
+		String reason = BasicUtils.getMessage("TempBanDefault").replace("%p", player.getName());
 		
 		if(args.length > 2)
 		{
@@ -39,11 +39,11 @@ public class TempBanCMD extends CommandModule
 			Bukkit.getBanList(Type.NAME).addBan(args[0], reason, expiry, player.getName());
 			data.getPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
 			
-			BasicUtils.notify("TheBasics.Tempban.Notify", "&6The player &7" + player.getName() + " &6has tempbanned the player &7" + args[0] + " &6for " + reason + "&6!");
-			BasicUtils.sendMessage(player, "&6You have tempbanned  &7" + args[0] + "!");
+			BasicUtils.notify("TheBasics.Tempban.Notify", BasicUtils.getMessage("TempBanNotify").replace("%p", player.getName()).replace("%p2", args[0]).replace("%r", reason));
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("TempBanSender").replace("%p", args[0]));
 		}else
 		{
-			BasicUtils.sendMessage(player, "&cPlease specify a valid time in years, weeks, days, hours, minutes, or seconds.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("TempBanInvalidTime"));
 		}
 	}
 
@@ -51,7 +51,7 @@ public class TempBanCMD extends CommandModule
 	{
 		PlayerData data = BasicUtils.getData(args[0]);
 		
-		String reason = "&cYou have been tempbanned by &7console&6!";
+		String reason = BasicUtils.getMessage("TempBanDefault").replace("%p", console.getName());
 		
 		if(args.length > 2)
 		{
@@ -62,14 +62,14 @@ public class TempBanCMD extends CommandModule
 		
 		if(expiry != null)
 		{
-			Bukkit.getBanList(Type.NAME).addBan(args[0], reason, expiry, "console");
+			Bukkit.getBanList(Type.NAME).addBan(args[0], reason, expiry, console.getName());
 			data.getPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
 			
-			BasicUtils.notify("TheBasics.Tempban.Notify", "&6The player &7console &6has tempbanned the player &7" + args[0] + " &6for " + reason + "&6!");
-			BasicUtils.sendMessage(console, "&6You have tempbanned  &7" + args[0] + "!");
+			BasicUtils.notify("TheBasics.Tempban.Notify", BasicUtils.getMessage("TempBanNotify").replace("%p", console.getName()).replace("%p2", args[0]).replace("%r", reason));
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("TempBanSender").replace("%p", args[0]));
 		}else
 		{
-			BasicUtils.sendMessage(console, "&cPlease specify a valid time in years, weeks, days, hours, minutes, or seconds.");
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("TempBanInvalidTime"));
 		}
 	}
 	

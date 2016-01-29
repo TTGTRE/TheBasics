@@ -36,14 +36,14 @@ public class ClearInventoryCMD extends CommandModule
 		if(args.length < 1)
 		{
 			player.getInventory().clear();	
-			BasicUtils.sendMessage(player, "&6You have cleared your inventory.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("ClearInventory"));
 		}else
 		{
 			Player player2 = Bukkit.getPlayer(args[0]);
 			
 			player2.getInventory().clear();
-			BasicUtils.sendMessage(player, "&6You have cleared &7" + args[0] + "'s &6inventory.");
-			BasicUtils.sendMessage(player2, "&6Your inventory has been cleared by &7" + player.getName() + "&6.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("ClearInventorySender").replace("%p", args[0]));
+			BasicUtils.sendMessage(player2, BasicUtils.getMessage("ClearInventoryReceiver").replace("%p", player.getName()));
 		}
 	}
 
@@ -52,7 +52,7 @@ public class ClearInventoryCMD extends CommandModule
 		Player player2 = Bukkit.getPlayer(args[0]);
 		
 		player2.getInventory().clear();
-		BasicUtils.sendMessage(console, "You have cleared &7" + args[0] + "'s &6inventory.");
-		BasicUtils.sendMessage(player2, "&6Your inventory has been cleared by &7console.");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("ClearInventorySender").replace("%p", args[0]));
+		BasicUtils.sendMessage(player2, BasicUtils.getMessage("ClearInventoryReceiver").replace("%p", console.getName()));
 	}
 }

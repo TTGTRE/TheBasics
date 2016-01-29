@@ -48,14 +48,14 @@ public abstract class PlayerBase extends ConfigModule
 			if(player.hasPermission("TheBasics.Teleport.Override"))
 			{
 				player.teleport(loc);
-				BasicUtils.sendMessage(player, "&6You have teleported to " + locName + ".");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportToLocation").replace("%a", locName));
 			}else
 			{
 				int delay = TheBasics.getGeneralConfig().getInt("TeleportDelay");
 				
 				if(delay > 0)
 				{
-					BasicUtils.sendMessage(player, "&6You will teleport in &7" + delay + "s&6.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportInitialize").replace("%t", String.valueOf(delay)));
 					Registery.teleportQue.add(player.getName());
 					
 					new BukkitRunnable()
@@ -71,13 +71,13 @@ public abstract class PlayerBase extends ConfigModule
 								if((delay - counter) <= 0)
 								{
 									player.teleport(loc);
-									BasicUtils.sendMessage(player, "&6You have teleported to " + locName + ".");;
+									BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportToLocation").replace("%a", locName));;
 									
 									this.cancel();
 									return;
 								}else
 								{
-									BasicUtils.sendMessage(player, "&7" + (delay-counter) + "s&6...");
+									BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportTimeRemaing").replace("%t", String.valueOf(delay - counter)));
 								}
 							}
 						}
@@ -85,7 +85,7 @@ public abstract class PlayerBase extends ConfigModule
 				}else
 				{
 					player.teleport(loc);
-					BasicUtils.sendMessage(player, "&6You have teleported to "  + locName + ".");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportToLocation").replace("%a", locName));
 				}
 			}
 		}

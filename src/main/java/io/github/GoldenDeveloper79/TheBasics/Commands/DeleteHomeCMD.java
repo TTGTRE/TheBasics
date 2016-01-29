@@ -36,19 +36,19 @@ public class DeleteHomeCMD extends CommandModule
 		{
 			if(BasicUtils.getData(player).removeHome(args[0]))
 			{
-				BasicUtils.sendMessage(player, "&6You have deleted the home called &7" + args[0] + "&6.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("DeleteHome").replace("%a", args[0]));
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cThat home does not exist!");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("HomeExist"));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(player, "&cYou cannot delete your default home!");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("DefaultHome"));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args)
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
 }

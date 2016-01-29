@@ -50,9 +50,12 @@ public class HelpCMD extends CommandModule
 	
 				if(command != null)
 				{
-					if(player.hasPermission(command.getPermission()))
+					if(command.getPermission() != null)
 					{
-						help.add("- &6/" + cmdLabel + " :&7 " + command.getDescription());
+						if(player.hasPermission(command.getPermission()))
+						{
+							help.add("- &6/" + cmdLabel + " &7: " + command.getDescription());
+						}
 					}
 				}
 			}
@@ -78,7 +81,7 @@ public class HelpCMD extends CommandModule
 					}
 				}else
 				{
-					BasicUtils.sendMessage(player, "&cPlease specify a valid page number.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("HelpPage"));
 				}
 			}catch(NumberFormatException e)
 			{
@@ -93,15 +96,15 @@ public class HelpCMD extends CommandModule
 							player2.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 						}
 
-						BasicUtils.sendMessage(player, "&6You sent help to &7" + args[0] + "&6.");
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("HelpSender").replace("%p", args[0]));
 
 					}else
 					{
-						BasicUtils.sendMessage(player, "&cYou do not have enough permission to perform this command!");
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
 					}
 				}else
 				{
-					BasicUtils.sendMessage(player, "&cPlease specify a valid page number.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("HelpPage"));
 				}
 			}
 		}else if(args.length == 2)
@@ -122,22 +125,22 @@ public class HelpCMD extends CommandModule
 							{
 								player2.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 							}
-							BasicUtils.sendMessage(player, "&6You sent help to &7" + args[0] + "&6.");
+							BasicUtils.sendMessage(player, BasicUtils.getMessage("HelpSender").replace("%p", args[0]));
 						}else
 						{
-							BasicUtils.sendMessage(player, "&cYou do not have enough permission to perform this command!");
+							BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
 						}
 					}else
 					{
-						BasicUtils.sendMessage(player, "&cThat player is not online!");
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
 					}
 				}else
 				{
-					BasicUtils.sendMessage(player, "&cPlease specify a valid page number.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("HelpPage"));
 				}
 			}catch(NumberFormatException e)
 			{
-				BasicUtils.sendMessage(player, "&cPlease specify a valid page number.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("HelpPage"));
 			}
 		}
 	}
@@ -145,7 +148,6 @@ public class HelpCMD extends CommandModule
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
 		ArrayList<String> help = new ArrayList<String>();
-
 
 		for(Plugin plugin : Bukkit.getPluginManager().getPlugins())
 		{
@@ -155,10 +157,7 @@ public class HelpCMD extends CommandModule
 	
 				if(command != null)
 				{
-					if(command.testPermissionSilent(console))
-					{
-						help.add("- &6/" + cmdLabel + " :&7 " + command.getDescription());
-					}
+					help.add("- &6/" + cmdLabel + " &7: " + command.getDescription());
 				}
 			}
 		}
@@ -177,7 +176,7 @@ public class HelpCMD extends CommandModule
 					}
 				}else
 				{
-					BasicUtils.sendMessage(console, "&cPlease specify a valid page number.");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("HelpPage"));
 				}
 			}catch(NumberFormatException e)
 			{
@@ -192,15 +191,14 @@ public class HelpCMD extends CommandModule
 							player2.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 						}
 
-						BasicUtils.sendMessage(console, "&6You sent help to &7" + args[0] + "&6.");
-
+						BasicUtils.sendMessage(console, BasicUtils.getMessage("HelpSender").replace("%p", args[0]));
 					}else
 					{
-						BasicUtils.sendMessage(console, "&cYou do not have enough permission to perform this command!");
+						BasicUtils.sendMessage(console, BasicUtils.getMessage("NoPermission"));
 					}
 				}else
 				{
-					BasicUtils.sendMessage(console, "&cPlease specify a valid page number.");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("HelpPage"));
 				}
 			}
 		}else if(args.length == 2)
@@ -221,22 +219,22 @@ public class HelpCMD extends CommandModule
 							{
 								player2.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 							}
-							BasicUtils.sendMessage(console, "&6You sent help to &7" + args[0] + "&6.");
+							BasicUtils.sendMessage(console, BasicUtils.getMessage("HelpSender").replace("%p", args[0]));
 						}else
 						{
-							BasicUtils.sendMessage(console, "&cYou do not have enough permission to perform this command!");
+							BasicUtils.sendMessage(console, BasicUtils.getMessage("NoPermission"));
 						}
 					}else
 					{
-						BasicUtils.sendMessage(console, "&cThat player is not online!");
+						BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerOffline"));
 					}
 				}else
 				{
-					BasicUtils.sendMessage(console, "&cPlease specify a valid page number.");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("HelpPage"));
 				}
 			}catch(NumberFormatException e)
 			{
-				BasicUtils.sendMessage(console, "&cPlease specify a valid page number.");
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("HelpPage"));
 			}
 		}
 	}

@@ -19,6 +19,8 @@ package io.github.GoldenDeveloper79.TheBasics;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.bukkit.Material;
+
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
@@ -58,4 +60,16 @@ public class Registery
 	 * K: Player Name
 	 */
 	public static ArrayList<String> teleportQue = new ArrayList<String>();
+	
+	public static Material[] repairableItems = new Material[] 
+	{
+		Material.CHAINMAIL_CHESTPLATE, Material.CHAINMAIL_HELMET, Material.CHAINMAIL_LEGGINGS,
+		Material.DIAMOND_AXE, Material.DIAMOND_BOOTS, Material.DIAMOND_CHESTPLATE, Material.DIAMOND_HELMET,
+		Material.DIAMOND_HOE, Material.DIAMOND_LEGGINGS, Material.DIAMOND_PICKAXE, Material.DIAMOND_SPADE, Material.DIAMOND_SWORD,
+		Material.BOW, Material.FLINT_AND_STEEL, Material.GOLD_AXE, Material.GOLD_BOOTS, Material.GOLD_CHESTPLATE, Material.GOLD_HELMET,
+		Material.GOLD_HELMET, Material.GOLD_HOE, Material.GOLD_LEGGINGS, Material.GOLD_PICKAXE, Material.GOLD_SPADE, Material.GOLD_SWORD,
+		Material.IRON_AXE, Material.IRON_BOOTS, Material.IRON_CHESTPLATE, Material.IRON_HELMET, Material.IRON_HOE, Material.IRON_LEGGINGS, Material.IRON_PICKAXE,
+		Material.IRON_SPADE,Material.IRON_SWORD, Material.LEATHER_BOOTS, Material.LEATHER_CHESTPLATE, Material.LEATHER_HELMET, Material.LEATHER_LEGGINGS,
+		Material.STONE_AXE
+	};
 }

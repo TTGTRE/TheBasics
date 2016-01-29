@@ -55,21 +55,21 @@ public class TeleportRequestAcceptCMD extends CommandModule
 			{
 				Registery.teleportRequest.remove(playerName);
 				
-				BasicUtils.sendMessage(player2, "&6The player &7" + player.getName() + "&6 has accepted your request.");
+				BasicUtils.sendMessage(player2, BasicUtils.getMessage("TeleportRequestAcceptReceiver").replace("%p", player.getName()));
 				BasicUtils.getData(player2).initTeleport(player.getLocation(), "&7" + player.getName());
 ;
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cThere is no teleport request to you.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportNoRequest"));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(player, "&cThere is no teleport request to you.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportNoRequest"));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
 }

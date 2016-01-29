@@ -44,11 +44,11 @@ public class SetWarpCMD extends CommandModule
 		TheBasics.getDataConfig().set(root + ".Yaw", loc.getYaw());
 		TheBasics.getDataConfig().set(root + ".Pitch", loc.getPitch());
 		
-		BasicUtils.sendMessage(player, "&6You have set the warp &7" + args[0] + "&6 at your location.");
+		BasicUtils.sendMessage(player, BasicUtils.getMessage("SetWarp").replace("%a", args[0]));
 	}
 	
 	public void performCommand(ConsoleCommandSender console, String[] args)
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
 }

@@ -37,24 +37,25 @@ public class FeedCMD extends CommandModule
 		{
 			player.setFoodLevel(20);
 			
-			BasicUtils.sendMessage(player, "&6You have been fed.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("Feed"));
 		}else
 		{
 			Player player2 = Bukkit.getPlayer(args[0]);
-			player2.setFoodLevel(20);
 			
-			BasicUtils.sendMessage(player, "&6You have fed &7" + args[0] + "&6.");
-			BasicUtils.sendMessage(player2, "&6You have been fed by &7" + player.getName() + "&6.");
+			player2.setFoodLevel(20);
+				
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("FeedSender").replace("%p", args[0]));
+			BasicUtils.sendMessage(player2, BasicUtils.getMessage("FeedReceiver").replace("%p", player.getName()));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
 		Player player2 = Bukkit.getPlayer(args[0]);
-		
+	
 		player2.setFoodLevel(20);
-		
-		BasicUtils.sendMessage(console, "You have fed &7" + args[0] + "&6.");
-		BasicUtils.sendMessage(player2, "&6You have been fed by &7console.&6");
+			
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("FeedSender").replace("%p", args[0]));
+		BasicUtils.sendMessage(player2, BasicUtils.getMessage("FeedReceiver").replace("%p", console.getName()));
 	}
 }

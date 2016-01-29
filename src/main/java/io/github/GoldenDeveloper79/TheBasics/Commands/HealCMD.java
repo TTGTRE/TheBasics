@@ -39,7 +39,7 @@ public class HealCMD extends CommandModule
 			player.setFoodLevel(20);
 			player.setFireTicks(0);
 			
-			BasicUtils.sendMessage(player, "&6You have healed yourself.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("Heal"));
 		}else
 		{
 			Player player2 = Bukkit.getPlayer(args[0]);
@@ -47,21 +47,21 @@ public class HealCMD extends CommandModule
 			player2.setHealth(player2.getMaxHealth());
 			player2.setFoodLevel(20);
 			player2.setFireTicks(0);
-			
-			BasicUtils.sendMessage(player, "&6You have healed &7" + args[0] + "&6.");
-			BasicUtils.sendMessage(player2, "&6You have been healed by &7" + player.getName() + "&6.");
+				
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("HealSender").replace("%p", args[0]));
+			BasicUtils.sendMessage(player2, BasicUtils.getMessage("HealReceiver").replace("%p", player.getName()));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
 		Player player2 = Bukkit.getPlayer(args[0]);
-		
+
 		player2.setHealth(player2.getMaxHealth());
 		player2.setFoodLevel(20);
 		player2.setFireTicks(0);
-		
-		BasicUtils.sendMessage(console, "&6You have healed &7" + args[0] + "&6.");
-		BasicUtils.sendMessage(player2, "&6You have been healed by &7console.");
+			
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("HealSender").replace("%p", args[0]));
+		BasicUtils.sendMessage(player2, BasicUtils.getMessage("HealReceiver").replace("%p", console.getName()));
 	}
 }

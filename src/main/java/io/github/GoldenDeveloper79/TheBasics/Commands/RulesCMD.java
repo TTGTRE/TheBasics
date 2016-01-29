@@ -58,7 +58,7 @@ public class RulesCMD extends CommandModule
 					}
 				}else
 				{
-					BasicUtils.sendMessage(player, "&cPlease specify a valid page number.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("RulesPage"));
 				}
 			}catch(NumberFormatException e)
 			{
@@ -73,15 +73,14 @@ public class RulesCMD extends CommandModule
 							player2.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 						}
 						
-						BasicUtils.sendMessage(player, "&6You sent rules to &7" + args[0] + "&6.");
-						
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("RulesSender").replace("%p", args[0]));
 					}else
 					{
-						BasicUtils.sendMessage(player, "&cYou do not have enough permission to perform this command!");
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
 					}
 				}else
 				{
-					BasicUtils.sendMessage(player, "&cPlease specify a valid page number.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("RulesPage"));
 				}
 			}
 		}else if(args.length == 2)
@@ -102,22 +101,23 @@ public class RulesCMD extends CommandModule
 							{
 								player2.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 							}
-							BasicUtils.sendMessage(player, "&6You sent rules to &7" + args[0] + "&6.");
+							
+							BasicUtils.sendMessage(player, BasicUtils.getMessage("RulesSender").replace("%p", args[0]));
 						}else
 						{
-							BasicUtils.sendMessage(player, "&cYou do not have enough permission to perform this command!");
+							BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
 						}
 					}else
 					{
-						BasicUtils.sendMessage(player, "&cThat player is not online!");
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
 					}
 				}else
 				{
-					BasicUtils.sendMessage(player, "&cPlease specify a valid page number.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("RulesPage"));
 				}
 			}catch(NumberFormatException e)
 			{
-				BasicUtils.sendMessage(player, "&cPlease specify a valid page number.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("RulesPage"));
 			}
 		}
 	}
@@ -138,7 +138,7 @@ public class RulesCMD extends CommandModule
 					}
 				}else
 				{
-					BasicUtils.sendMessage(console, "Please specify a valid page number.");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("RulesPage"));
 				}
 			}catch(NumberFormatException e)
 			{
@@ -153,14 +153,14 @@ public class RulesCMD extends CommandModule
 							player2.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 						}
 						
-						BasicUtils.sendMessage(console, "You sent rules to &7" + args[0] + "&6.");
+						BasicUtils.sendMessage(console, BasicUtils.getMessage("RulesSender").replace("%p", args[0]));
 					}else
 					{
-						BasicUtils.sendMessage(console, "You do not have enough permission to perform this command!");
+						BasicUtils.sendMessage(console, BasicUtils.getMessage("NoPermission"));
 					}
 				}else
 				{
-					BasicUtils.sendMessage(console, "Please specify a valid page number.");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("RulesPage"));
 				}
 			}
 		}else if(args.length == 2)
@@ -182,22 +182,22 @@ public class RulesCMD extends CommandModule
 								player.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
 							}
 							
-							BasicUtils.sendMessage(console, "&6You sent rules to &7" + args[0] + "&6.");
+							BasicUtils.sendMessage(console, BasicUtils.getMessage("RulesSender").replace("%p", args[0]));
 						}else
 						{
-							BasicUtils.sendMessage(console, "&cYou do not have enough permission to perform this command!");
+							BasicUtils.sendMessage(console, BasicUtils.getMessage("NoPermission"));
 						}
 					}else
 					{
-						BasicUtils.sendMessage(player, "That player is not online!");
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
 					}
 				}else
 				{
-					BasicUtils.sendMessage(console, "Please specify a valid page number.");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("RulesPage"));
 				}
 			}catch(NumberFormatException e)
 			{
-				BasicUtils.sendMessage(console, "Please specify a valid page number.");
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("RulesPage"));
 			}
 		}
 	}

@@ -54,20 +54,20 @@ public class TeleportRequestDenyCMD extends CommandModule
 			if(player2 != null)
 			{
 				Registery.teleportRequest.remove(playerName);
-				BasicUtils.sendMessage(player, "&6You have denied the request to be teleported too.");
-				BasicUtils.sendMessage(player2, "&6Your request to teleport to &7" + player.getName() + "&6 has been denied.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportRequestDenySender").replace("%p", playerName));
+				BasicUtils.sendMessage(player2, BasicUtils.getMessage("TeleportRequestDenyReceiver").replace("%p", player.getName()));
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cThere is no teleport request to you.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportNoRequest"));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(player, "&cThere is no teleport request too you.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportNoRequest"));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
 }

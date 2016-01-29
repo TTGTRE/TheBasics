@@ -41,9 +41,12 @@ public class BasicUtils
 	 */
 	public static void sendMessage(CommandSender sender, String message)
 	{
-		String prefix = TheBasics.getGeneralConfig().getString("Prefix");
-
-		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + message));
+		if(message != null && sender != null)
+		{
+			String prefix = TheBasics.getGeneralConfig().getString("Prefix");
+	
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + message));
+		}
 	}
 
 	/*
@@ -58,6 +61,19 @@ public class BasicUtils
 				sendMessage(player, message);
 			}
 		}
+	}
+	
+	/*
+	 * Gets a message from the language config
+	 */
+	public static String getMessage(String key)
+	{
+		if(TheBasics.getLanguageConfig().contains(key))
+		{
+			return TheBasics.getLanguageConfig().getString(key);
+		}
+		
+		return null;
 	}
 
 	/*
@@ -267,5 +283,21 @@ public class BasicUtils
 	{
 		InputStream stream = TheBasics.getResourceURL(fileName).openStream();
 		return new Scanner(stream).useDelimiter("\\A").next();
+	}
+
+	/*
+	 * Checks if an item can be repaired.
+	 */
+	public static boolean isRepairable(ItemStack item)
+	{
+		for(Material material : Registery.repairableItems)
+		{
+			if(item.getType().equals(material))
+			{
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }

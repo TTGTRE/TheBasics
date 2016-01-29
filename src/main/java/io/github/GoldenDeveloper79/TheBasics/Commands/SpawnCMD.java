@@ -39,6 +39,6 @@ public class SpawnCMD extends CommandModule
 
 	public void performCommand(ConsoleCommandSender console, String[] args)
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");	
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));	
 	}	
 }

@@ -27,6 +27,7 @@ import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
 
 public class GamemodeCMD extends CommandModule
 {
+	//gamemode <name> <mode>
 	public GamemodeCMD()
 	{
 		super(new String[] {"gamemode", "gm"}, 0, 2, MultiPlayer.OTHER);
@@ -34,12 +35,12 @@ public class GamemodeCMD extends CommandModule
 
 	public void performCommand(Player player, String[] args) 
 	{
-		Player retriever = null;
+		Player receiver = null;
 		GameMode mode = null;
 
 		if(args.length < 0)
 		{	
-			retriever = player;
+			receiver = player;
 
 			switch(player.getGameMode())
 			{
@@ -52,7 +53,7 @@ public class GamemodeCMD extends CommandModule
 		{
 			if(Bukkit.getPlayer(args[0]) == null)
 			{
-				retriever = player;
+				receiver = player;
 
 				if(args[0].equalsIgnoreCase("s") || args[0].equalsIgnoreCase("survival") || args[0].equalsIgnoreCase("0"))
 				{
@@ -69,9 +70,9 @@ public class GamemodeCMD extends CommandModule
 				}	
 			}else
 			{
-				retriever = Bukkit.getPlayer(args[0]);
+				receiver = Bukkit.getPlayer(args[0]);
 
-				switch(retriever.getGameMode())
+				switch(receiver.getGameMode())
 				{
 				case SURVIVAL:
 					mode = GameMode.CREATIVE;
@@ -83,99 +84,101 @@ public class GamemodeCMD extends CommandModule
 		{
 			if(Bukkit.getPlayer(args[0]) != null)
 			{
-				retriever = Bukkit.getPlayer(args[0]);
+				receiver = Bukkit.getPlayer(args[0]);
 
-				if(args[0].equalsIgnoreCase("s") || args[0].equalsIgnoreCase("survival") || args[0].equalsIgnoreCase("0"))
+				if(args[1].equalsIgnoreCase("s") || args[1].equalsIgnoreCase("survival") || args[1].equalsIgnoreCase("0"))
 				{
 					mode = GameMode.SURVIVAL;
-				}else if(args[0].equalsIgnoreCase("c") || args[0].equalsIgnoreCase("creative") || args[0].equalsIgnoreCase("1"))
+				}else if(args[1].equalsIgnoreCase("c") || args[1].equalsIgnoreCase("creative") || args[1].equalsIgnoreCase("1"))
 				{
 					mode = GameMode.CREATIVE;
-				}else if(args[0].equalsIgnoreCase("a") || args[0].equalsIgnoreCase("adventure") || args[0].equalsIgnoreCase("2"))
+				}else if(args[1].equalsIgnoreCase("a") || args[1].equalsIgnoreCase("adventure") || args[1].equalsIgnoreCase("2"))
 				{
 					mode = GameMode.ADVENTURE;
-				}else if(args[0].equalsIgnoreCase("spec") || args[0].equalsIgnoreCase("specator") || args[0].equalsIgnoreCase("3"))
+				}else if(args[1].equalsIgnoreCase("spec") || args[1].equalsIgnoreCase("specator") || args[1].equalsIgnoreCase("3"))
 				{
 					mode = GameMode.SPECTATOR;
 				}	
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cThat player is not online!");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
 			}
 		}
 
-		if(mode != null && retriever != null)
+		if(mode != null && receiver != null)
 		{
-			retriever.setGameMode(mode);
+			receiver.setGameMode(mode);
 
-			if(retriever == player)
+			if(receiver == player)
 			{
-				BasicUtils.sendMessage(player, "&6You have set your gamemode to &7" + mode.toString().toLowerCase() + "&6.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("Gamemode").replace("%a", mode.name().toLowerCase()));
 			}else
 			{
-				BasicUtils.sendMessage(player, "&6You have changed the gamemode for &7" + args[0] + "&6 to &7" + mode.toString().toLowerCase() + "&6.");
-				BasicUtils.sendMessage(retriever, "&6Your gamemode has been changed to &7" + mode.toString().toLowerCase() + " &6by &7" + player.getName() + ".");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("GamemodeSender").replace("%p", receiver.getName()).replace("%a", mode.name().toLowerCase()));
+				BasicUtils.sendMessage(receiver, BasicUtils.getMessage("GamemodeReceiver").replace("%p", player.getName()).replace("%a", mode.name().toLowerCase()));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(player, "&cUsage: &7" + getUsage());
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("Usage").replace("%u", getUsage()));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
-		if(args.length >= 1)
-		{		
-			Player retriever = Bukkit.getPlayer(args[0]);
-			GameMode mode = null;
-
-			if(retriever != null)
+		Player receiver = null;
+		GameMode mode = null;
+		
+		if(args.length == 1)
+		{
+			if(Bukkit.getPlayer(args[0]) != null)
 			{
-				if(args.length == 1)
-				{
-					switch(retriever.getGameMode())
-					{
-					case SURVIVAL:
-						mode = GameMode.CREATIVE;
-					default:
-						mode = GameMode.SURVIVAL;
-					}
-				}else if(args.length == 2)
-				{
-					switch(args[1].toLowerCase())
-					{
-					case "s":
-					case "survival":
-						mode = GameMode.SURVIVAL;
-					case "c":
-					case "creative":
-						mode = GameMode.CREATIVE;
-					case "a":
-					case "adventure":
-						mode = GameMode.ADVENTURE;
-					case "spec":
-					case "spectator":
-						mode = GameMode.SPECTATOR;
-					}
-				}
-				
-				if(mode != null)
-				{
-					retriever.setGameMode(mode);
+				receiver = Bukkit.getPlayer(args[0]);
 
-					BasicUtils.sendMessage(console, "&6You have changed the gamemode for &7" + args[0] + "&6 to &7" + mode.toString().toLowerCase() + "&6.");
-					BasicUtils.sendMessage(retriever, "&6Your gamemode has been changed to &7" + mode.toString().toLowerCase() + " &6by &7console&6.");
-				}else
+				switch(receiver.getGameMode())
 				{
-					BasicUtils.sendMessage(console, "&cUsage: &7" + getUsage());
+				case SURVIVAL:
+					mode = GameMode.CREATIVE;
+				default:
+					mode = GameMode.SURVIVAL;
 				}
 			}else
 			{
-				BasicUtils.sendMessage(console, "&cThat player is not online!");
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerOffline"));
 			}
+		}else if(args.length == 2)
+		{
+			if(Bukkit.getPlayer(args[0]) != null)
+			{
+				receiver = Bukkit.getPlayer(args[0]);
+
+				if(args[1].equalsIgnoreCase("s") || args[1].equalsIgnoreCase("survival") || args[1].equalsIgnoreCase("0"))
+				{
+					mode = GameMode.SURVIVAL;
+				}else if(args[1].equalsIgnoreCase("c") || args[1].equalsIgnoreCase("creative") || args[1].equalsIgnoreCase("1"))
+				{
+					mode = GameMode.CREATIVE;
+				}else if(args[1].equalsIgnoreCase("a") || args[1].equalsIgnoreCase("adventure") || args[1].equalsIgnoreCase("2"))
+				{
+					mode = GameMode.ADVENTURE;
+				}else if(args[1].equalsIgnoreCase("spec") || args[1].equalsIgnoreCase("specator") || args[1].equalsIgnoreCase("3"))
+				{
+					mode = GameMode.SPECTATOR;
+				}		
+			}else
+			{
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerOffline"));
+			}
+		}
+
+		if(mode != null && receiver != null)
+		{
+			receiver.setGameMode(mode);
+
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("GamemodeSender").replace("%p", receiver.getName()).replace("%a", mode.name().toLowerCase()));
+			BasicUtils.sendMessage(receiver, BasicUtils.getMessage("GamemodeReceiver").replace("%p", console.getName()).replace("%a", mode.name().toLowerCase()));
 		}else
 		{
-			BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("Usage").replace("%u", getUsage()));
 		}
 	}
 }

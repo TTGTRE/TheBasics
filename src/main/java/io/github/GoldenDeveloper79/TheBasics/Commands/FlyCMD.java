@@ -35,24 +35,18 @@ public class FlyCMD extends CommandModule
 	{
 		if(args.length < 1)
 		{
-			if(player.hasPermission("TheBasics.Fly"))
+			if(player.getAllowFlight())
 			{
-				if(player.getAllowFlight())
-				{
-					player.setAllowFlight(false);
-					player.setFlying(false);
-					
-					BasicUtils.sendMessage(player, "&6You have disabled flying for yourself.");
-				}else
-				{
-					player.setAllowFlight(true);
-					player.setFlying(true);
-					
-					BasicUtils.sendMessage(player, "&6You have enabled flying for yourself.");
-				}
+				player.setAllowFlight(false);
+				player.setFlying(false);
+				
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("Fly").replace("%a", "disabled"));
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cYou do not have enough permission to perform this command!");
+				player.setAllowFlight(true);
+				player.setFlying(true);
+				
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("Fly").replace("%a", "enabled"));
 			}
 		}else 
 		{
@@ -65,19 +59,19 @@ public class FlyCMD extends CommandModule
 					player2.setAllowFlight(false);
 					player2.setFlying(false);
 					
-					BasicUtils.sendMessage(player, "&6You have disabled flying for &7" + args[0] + "&6.");
-					BasicUtils.sendMessage(player2, "&6Flying has been disabled for you by &7" + player.getName() + "&7.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("FlySender").replace("%p", args[0]).replace("%a", "disabled"));
+					BasicUtils.sendMessage(player2, BasicUtils.getMessage("FlyReceiver").replace("%p", player.getName()).replace("%a", "disabled"));
 				}else
 				{
 					player2.setAllowFlight(true);
 					player2.setFlying(true);
 					
-					BasicUtils.sendMessage(player, "&6You have enabled flying for &7" + args[0] + "&6.");
-					BasicUtils.sendMessage(player2, "&6Flying has been enabled for you by &7" + player.getName() + "&6.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("FlySender").replace("%p", args[0]).replace("%a", "enabled"));
+					BasicUtils.sendMessage(player2, BasicUtils.getMessage("FlyReceiver").replace("%p", player.getName()).replace("%a", "enabled"));
 				}
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cYou do not have enough permission to perform this command!");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
 			}
 		}
 		
@@ -94,19 +88,19 @@ public class FlyCMD extends CommandModule
 				player2.setAllowFlight(false);
 				player2.setFlying(false);
 				
-				BasicUtils.sendMessage(console, "You have disabled flying for &7" + args[0] + "&6.");
-				BasicUtils.sendMessage(player2, "&6Flying has been disabled for you by &7console.");
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("FlySender").replace("%p", args[0]).replace("%a", "disabled"));
+				BasicUtils.sendMessage(player2, BasicUtils.getMessage("FlyReceiver").replace("%p", console.getName()).replace("%a", "disabled"));
 			}else
 			{
 				player2.setAllowFlight(true);
 				player2.setFlying(true);
 				
-				BasicUtils.sendMessage(console, "You have enabled flying for &7" + args[0] + "&6.");
-				BasicUtils.sendMessage(player2, "&6Flying has been enabled for you by &7console.");
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("FlySender").replace("%p", args[0]).replace("%a", "enabled"));
+				BasicUtils.sendMessage(player2, BasicUtils.getMessage("FlyReceiver").replace("%p", console.getName()).replace("%a", "enabled"));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(console, "You do not have enough permission to perform this command!");
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("NoPermission"));
 		}
 	}
 }

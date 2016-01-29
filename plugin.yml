@@ -1,5 +1,5 @@
 name: TheBasics
-version: 1.01
+version: 1.03
 main: io.github.GoldenDeveloper79.TheBasics.TheBasics
 description: A basic set of functions for Minecraft servers.
 commands:

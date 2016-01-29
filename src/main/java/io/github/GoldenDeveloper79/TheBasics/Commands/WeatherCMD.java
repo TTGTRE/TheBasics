@@ -33,7 +33,7 @@ public class WeatherCMD extends CommandModule
 
 	public void performCommand(Player player, String[] args) 
 	{
-		if(args[0].equalsIgnoreCase("sun") || args[0].equalsIgnoreCase("s"))
+		if(args[0].equalsIgnoreCase("sun") || args[0].equalsIgnoreCase("s")|| args[0].equals("c") || args[0].equals("clear"))
 		{
 			player.getWorld().setWeatherDuration(0);
 			player.getWorld().setThunderDuration(0);
@@ -43,8 +43,8 @@ public class WeatherCMD extends CommandModule
 				players.setPlayerWeather(WeatherType.CLEAR);
 			}
 			
-			BasicUtils.sendMessage(player, "&6You changed the weather to &7sun&6.");
-		}else if(args[0].equalsIgnoreCase("rain") || args[0].equalsIgnoreCase("r"))
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("WeatherSender").replace("%a", "clear"));
+		}else if(args[0].equalsIgnoreCase("rain") || args[0].equalsIgnoreCase("r") || args[0].equals("d") || args[0].equals("downfall"))
 		{
 			player.getWorld().setWeatherDuration(Integer.MAX_VALUE);
 			player.getWorld().setThunderDuration(Integer.MAX_VALUE);
@@ -54,12 +54,15 @@ public class WeatherCMD extends CommandModule
 				players.setPlayerWeather(WeatherType.DOWNFALL);
 			}
 			
-			BasicUtils.sendMessage(player, "&6You changed the weather to &7rain&6.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("WeatherSender").replace("%a", "downfall"));
+		}else
+		{
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("WeatherInvalid"));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args)
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}	
 }

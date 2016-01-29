@@ -44,20 +44,20 @@ public class PayCMD extends CommandModule
 			{
 				TheBasics.getEconomy().depositBalance(player2, amount);
 				
-				BasicUtils.sendMessage(player, "&6You gave &7" + args[0] + " $" + amount + "&6.");
-				BasicUtils.sendMessage(player2, "&6You received &7$" + amount + " &6from &7" + player.getName() + "&6.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("PaySender").replace("%p", args[0]).replace("%a", String.valueOf(amount)));
+				BasicUtils.sendMessage(player2, BasicUtils.getMessage("PayReceiver").replace("%p", player.getName()).replace("%a", String.valueOf(amount)));
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cYou do not have enough money!");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("PayLackOfFunds"));
 			}
 		}catch(NumberFormatException e)
 		{
-			BasicUtils.sendMessage(player, "&cPlease specify a valid amount!");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidAmount"));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args)
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}	
 }

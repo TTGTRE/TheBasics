@@ -38,7 +38,7 @@ public class BanCMD extends CommandModule
 	{
 		PlayerData data = BasicUtils.getData(args[0]);
 
-		String reason = "&cYou have been banned by &7" + player.getName() + "&6!";
+		String reason = BasicUtils.getMessage("BanDefault").replace("%p", player.getName());
 		
 		if(args.length > 1)
 		{
@@ -48,28 +48,25 @@ public class BanCMD extends CommandModule
 		Bukkit.getBanList(Type.NAME).addBan(args[0], reason, null, player.getName());
 		data.getPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
 		
-		BasicUtils.notify("TheBasics.Ban.Notify", "&6The player &7" + player.getName() + " &6has banned the player &7" + args[0] + " &6for " + reason + "&6!");
-		BasicUtils.sendMessage(player, "&6You have banned &7" + args[0] + "&6!");
+		BasicUtils.notify("TheBasics.Ban.Notify", BasicUtils.getMessage("BanNotify").replace("%p", player.getName()).replace("%p2", args[0]).replace("%r", reason));
+		BasicUtils.sendMessage(player, BasicUtils.getMessage("BanSender").replace("%p", args[0]));
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
 		PlayerData data = BasicUtils.getData(args[0]);
-		String reason = "&cYou have been banned by &7consle&6!";
+
+		String reason = BasicUtils.getMessage("BanDefault").replace("%p", console.getName());
 		
 		if(args.length > 1)
 		{
 			reason = BasicUtils.combineString(1, args);
 		}
 		
-		data.set("Banned.Is", true);
-		data.set("Banned.Time", -1);
-		data.set("Banned.Reason", reason);
-		
 		Bukkit.getBanList(Type.NAME).addBan(args[0], reason, null, console.getName());
 		data.getPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
 		
-		BasicUtils.notify("TheBasics.Ban.Notify", "&7Consle&6 has banned the player &7" + args[0] + " &6for " + reason + "&6!");
-		BasicUtils.sendMessage(console, "You have banned &7" + args[0] + "&6!");
+		BasicUtils.notify("TheBasics.Ban.Notify", BasicUtils.getMessage("BanNotify").replace("%p", console.getName()).replace("%p2", args[0]).replace("%r", reason));
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("BanSender").replace("%p", args[0]));
 	}
 }

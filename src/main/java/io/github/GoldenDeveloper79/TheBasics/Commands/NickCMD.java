@@ -38,22 +38,22 @@ public class NickCMD extends CommandModule
 		{
 			String name = args[0];
 			
-			if(name.length() <= TheBasics.getGeneralConfig().getDouble("Nickname.MaxLength") && TheBasics.getGeneralConfig().getDouble("Nickname.MinLength") >= name.length())
+			if(name.length() <= TheBasics.getGeneralConfig().getDouble("Nickname.MaxLength") && TheBasics.getGeneralConfig().getDouble("Nickname.MinLength") <= name.length())
 			{
 				player.setDisplayName(ChatColor.translateAlternateColorCodes('&', args[0]));
-				BasicUtils.sendMessage(player, "&6You changed your displayname to " + args[0] + "&6.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("Nick").replace("%a", args[0]));
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cPlease specify a valid nickname!");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("NickInvalid"));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(player, "&cChanging your nickname is disabled on this server!");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("NickDisabled"));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
 }

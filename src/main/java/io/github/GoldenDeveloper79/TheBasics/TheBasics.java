@@ -83,6 +83,7 @@ public class TheBasics extends JavaPlugin
 	private static ConfigModule dataConfig;
 	private static ConfigModule groupConfig;
 	private static ConfigModule textConfig;
+	private static ConfigModule languageConfig;
 	
 	//Economy
 	private static Economy economy;
@@ -102,6 +103,7 @@ public class TheBasics extends JavaPlugin
 		if(TheBasics.getGeneralConfig().getBoolean("AutoUpdating"))
 		{
 			new Updater(this, 97487, this.getFile(), UpdateType.DEFAULT, false);
+			log.info("TheBasics has been updated!");
 		}
 		
 		economy = new Economy();
@@ -143,6 +145,7 @@ public class TheBasics extends JavaPlugin
 		dataConfig = new ConfigModule(new File(mainDir, "data.yml"));
 		groupConfig = new ConfigModule(new File(mainDir, "groups.yml"));
 		textConfig = new ConfigModule(new File(mainDir, "text.yml"));
+		languageConfig = new ConfigModule(new File(mainDir, "language.yml"));
 	}
 	
 	/*
@@ -323,6 +326,14 @@ public class TheBasics extends JavaPlugin
 	}
 	
 	/*
+	 * Gets the language config for the plugin. Includes messages. (language.yml)
+	 */
+	public static ConfigModule getLanguageConfig()
+	{
+		return languageConfig;
+	}
+	
+	/*
 	 * Gets the text config for the plugin. Includes Motd/Rules. (text.yml).
 	 */
 	public static ConfigModule getTextConfig() 
@@ -330,11 +341,17 @@ public class TheBasics extends JavaPlugin
 		return textConfig;
 	}
 
+	/*
+	 * Gets the economy methods.
+	 */
 	public static Economy getEconomy() 
 	{
 		return economy;
 	}
 
+	/*
+	 * Gets the permission methods.
+	 */
 	public static Permissions getPermissions() 
 	{
 		return permissions;

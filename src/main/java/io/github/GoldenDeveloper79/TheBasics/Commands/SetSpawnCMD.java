@@ -36,11 +36,11 @@ public class SetSpawnCMD extends CommandModule
 		Location loc = player.getLocation();
 		player.getWorld().setSpawnLocation(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
 	
-		BasicUtils.sendMessage(player, "&6You have set spawn for the world &7" + loc.getWorld().getName() + " &6at your location.");
+		BasicUtils.sendMessage(player, BasicUtils.getMessage("SetSpawn"));
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args)
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");	
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));	
 	}	
 }

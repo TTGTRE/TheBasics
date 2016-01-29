@@ -54,7 +54,7 @@ public class PlayTimeCMD extends CommandModule
 				formatTime = String.valueOf(bd.doubleValue()) + "h";
 			}
 			
-			BasicUtils.sendMessage(player, "&6You have played on the server for &7" + formatTime + "&6.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayTimeGet").replace("%a", formatTime));
 			
 			if(TheBasics.getGroupConfig().getString("Ranking.Method").equalsIgnoreCase("TIME"))
 			{
@@ -79,48 +79,68 @@ public class PlayTimeCMD extends CommandModule
 						GroupModule group = TheBasics.getPermissions().getGroup(groupName);
 						TheBasics.getPermissions().addPlayerToGroup(player.getPlayer(), group);
 						
-						BasicUtils.sendMessage(player, "&6You have ranked up to &7" + groupName + "&6.");	
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayTimeRankup").replace("%a", groupName));	
 					}
 				}
 			}
 		}else
 		{
 			Player player2 = Bukkit.getPlayer(args[0]);
-			String formatTime;
-			double time = BasicUtils.getData(player2).getDouble("PlayTime");
 			
-			if(time < 60)
+			if(player2 != null)
 			{
-				formatTime = String.valueOf(time) + "m";
+				String formatTime;
+				double time = BasicUtils.getData(player2).getDouble("PlayTime");
+				
+				if(time < 60)
+				{
+					formatTime = String.valueOf(time) + "m";
+				}else
+				{
+					BigDecimal bd = new BigDecimal(Double.toString(time));
+					bd = bd.setScale(1, BigDecimal.ROUND_HALF_UP);
+					
+					formatTime = String.valueOf(bd.doubleValue()) + "h";
+				}
+				
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayTimeGetOther").replace("%p", args[0]).replace("%a", formatTime));
 			}else
 			{
-				BigDecimal bd = new BigDecimal(Double.toString(time));
-				bd = bd.setScale(1, BigDecimal.ROUND_HALF_UP);
-				
-				formatTime = String.valueOf(bd.doubleValue()) + "h";
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("OfflinePlayer"));
 			}
-			
-			BasicUtils.sendMessage(player, "&6The player &7" + args[0] + " &6has played on the server for&7 " + formatTime + "&6.");
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
-		Player player = Bukkit.getPlayer(args[0]);
-		String formatTime;
-		double time = BasicUtils.getData(player).getDouble("PlayTime");
-		
-		if(time < 60)
+		if(args.length == 1)
 		{
-			formatTime = String.valueOf(time) + "m";
+			Player player = Bukkit.getPlayer(args[0]);
+			
+			if(player != null)
+			{
+				String formatTime;
+				double time = BasicUtils.getData(player).getDouble("PlayTime");
+				
+				if(time < 60)
+				{
+					formatTime = String.valueOf(time) + "m";
+				}else
+				{
+					BigDecimal bd = new BigDecimal(Double.toString(time));
+					bd = bd.setScale(1, BigDecimal.ROUND_HALF_UP);
+					
+					formatTime = String.valueOf(bd.doubleValue()) + "h";
+				}
+				
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayTimeGetOther").replace("%p", args[0]).replace("%a", formatTime));
+			}else
+			{
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("OfflinePlayer"));
+			}
 		}else
 		{
-			BigDecimal bd = new BigDecimal(Double.toString(time));
-			bd = bd.setScale(1, BigDecimal.ROUND_HALF_UP);
-			
-			formatTime = String.valueOf(bd.doubleValue()) + "h";
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 		}
-		
-		BasicUtils.sendMessage(console, "&6The player &7" + args[0] + " &6has played on the server for&7 " + formatTime + "&6.");
 	}
 }

@@ -38,11 +38,11 @@ public class TeleportRequestCMD extends CommandModule
 	{
 		Player player2 = Bukkit.getPlayer(args[0]);
 		
-		BasicUtils.sendMessage(player2, "&6The player &7" + player.getName() + "&6 would like to teleport to you. Do /traccept to accept or /trdeny to deny.");
+		BasicUtils.sendMessage(player2, BasicUtils.getMessage("TeleportRequestReceiver").replace("%p", player.getName()));
 		
 		if(Registery.teleportRequest.containsKey(player.getName()))
 		{
-			BasicUtils.sendMessage(player, "&cYour teleport request for &7" + Registery.teleportRequest.get(player.getName()) + " &6has timed out.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportRequestTimeout"));
 			Registery.teleportRequest.remove(player.getName());
 		}
 		
@@ -54,7 +54,7 @@ public class TeleportRequestCMD extends CommandModule
 			{
 				if(Registery.teleportRequest.containsKey(player.getName()))
 				{
-					BasicUtils.sendMessage(player, "&cYour teleport request for &7" + args[0] + " &6has timed out.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportRequestTimeout"));
 					Registery.teleportRequest.remove(player.getName());
 					this.cancel();
 				}
@@ -64,6 +64,6 @@ public class TeleportRequestCMD extends CommandModule
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
 }

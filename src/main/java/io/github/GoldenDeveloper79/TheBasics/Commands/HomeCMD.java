@@ -49,7 +49,7 @@ public class HomeCMD extends CommandModule
 					home = args[0];
 				}else
 				{
-					BasicUtils.sendMessage(player, "&cThat home does not exist!");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("HomeExist"));
 					return;
 				}
 			}
@@ -69,12 +69,12 @@ public class HomeCMD extends CommandModule
 			String homes = data.getConfig().getConfigurationSection("Home").getKeys(false)
 					.toString().replace("[", "").replace("]", "");
 			
-			BasicUtils.sendMessage(player, "&6Homes: &7" + homes + "&6.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("Homes").replace("%a", homes));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args)
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
 }

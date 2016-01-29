@@ -60,7 +60,7 @@ public class GiveCMD extends CommandModule
 				receiver = Bukkit.getPlayer(args[0]);
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cThat player is not online!");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
 				return;
 			}
 		}
@@ -69,26 +69,26 @@ public class GiveCMD extends CommandModule
 		{
 			if(receiver == player)
 			{
-				BasicUtils.sendMessage(player, "&6You received &7" + item.getAmount() + "x " + item.getType().toString().toLowerCase() + "&6.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("Give").replace("%a2", String.valueOf(item.getAmount())).replace("%a", item.getType().toString().toLowerCase()));
 			}else
 			{
-				BasicUtils.sendMessage(player, "&6You gave &7" + args[0] + item.getAmount() + "x " + item.getType().toString().toLowerCase() + "&6.");
-				BasicUtils.sendMessage(receiver, "&6You received &7" + item.getAmount() + "x " + item.getType().toString().toLowerCase() + " &6from&7 " + player.getName() + "&6.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("GiveSender").replace("%p", receiver.getName()).replace("%a2", String.valueOf(item.getAmount())).replace("%a", item.getType().toString().toLowerCase()));
+				BasicUtils.sendMessage(receiver, BasicUtils.getMessage("GiveReceiver").replace("%p", player.getName()).replace("%a2", String.valueOf(item.getAmount())).replace("%a", item.getType().toString().toLowerCase()));
 			}
 			
 			BasicUtils.addItem(receiver, item);
 		}else
 		{
-			BasicUtils.sendMessage(player, "&cPlease specify a valid itemid/name and amount!");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidValue"));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args)
 	{
 		ItemStack item = null;
-		Player player = Bukkit.getPlayer(args[0]);
+		Player player2 = Bukkit.getPlayer(args[0]);
 		
-		if(player != null)
+		if(player2 != null)
 		{
 			if(args.length == 2)
 			{
@@ -100,16 +100,16 @@ public class GiveCMD extends CommandModule
 			
 			if(item != null)
 			{
-				BasicUtils.sendMessage(console, "&6You gave &7" + args[0] + item.getAmount() + "x " + item.getType().toString().toLowerCase() + "&6.");
-				BasicUtils.sendMessage(player, "&6You received &7" + item.getAmount() + "x " + item.getType().toString().toLowerCase() + " &6from&7 " + player.getName() + "&6.");
-				BasicUtils.addItem(player, item);
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("GiveSender").replace("%p", player2.getName()).replace("%a2", String.valueOf(item.getAmount())).replace("%a", item.getType().toString().toLowerCase()));
+				BasicUtils.sendMessage(player2, BasicUtils.getMessage("GiveReceiver").replace("%p", console.getName()).replace("%a2", String.valueOf(item.getAmount())).replace("%a", item.getType().toString().toLowerCase()));
+				BasicUtils.addItem(player2, item);
 			}else
 			{
-				BasicUtils.sendMessage(console, "Please specify a valid itemid/name and amount!");
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("InvalidValue"));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(console, "That player is not online!");
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("OfflinePlayer"));
 		}
 	}
 }

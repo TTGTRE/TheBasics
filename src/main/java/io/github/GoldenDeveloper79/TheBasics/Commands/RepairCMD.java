@@ -37,18 +37,24 @@ public class RepairCMD extends CommandModule
 		
 		if(item != null)
 		{
-			item.setDurability(item.getType().getMaxDurability());
+			if(BasicUtils.isRepairable(item))
+			{
+				item.setDurability((short) 0);
 			
-			BasicUtils.sendMessage(player, "&6You have repaired the item &7" + item.getType().toString() + "&6.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("Repair"));
+			}else
+			{
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("RepairInvalid"));
+			}
 		}else
 		{
-			BasicUtils.sendMessage(player, "&cYou must be holding an item to use this command!");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("RepairInvalidItem"));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
-		BasicUtils.sendMessage(console, "&cYou must be a player to perform this command!");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
 }
 

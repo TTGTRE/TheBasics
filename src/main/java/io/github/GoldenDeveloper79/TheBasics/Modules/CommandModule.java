@@ -16,10 +16,12 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Modules;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 
+import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
@@ -45,8 +47,12 @@ public abstract class CommandModule
 		
 		Registery.commands.put(labels[0], this);
 		
+		String permissionMessage = ChatColor.translateAlternateColorCodes('&', 
+				TheBasics.getGeneralConfig().getString("Prefix") + BasicUtils.getMessage("NoPermission"));
+				
 		PluginCommand cmd = TheBasics.getPlugin().getCommand(labels[0]);
 		cmd.setPermission("TheBasics." + labels[0]);
+		cmd.setPermissionMessage(permissionMessage);
 		cmd.setExecutor(TheBasics.getCommandExecutor());
 		
 		this.description = cmd.getDescription();

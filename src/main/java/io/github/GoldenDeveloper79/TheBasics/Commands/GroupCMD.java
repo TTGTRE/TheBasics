@@ -50,15 +50,15 @@ public class GroupCMD extends CommandModule
 					if(TheBasics.getPermissions().groupExist(args[2]))
 					{
 						TheBasics.getPermissions().addPlayerToGroup(player2, TheBasics.getPermissions().getGroup(args[2]));
-						BasicUtils.sendMessage(player, "&6You added &7" + args[1] + " &6to the group &7" + args[2] + "&6.");
-						BasicUtils.sendMessage(player2, "&6You have been added to the group &7" + args[2] + "&6 by &7" + player.getName() + "&6.");
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupSetSender").replace("%p", args[1]).replace("%a", args[2]));
+						BasicUtils.sendMessage(player2, BasicUtils.getMessage("GroupSetReceiver").replace("%p", player.getName()).replace("%a", args[2]));
 					}else
 					{
-						BasicUtils.sendMessage(player, "&cThat group does not exist!");
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupExist"));
 					}
 				}else
 				{
-					BasicUtils.sendMessage(player, "&cThat player is not online!");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
 				}
 			}else if(args[0].equalsIgnoreCase("get"))
 			{
@@ -68,10 +68,10 @@ public class GroupCMD extends CommandModule
 				{
 					String groupName = TheBasics.getPermissions().getPlayerGroup(player2).getGroupName();
 					
-					BasicUtils.sendMessage(player, "&6The player &7" + args[1] + " &6is in the group &7" + groupName + "&6.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupGet").replace("%p", args[1]).replace("%a", groupName));
 				}else
 				{
-					BasicUtils.sendMessage(player, "&cThat player is not online!");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
 				}
 			}else if(args[0].equalsIgnoreCase("create"))
 			{
@@ -79,18 +79,18 @@ public class GroupCMD extends CommandModule
 				{
 					TheBasics.getPermissions().createGroup(args[1]);
 					
-					BasicUtils.sendMessage(player, "&6You have created the group called &7" + args[1] + "&6.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupCreate").replace("%a", args[1]));
 				}else
 				{
-					BasicUtils.sendMessage(player, "&cThat group already exist!");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupExistTwo"));
 				}
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cUsage: &7" + getUsage());
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("Usage").replace("%u", getUsage()));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(player, "&cYou do not have enough permission to perform this command!");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
 		}
 	}
 
@@ -107,15 +107,15 @@ public class GroupCMD extends CommandModule
 					if(TheBasics.getPermissions().groupExist(args[2]))
 					{
 						TheBasics.getPermissions().addPlayerToGroup(player2, TheBasics.getPermissions().getGroup(args[2]));
-						BasicUtils.sendMessage(console, "&6You added &7" + args[1] + " &6to the group &7" + args[2] + "&6.");
-						BasicUtils.sendMessage(player2, "&6You have been added to the group &7" + args[2] + "&6 by &7console&6.");
+						BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupSetSender").replace("%p", args[1]).replace("%a", args[2]));
+						BasicUtils.sendMessage(player2, BasicUtils.getMessage("GroupSetReceiver").replace("%p", console.getName()).replace("%a", args[2]));
 					}else
 					{
-						BasicUtils.sendMessage(console, "&cThat group does not exist!");
+						BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupExist"));
 					}
 				}else
 				{
-					BasicUtils.sendMessage(console, "&cThat player is not online!");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerOffline"));
 				}
 			}else if(args[0].equalsIgnoreCase("get"))
 			{
@@ -125,10 +125,10 @@ public class GroupCMD extends CommandModule
 				{
 					String groupName = TheBasics.getPermissions().getPlayerGroup(player2).getGroupName();
 					
-					BasicUtils.sendMessage(console, "&6The player &7" + args[1] + " &6is in the group &7" + groupName + "&6.");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupGet").replace("%p", args[1]).replace("%a", groupName));
 				}else
 				{
-					BasicUtils.sendMessage(console, "&cThat player is not online!");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerOffline"));
 				}
 			}else if(args[0].equalsIgnoreCase("create"))
 			{
@@ -136,18 +136,18 @@ public class GroupCMD extends CommandModule
 				{
 					TheBasics.getPermissions().createGroup(args[1]);
 					
-					BasicUtils.sendMessage(console, "&6You have created the group called &7" + args[1] + "&6.");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupCreate").replace("%a", args[1]));
 				}else
 				{
-					BasicUtils.sendMessage(console, "&cThat group already exist!");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupExistTwo"));
 				}
 			}else
 			{
-				BasicUtils.sendMessage(console, "&cUsage: &7" + getUsage());
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("Usage").replace("%u", getUsage()));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(console, "&cYou do not have enough permission to perform this command!");
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("NoPermission"));
 		}
 	}
 }

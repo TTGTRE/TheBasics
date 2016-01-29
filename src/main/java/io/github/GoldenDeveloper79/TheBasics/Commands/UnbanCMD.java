@@ -28,15 +28,15 @@ public class UnbanCMD extends CommandModule
 			{
 				Bukkit.getBanList(Type.NAME).pardon(args[0]);
 				
-				BasicUtils.sendMessage(player, "&6You have unbanned the player &7" + args[0] + "&6.");
-				BasicUtils.notify("TheBasics.Unban.Notify", "&6The player &7" + player.getName() + " &6has unbanned the player &7" + args[0] + "&6.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("UnbanSender").replace("%p", args[0]));
+				BasicUtils.notify("TheBasics.Unban.Notify", BasicUtils.getMessage("UnbanNotify").replace("%p", player.getName()).replace("%p2", args[0]));
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cThat player is not banned!");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerNotBanned"));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(player, "&cThat player hasn't played on the server before!");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerNeverPlayed"));
 		}
 	}
 	
@@ -51,15 +51,15 @@ public class UnbanCMD extends CommandModule
 			{
 				Bukkit.getBanList(Type.NAME).pardon(args[0]);
 				
-				BasicUtils.sendMessage(console, "&6You have unbanned the player &7" + args[0] + "&6.");
-				BasicUtils.notify("TheBasics.Unban.Notify", "&6The player &7console &6has unbanned the player &7" + args[0] + "&6.");
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("UnbanSender").replace("%p", args[0]));
+				BasicUtils.notify("TheBasics.Unban.Notify", BasicUtils.getMessage("UnbanNotify").replace("%p", console.getName()).replace("%p2", args[0]));
 			}else
 			{
-				BasicUtils.sendMessage(console, "&cThat player is not banned!");
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerNotBanned"));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(console, "&cThat player hasn't played on the server before!");
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerNeverPlayed"));
 		}
 	}
 }

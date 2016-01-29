@@ -37,84 +37,84 @@ public class BalanceCMD extends CommandModule
 		if(args.length < 1)
 		{
 			double balance = TheBasics.getEconomy().getBalance(player);
-			
-			BasicUtils.sendMessage(player, "&6Your balance is &7$" + balance + "&6.");
+
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("BalanceGet").replace("%a", String.valueOf(balance)));
 		}else if(args.length == 1)
 		{
 			if(player.hasPermission("TheBasics.Balance.Others"))
 			{
 				Player player2 = Bukkit.getPlayer(args[0]);
-				
+
 				if(player2 != null)
 				{
 					double balance = TheBasics.getEconomy().getBalance(player2);
-					
-					BasicUtils.sendMessage(player, "&6The balance of " + args[0] + " is &7$" + balance + "&6.");
+
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("BalanceGetOthers").replace("%p", args[0]).replace("%a", String.valueOf(balance)));
 				}else
 				{
-					BasicUtils.sendMessage(player, "&cThat player is not online!");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
 				}
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cYou do not have enough permission to perform this command!");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
 			}
 		}else if(args.length == 3)
 		{
 			if(player.hasPermission("TheBasics.Balance." + args[0].toLowerCase()))
 			{
 				Player player2 = Bukkit.getPlayer(args[1]);
-				
+
 				if(player2 != null)
 				{
 					try
 					{
 						double amount = Double.parseDouble(args[2]);
-						
+
 						if(amount >= 0)
 						{
 							if(args[0].equalsIgnoreCase("set"))
 							{
 								TheBasics.getEconomy().setBalance(player2, amount);
-								BasicUtils.sendMessage(player, "&6You have set the balance for " + args[1] + " to &7$" + amount + "&6.");
-								BasicUtils.sendMessage(player2, "&6Your balance has been set to &7$" + amount + " &6by " + player.getName() + ".");
+								BasicUtils.sendMessage(player, BasicUtils.getMessage("BalanceSetSender").replace("%p", args[1]).replace("%a", String.valueOf(amount)));
+								BasicUtils.sendMessage(player, BasicUtils.getMessage("BalanceSetReceiver").replace("%p", player.getName()).replace("%a", String.valueOf(amount)));
 							}else if(args[0].equalsIgnoreCase("add"))
 							{
 								TheBasics.getEconomy().depositBalance(player2, amount);
-								BasicUtils.sendMessage(player, "&6You have gave " + args[1] + " &7$" + amount + "&6.");
-								BasicUtils.sendMessage(player2, "&6You have recieved &7$" + amount + " &6from " + player.getName() + ".");
+								BasicUtils.sendMessage(player, BasicUtils.getMessage("BalanceGaveSender").replace("%p", args[1]).replace("%a", String.valueOf(amount)));
+								BasicUtils.sendMessage(player2, BasicUtils.getMessage("BalanceGaveReceiver").replace("%p", player.getName()).replace("%a", String.valueOf(amount)));
 							}else if(args[0].equalsIgnoreCase("take"))
 							{
 								if(TheBasics.getEconomy().withdrawBalance(player2, amount))
 								{
-									BasicUtils.sendMessage(player, "&6You have took" + args[1] + " &7$" + amount + "&6.");
-									BasicUtils.sendMessage(player2, "&6You have lost &7$" + amount + " &6from " + player.getName() + ".");
+									BasicUtils.sendMessage(player, BasicUtils.getMessage("BalanceTakeSender").replace("%p", args[1]).replace("%a", String.valueOf(amount)));
+									BasicUtils.sendMessage(player2, BasicUtils.getMessage("BalanceTakeReceiver").replace("%p", player.getName()).replace("%a", String.valueOf(amount)));
 								}else
 								{
-									BasicUtils.sendMessage(player, "&cThat player does not have enough money!");
+									BasicUtils.sendMessage(player, BasicUtils.getMessage("BalanceLackOfFunds"));
 								}
 							}else
 							{
-								BasicUtils.sendMessage(player, "&cUsage: " + getUsage());
+								BasicUtils.sendMessage(player, BasicUtils.getMessage("Usage").replace("%u", getUsage()));
 							}
 						}else
 						{
-							BasicUtils.sendMessage(player, "&cPlease specify a valid amount!");
+							BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidValue"));
 						}
 					}catch(NumberFormatException e)
 					{
-						BasicUtils.sendMessage(player, "&cPlease specify a valid amount!");
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidValue"));
 					}
 				}else
 				{
-					BasicUtils.sendMessage(player, "&cThat player is not online!");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
 				}
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cYou do not have enough permission to perform this command!");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(player, "&cUsage: " + getUsage());
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("Usage").replace("%u", getUsage()));
 		}
 	}
 
@@ -124,78 +124,78 @@ public class BalanceCMD extends CommandModule
 		{
 			if(console.hasPermission("TheBasics.Balance.Others"))
 			{
-				Player player = Bukkit.getPlayer(args[0]);
-				
-				if(player != null)
+				Player player2 = Bukkit.getPlayer(args[0]);
+
+				if(player2 != null)
 				{
-					double balance = TheBasics.getEconomy().getBalance(player);
-					
-					BasicUtils.sendMessage(console, "&6The balance of " + args[0] + " is &7$" + balance + "&6.");
+					double balance = TheBasics.getEconomy().getBalance(player2);
+
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("BalanceGetOthers").replace("%p", args[0]).replace("%a", String.valueOf(balance)));
 				}else
 				{
-					BasicUtils.sendMessage(console, "&cThat console is not online!");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerOffline"));
 				}
 			}else
 			{
-				BasicUtils.sendMessage(console, "&cYou do not have enough permission to perform this command!");
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("NoPermission"));
 			}
 		}else if(args.length == 3)
 		{
 			if(console.hasPermission("TheBasics.Balance." + args[0].toLowerCase()))
 			{
-				Player player = Bukkit.getPlayer(args[1]);
-				
-				if(player != null)
+				Player player2 = Bukkit.getPlayer(args[1]);
+
+				if(player2 != null)
 				{
 					try
 					{
 						double amount = Double.parseDouble(args[2]);
-						
+
 						if(amount >= 0)
 						{
 							if(args[0].equalsIgnoreCase("set"))
 							{
-								TheBasics.getEconomy().setBalance(player, amount);
-								BasicUtils.sendMessage(console, "&6You have set the balance for " + args[1] + " to &7$" + amount + "&6.");
-								BasicUtils.sendMessage(player, "&6Your balance has been set to &7$" + amount + " &6by " + console.getName() + ".");
+								TheBasics.getEconomy().setBalance(player2, amount);
+								BasicUtils.sendMessage(console, BasicUtils.getMessage("BalanceSetSender").replace("%p", args[1]).replace("%a", String.valueOf(amount)));
+								BasicUtils.sendMessage(player2, BasicUtils.getMessage("BalanceSetReceiver").replace("%p", console.getName()).replace("%a", String.valueOf(amount)));
 							}else if(args[0].equalsIgnoreCase("add"))
 							{
-								TheBasics.getEconomy().depositBalance(player, amount);
-								BasicUtils.sendMessage(console, "&6You have gave " + args[1] + " &7$" + amount + "&6.");
-								BasicUtils.sendMessage(player, "&6You have recieved &7$" + amount + " &6from " + console.getName() + ".");
+								TheBasics.getEconomy().depositBalance(player2, amount);
+								BasicUtils.sendMessage(console, BasicUtils.getMessage("BalanceGaveSender").replace("%p", args[1]).replace("%a", String.valueOf(amount)));
+								BasicUtils.sendMessage(player2, BasicUtils.getMessage("BalanceGaveReceiver").replace("%p", console.getName()).replace("%a", String.valueOf(amount)));
 							}else if(args[0].equalsIgnoreCase("take"))
 							{
-								if(TheBasics.getEconomy().withdrawBalance(player, amount))
+								if(TheBasics.getEconomy().withdrawBalance(player2, amount))
 								{
-									BasicUtils.sendMessage(console, "&6You have took " + args[1] + " &7$" + amount + "&6.");
-									BasicUtils.sendMessage(player, "&6You have lost &7$" + amount + " &6from " + console.getName() + ".");
+									BasicUtils.sendMessage(console, BasicUtils.getMessage("BalanceTakeSender").replace("%p", args[1]).replace("%a", String.valueOf(amount)));
+									BasicUtils.sendMessage(player2, BasicUtils.getMessage("BalanceTakeReceiver").replace("%p", console.getName()).replace("%a", String.valueOf(amount)));
 								}else
 								{
-									BasicUtils.sendMessage(player, "&cThat player does not have enough money!");
+									BasicUtils.sendMessage(console, BasicUtils.getMessage("BalanceLackOfFunds"));
 								}
 							}else
 							{
-								BasicUtils.sendMessage(console, "&cUsage: " + getUsage());
+								BasicUtils.sendMessage(console, BasicUtils.getMessage("Usage").replace("%u", getUsage()));
 							}
 						}else
 						{
-							BasicUtils.sendMessage(console, "&cPlease specify a valid amount!");
+							BasicUtils.sendMessage(console, BasicUtils.getMessage("InvalidValue"));
 						}
 					}catch(NumberFormatException e)
 					{
-						BasicUtils.sendMessage(console, "&cPlease specify a valid amount!");
+						BasicUtils.sendMessage(console, BasicUtils.getMessage("InvalidValue"));
 					}
 				}else
 				{
-					BasicUtils.sendMessage(console, "&cThat console is not online!");
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerOffline"));
 				}
 			}else
 			{
-				BasicUtils.sendMessage(console, "&cYou do not have enough permission to perform this command!");
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("NoPermission"));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(console, "&cUsage: " + getUsage());
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("Usage").replace("%u", getUsage()));
 		}
 	}
 }

@@ -34,7 +34,7 @@ public class TimeCMD extends CommandModule
 	{
 		if(args.length < 1)
 		{
-			BasicUtils.sendMessage(player, "&6The current time is &7" + formatTime(player.getWorld().getTime()) + "&6.");
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("TimeGet").replace("%a", formatTime(player.getWorld().getTime())));
 		}else if(args.length == 2 && args[0].equalsIgnoreCase("set"))
 		{
 			if(player.hasPermission("TheBasics.Time.Set"))
@@ -43,25 +43,25 @@ public class TimeCMD extends CommandModule
 				{
 					long time = Long.parseLong(args[1]);
 					player.getWorld().setTime(time);
-					BasicUtils.sendMessage(player, "&6You have changed the time to &7" + formatTime(time) + "&6.");
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("TimeSet").replace("%a", formatTime(time)));
 				}catch(NumberFormatException e)
 				{
 					if(args[1].equalsIgnoreCase("Night"))
 					{
 						player.getWorld().setTime(12300);
-						BasicUtils.sendMessage(player, "&6You have changed the time to night.");
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("TimeSet").replace("%a", "night"));
 					}else if(args[1].equalsIgnoreCase("Day"))
 					{
 						player.getWorld().setTime(0);
-						BasicUtils.sendMessage(player, "&6You have set the time to day.");
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("TimeSet").replace("%a", "day"));
 					}else
 					{
-						BasicUtils.sendMessage(player, "&cPlease specify a valid time!");
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("TimeInvalid"));
 					}
 				}
 			}else
 			{
-				BasicUtils.sendMessage(player, "&cYou do not have enough permission to perform this command!");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
 			}
 		}else
 		{
@@ -71,7 +71,7 @@ public class TimeCMD extends CommandModule
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
-		BasicUtils.sendMessage(console, "cYou must be a player to perform this command!");
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
 	
 	private String formatTime(long time)
