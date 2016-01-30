@@ -20,12 +20,12 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 import io.github.GoldenDeveloper79.TheBasics.API.BasicPermissions;
 import io.github.GoldenDeveloper79.TheBasics.Configs.BasicConfig;
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
-import io.github.GoldenDeveloper79.TheBasics.Utils.BasicUtils;
 
 public class Permissions implements BasicPermissions 
 {
@@ -51,7 +51,7 @@ public class Permissions implements BasicPermissions
 	{
 		if(player.isOnline())
 		{
-			return getGroup(BasicUtils.getData(player.getName()).getString("Group"));
+			return getGroup(BasicUtils.getData((Player) player).getString("Group"));
 		}else
 		{
 			return getGroup(BasicUtils.getConfig(player.getName()).getString("Group"));

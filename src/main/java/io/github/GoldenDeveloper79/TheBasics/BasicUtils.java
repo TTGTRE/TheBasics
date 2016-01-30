@@ -14,7 +14,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package io.github.GoldenDeveloper79.TheBasics.Utils;
+package io.github.GoldenDeveloper79.TheBasics;
 
 import java.io.File;
 
@@ -26,8 +26,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.GoldenDeveloper79.TheBasics.Registery;
-import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 import net.md_5.bungee.api.ChatColor;
 
@@ -89,9 +87,9 @@ public class BasicUtils
 	 */
 	public static PlayerData getData(Player player)
 	{
-		if(Registery.players.containsKey(player.getName()))
+		if(Registery.players.containsKey(player.getName().toLowerCase()))
 		{
-			return Registery.players.get(player.getName());
+			return Registery.players.get(player.getName().toLowerCase());
 		}
 
 		return null;
@@ -107,6 +105,7 @@ public class BasicUtils
 		{
 			return Registery.players.get(player);
 		}
+		
 		return null;
 	}
 

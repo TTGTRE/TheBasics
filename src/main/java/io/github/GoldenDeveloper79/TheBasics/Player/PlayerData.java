@@ -47,7 +47,7 @@ public class PlayerData extends PlayerBase
 	
 	public void join()
 	{
-		Registery.players.put(name, this);
+		Registery.players.put(name.toLowerCase(), this);
 		TheBasics.getDataConfig().update("Players." + name, player.getUniqueId().toString());
 		
 		Location loc = player.getLocation();
@@ -90,6 +90,11 @@ public class PlayerData extends PlayerBase
 		update("LastLocation.Z", loc.getZ());
 		update("LastLocation.Yaw", loc.getYaw());
 		update("LastLocation.Pitch", loc.getPitch());
+	
+		if(!contains("IgnoreList"))
+		{
+			set("IgnoreList", new String[] {});
+		}
 		
 		loadPermissions();
 	}

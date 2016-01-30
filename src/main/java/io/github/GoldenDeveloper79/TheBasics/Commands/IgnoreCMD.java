@@ -16,59 +16,46 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
-import java.util.Map.Entry;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
-import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
+import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
-public class TeleportRequestAcceptCMD extends CommandModule
+public class IgnoreCMD extends CommandModule
 {
-	public TeleportRequestAcceptCMD()
+	public IgnoreCMD() 
 	{
-		super(new String[] {"teleportrequestaccept", "traccept"}, 0, 0, MultiPlayer.OTHER);
+		super(new String[] {"ignore"}, 1, 1, MultiPlayer.ALWAYS);
 	}
 
 	public void performCommand(Player player, String[] args)
 	{
-		if(Registery.teleportRequest.containsValue(player.getName()))
+		PlayerData sender = BasicUtils.getData(player);
+		Player ignored = Bukkit.getPlayer(args[0]);
+		
+		if(!ignored.equals(player))
 		{
-			String playerName = null;
-			
-			for(Entry<String, String> players : Registery.teleportRequest.entrySet())
+			if(!sender.getIgnoredPlayers().contains(ignored.getUniqueId().toString()))
 			{
-				if(players.getValue().equals(player.getName()))
-				{
-					playerName = players.getKey();
-					break;
-				}
-			}
-			
-			Player player2 = Bukkit.getPlayer(playerName);
-			
-			if(player2 != null)
-			{
-				Registery.teleportRequest.remove(playerName);
+				sender.getIgnoredPlayers().add(ignored.getUniqueId().toString());
+				sender.set("IgnoredPlayers", sender.getIgnoredPlayers());
 				
-				BasicUtils.sendMessage(player2, BasicUtils.getMessage("TeleportRequestAcceptReceiver").replace("%p", player.getName()));
-				BasicUtils.getData(player2).initTeleport(player.getLocation(), "&7" + player.getName());
-;
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("IgnoredSender").replace("%p", args[0]));
 			}else
 			{
-				BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportNoRequest"));
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("AlreadyIgnored"));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportNoRequest"));
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("IgnoreSelf"));
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(ConsoleCommandSender console, String[] args)
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}

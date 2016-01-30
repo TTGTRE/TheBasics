@@ -20,9 +20,9 @@ import org.bukkit.WeatherType;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
-import io.github.GoldenDeveloper79.TheBasics.Utils.BasicUtils;
 
 public class WeatherCMD extends CommandModule
 {

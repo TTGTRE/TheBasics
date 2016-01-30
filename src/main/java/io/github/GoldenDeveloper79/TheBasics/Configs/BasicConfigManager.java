@@ -32,11 +32,6 @@ import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 
 public class BasicConfigManager 
 {
-	/*
-	 * Get new configuration with header
-	 * @param filePath - Path to file
-	 * @return - New SimpleConfig
-	 */
 	public BasicConfig getNewConfig(String filePath, String[] header) 
 	{
 		File file = getConfigFile(filePath);
@@ -56,21 +51,11 @@ public class BasicConfigManager
 		return config;
 	}
 
-	/*
-	 * Get new configuration
-	 * @param filePath - Path to file
-	 * @return - New SimpleConfig
-	 */
 	public BasicConfig getNewConfig(String filePath) 
 	{
 		return getNewConfig(filePath, null);
 	}
-
-	/*
-	 * Get configuration file from string
-	 * @param file - File path
-	 * @return - New file object
-	 */
+	
 	private File getConfigFile(String file)
 	{
 		if(file.isEmpty() || file == null)
@@ -83,11 +68,6 @@ public class BasicConfigManager
 		return configFile;
 	}
 
-	/*
-	 * Create new file for config and copy resource into it
-	 * @param file - Path to file
-	 * @param resource - Resource to copy
-	 */
 	public void prepareFile(String fileName)
 	{
 		File file = getConfigFile(fileName);
@@ -106,11 +86,6 @@ public class BasicConfigManager
 		}catch(IOException e) {}
 	}
 
-	/*
-	 * Adds header block to config
-	 * @param file - Config file
-	 * @param header - Header lines
-	 */
 	public void setHeader(File file, String[] header)
 	{
 		if(!file.exists()) 
@@ -170,11 +145,6 @@ public class BasicConfigManager
 		}catch(IOException e) {}
 	}
 
-	/*
-	 * Read file and make comments SnakeYAML friendly
-	 * @param filePath - Path to file
-	 * @return - File as Input Stream
-	 */
 	public InputStream getConfigContent(File file) 
 	{
 		if(!file.exists())
@@ -220,12 +190,7 @@ public class BasicConfigManager
 			return null;
 		}
 	}
-
-	/*
-	 * Get comments from file
-	 * @param file - File
-	 * @return - Comments number
-	 */
+	
 	private int getCommentsNum(File file)
 	{
 		if(!file.exists())
@@ -257,16 +222,10 @@ public class BasicConfigManager
 
 	}
 
-	/*
-	 * Get config content from file
-	 * @param filePath - Path to file
-	 * @return - readied file
-	 */
 	public InputStream getConfigContent(String filePath) 
 	{
 		return getConfigContent(getConfigFile(filePath));
 	}
-
 
 	private String prepareConfigString(String configString)
 	{
@@ -344,11 +303,6 @@ public class BasicConfigManager
 	}
 
 
-	/*
-	 * Saves configuration to file
-	 * @param configString - Config string
-	 * @param file - Config file
-	 */
 	public void saveConfig(String configString, File file) 
 	{
 		String configuration = prepareConfigString(configString);
@@ -362,11 +316,6 @@ public class BasicConfigManager
 		}catch(IOException e) {}
 	}
 
-	/*
-	 * Copy resource from Input Stream to file
-	 * @param resource - Resource from .jar
-	 * @param file - File to write
-	 */
 	private void copyResource(InputStream resource, File file) 
 	{
 		try 

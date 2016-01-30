@@ -41,11 +41,14 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.GroupCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.HealCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.HelpCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.HomeCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.IgnoreCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.KickCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.MessageCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.NickCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.PayCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.PlayTimeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.RepairCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.ReplyCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.RulesCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.SetHomeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.SetSpawnCMD;
@@ -58,6 +61,7 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportRequestDenyCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TempBanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TimeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.UnbanCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.VanishCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.WarpCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.WeatherCMD;
 import io.github.GoldenDeveloper79.TheBasics.Configs.BasicConfig;
@@ -68,7 +72,6 @@ import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerQuitEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicServerPingEvent;
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
-import io.github.GoldenDeveloper79.TheBasics.Utils.BasicUtils;
 
 public class TheBasics extends JavaPlugin
 {
@@ -107,7 +110,6 @@ public class TheBasics extends JavaPlugin
 			
 			if(updater.getResult().equals(UpdateResult.SUCCESS))
 			{
-				//Just to reload them if I updated them.
 				loadConfigs();
 			}
 		}
@@ -179,11 +181,14 @@ public class TheBasics extends JavaPlugin
 		new HealCMD();
 		new HelpCMD();
 		new HomeCMD();
+		new IgnoreCMD();
 		new KickCMD();
+		new MessageCMD();
 		new NickCMD();
 		new PayCMD();
 		new PlayTimeCMD();
 		new RepairCMD();
+		new ReplyCMD();
 		new RulesCMD();
 		new SetHomeCMD();
 		new SetSpawnCMD();
@@ -196,6 +201,7 @@ public class TheBasics extends JavaPlugin
 		new TempBanCMD();
 		new TimeCMD();
 		new UnbanCMD();
+		new VanishCMD();
 		new WarpCMD();
 		new WeatherCMD();
 	}

@@ -16,44 +16,32 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Player;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
-import io.github.GoldenDeveloper79.TheBasics.Utils.BasicUtils;
 
-public abstract class PlayerBase
+public abstract class PlayerBase extends PlayerFileBase
 {
 	private Player player;
-	private File file;
-	private FileConfiguration config;
 	private boolean afk = false;
 	private boolean vanished = false;
 	private boolean muted = false;
+	private Player lastMessaged;
+	private List<String> ignoredPlayers;
 	
 	public PlayerBase(Player player)
 	{
+		super(player);
+		
 		this.player = player;
-		
-		file = new File("plugins/TheBasics/Players/" + player.getUniqueId().toString() + ".yml");
-	
-		if(!file.exists())
-		{
-			try 
-			{
-				file.createNewFile();
-			} catch (IOException e) {}
-		}
-		
-		config = YamlConfiguration.loadConfiguration(file);
+
+		ignoredPlayers = getStringList("IgnoredPlayer");
 	}
 	
 	public void initTeleport(Location loc, String locName)
@@ -197,102 +185,18 @@ public abstract class PlayerBase
 		this.muted = muted;
 	}
 	
-	/*
-	 * Sets a value to the specified key.
-	 */
-	public void set(String key, Object value)
+	public Player getLastMessaged()
 	{
-		config.set(key, value);
-
-		try 
-		{
-			config.save(file);
-		} catch (IOException e) 
-		{
-			TheBasics.getLog().severe("Could not save the config for " + file.getName() + "!");
-		}
+		return lastMessaged;
 	}
 
-	/*
-	 * Sets a value to the specified key when the value does not equal the same in the config.
-	 */
-	public void update(String key, Object value)
+	public void setLastMessaged(Player lastMessaged)
 	{
-		if(!contains(key) || !get(key).equals(value))
-		{
-			set(key, value);
-		}
+		this.lastMessaged = lastMessaged;
 	}
-
-	/*
-	 * Gets an object from a specified key.
-	 */
-	public Object get(String key)
+	
+	public List<String> getIgnoredPlayers()
 	{
-		return config.get(key);
-	}
-
-	/*
-	 * Gets a string from a specified key.
-	 */
-	public String getString(String key)
-	{
-		return config.getString(key);
-	}
-
-	/*
-	 * Gets an integer from a specified key.
-	 */
-	public int getInt(String key)
-	{
-		return config.getInt(key);
-	}
-
-	/*
-	 * Gets a double from a specified key.
-	 */
-	public double getDouble(String key)
-	{
-		return config.getDouble(key);
-	}
-
-	/*
-	 * Gets a boolean from a specified key.
-	 */
-	public boolean getBoolean(String key)
-	{
-		return config.getBoolean(key);
-	}
-
-	/*
-	 * Checks if a path exist from a specified key.
-	 */
-	public boolean contains(String key)
-	{
-		return config.contains(key);
-	}
-
-	/*
-	 * Gets a string list from a specified key.
-	 */
-	public List<String> getStringList(String key)
-	{
-		return config.getStringList(key);
-	}
-
-	/*
-	 * Gets the file associated with the configuration.
-	 */
-	public File getFile()
-	{
-		return file;
-	}
-
-	/*
-	 * Gets the configuration.
-	 */
-	public FileConfiguration getConfig() 
-	{
-		return config;
+		return ignoredPlayers;
 	}
 }

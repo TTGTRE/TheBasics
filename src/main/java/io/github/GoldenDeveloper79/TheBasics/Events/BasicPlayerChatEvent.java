@@ -16,15 +16,16 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
+import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
 public class BasicPlayerChatEvent implements Listener	
 {
@@ -52,7 +53,15 @@ public class BasicPlayerChatEvent implements Listener
 			format = format.replaceAll("<Name>", player.getDisplayName());
 			format = format.replaceAll("<Message>", message);
 			
-			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', format));
+			String formattedMessage = ChatColor.translateAlternateColorCodes('&', format);
+			
+			for(PlayerData data : Registery.players.values())
+			{
+				if(!data.getIgnoredPlayers().contains(player.getUniqueId().toString()))
+				{
+					data.getPlayer().sendMessage(formattedMessage);
+				}
+			}
 		}
 	}
 }

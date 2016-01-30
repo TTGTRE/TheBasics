@@ -57,3 +57,10 @@ Nickname:
 ChatFormat:
   Member: '&f[&6<World>&f] <Prefix> &6<Name> &f: &6<Message>'
   Admin: '&f[&c<World>&f] <Prefix> &c<Name> &f: &c<Message>'
+  
+#The format for messaging players. (%p = sender/recevier, %m = message)
+MessageFormat: 
+  #What the sender will see.
+  Sender: '&f[&6You &f-> &6%p&f] %m' 
+  #What the receiver will see.
+  Receiver: '&f[&6%p &f-> &6You&f] %m' 

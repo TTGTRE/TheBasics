@@ -17,6 +17,8 @@ Groups:
     - thebasics.teleportrequest
     - thebasics.teleportrequestaccept
     - thebasics.teleportrequestdeny
+    - thebasics.message
+    - thebasics.reply
   Admin:
     Default: false
     Prefix: '&f[&cAdmin&f]'

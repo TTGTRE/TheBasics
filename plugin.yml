@@ -1,7 +1,8 @@
 name: TheBasics
-version: 1.04
+version: 1.05
 main: io.github.GoldenDeveloper79.TheBasics.TheBasics
 description: A basic set of functions for Minecraft servers.
+author: [GoldenDeveloper]
 commands:
   balance:
     description: Retrieves or modifies the balance of yourself or another player.
@@ -44,9 +45,16 @@ commands:
   home:
     description: Teleports yourself to a home.
     usage: /home <name>.
+  ignore:
+    description: Ignores a player on the server.
+    usage: /ignore <name>.
   kick:
     description: Kicks a player from the server.
     usage: /kick <name> <reason>.
+  message:
+    description: Message a player on the server.
+    usage: /message <name> <message>.
+    aliases: [msg, tell]
   nick:
     description: Changes the displayname of yourself.
     usage: /nick <name>
@@ -60,6 +68,10 @@ commands:
   repair:
     description: Repairs an item that you are holding in your hand.
     usage: /repair.
+  reply:
+    description: Replies to a player who sent you a message.
+    usage: /reply <message>.
+    aliases: [r]
   rules:
     description: Sends the rules to yourself or another player.
     usage: /rules <name> <page>.
@@ -100,6 +112,10 @@ commands:
   unban:
     description: Unbans a player from the server.
     usage: /unban <name>.
+  vanish:
+    descripton: Vanish yourself or another player.
+    usage: /vanish <name>.
+    aliases: [v]
   warp:
     description: Gets a list of warps or teleport yourself to a warp.
     usage: /warp <name>.
