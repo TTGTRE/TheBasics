@@ -24,11 +24,14 @@ A set of basic functions for Minecraft servers. More details coming.
 - /heal (Heals yourself or another player).
 - /home (Teleports yourself to your home).
 - /help (Sends yourself or another player the help list).
+- /ignore (Ignores a player on the server).
 - /kick (Kicks a player from the server).
+- /message (/msg, /tell) (Messages a player on the server).
 - /nick (Modify the displayname of yourself).
 - /pay (Pays a player a balance).
 - /playtime (/ptime) (Checks the playtime for yourself or another player).
 - /repair (Repairs the item you are holding in your hand).
+- /reply (/r) (Replies to a player who recently messaged you).
 - /rules (Sends yourself or another player a list of rules).
 - /sethome (Sets a home at your location).
 - /setspawn (Sets the world spawn at your location).
@@ -40,6 +43,7 @@ A set of basic functions for Minecraft servers. More details coming.
 - /tempban (Temporarily bans a player from the server).
 - /time (Gets or sets the time of the world you are in).
 - /unban (Unbans a player from the server).
+- /vanish (/v) (Vanished yourself from players on the server).
 - /warp (List or teleport yourself to a warp).
 - /weather (Change the weather in your world).
 - More...
@@ -64,6 +68,7 @@ A set of basic functions for Minecraft servers. More details coming.
 
 **Chat**
 - Easily modify chat format per group.
+- 
 **Website**
 - http://goldendeveloper79.github.io/TheBasics
 
