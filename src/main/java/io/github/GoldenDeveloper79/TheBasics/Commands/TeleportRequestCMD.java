@@ -21,11 +21,11 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
+import io.github.GoldenDeveloper79.TheBasics.Utils.BasicUtils;
 
 public class TeleportRequestCMD extends CommandModule
 {

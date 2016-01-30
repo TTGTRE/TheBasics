@@ -3,7 +3,7 @@
 #(Used for general stuff)#
 ##########################
 
-#If autoupdating should be allowed. (Default=true)
+#If auto updating should be allowed. (Default=true)
 AutoUpdating: true
 
 #The prefix for all messaging/broadcasting. (Default='&0&l[&6&lTheBasics&0&l]&6 ')
@@ -47,7 +47,7 @@ Nickname:
   #The maximum length of a nick. Includes coloring/style. Ex: &6&lGoldenDeveloper is 19. (Default = 20)
   MaxLength: 20
   #The minimum length of a nick. Includes coloring/style. Ex: &6&lAu_79 is 9. (Default = 8) 
-  MinLength: 8
+  MinLength: 5
 
 #The chat format for groups.
 #<World> = world name.

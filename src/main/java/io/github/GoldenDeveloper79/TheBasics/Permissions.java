@@ -22,9 +22,10 @@ import java.util.Collections;
 import org.bukkit.OfflinePlayer;
 
 import io.github.GoldenDeveloper79.TheBasics.API.BasicPermissions;
-import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
+import io.github.GoldenDeveloper79.TheBasics.Configs.BasicConfig;
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
+import io.github.GoldenDeveloper79.TheBasics.Utils.BasicUtils;
 
 public class Permissions implements BasicPermissions 
 {
@@ -211,7 +212,7 @@ public class Permissions implements BasicPermissions
 	{
 		if(!groupExist(name))
 		{
-			ConfigModule conf = TheBasics.getGroupConfig();
+			BasicConfig conf = TheBasics.getGroupConfig();
 			
 			conf.set("Groups." + name + ".Default", false);
 			conf.set("Groups." + name + ".Prefix", "[" + name + "] ");

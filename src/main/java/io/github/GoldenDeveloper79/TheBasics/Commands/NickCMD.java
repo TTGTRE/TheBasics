@@ -20,10 +20,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
+import io.github.GoldenDeveloper79.TheBasics.Utils.BasicUtils;
 
 public class NickCMD extends CommandModule
 {
@@ -38,7 +38,7 @@ public class NickCMD extends CommandModule
 		{
 			String name = args[0];
 			
-			if(name.length() <= TheBasics.getGeneralConfig().getDouble("Nickname.MaxLength") && TheBasics.getGeneralConfig().getDouble("Nickname.MinLength") <= name.length())
+			if(name.toCharArray().length <= TheBasics.getGeneralConfig().getDouble("Nickname.MaxLength") && TheBasics.getGeneralConfig().getDouble("Nickname.MinLength") <= name.toCharArray().length)
 			{
 				player.setDisplayName(ChatColor.translateAlternateColorCodes('&', args[0]));
 				BasicUtils.sendMessage(player, BasicUtils.getMessage("Nick").replace("%a", args[0]));

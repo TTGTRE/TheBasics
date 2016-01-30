@@ -22,12 +22,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
+import io.github.GoldenDeveloper79.TheBasics.Utils.BasicUtils;
 
 public class PlayTimeCMD extends CommandModule
 {
@@ -61,7 +61,7 @@ public class PlayTimeCMD extends CommandModule
 				PlayerData data = BasicUtils.getData(player);
 				String groupName = null;
 				
-				for(String group : TheBasics.getGroupConfig().getConfig().getConfigurationSection("Ranking.Ranks").getKeys(false))
+				for(String group : TheBasics.getGroupConfig().getConfigurationSection("Ranking.Ranks").getKeys(false))
 				{
 					if(TheBasics.getPermissions().groupExist(group))
 					{

@@ -22,9 +22,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
+import io.github.GoldenDeveloper79.TheBasics.Utils.BasicUtils;
 
 public class BasicPlayerJoinEvent implements Listener
 {

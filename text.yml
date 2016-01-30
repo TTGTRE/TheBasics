@@ -1,3 +1,4 @@
+
 #The server motd on the server list.
 ListMOTD: '&6Welcome to -=Server=-. It is powered by TheBasics.'
 
@@ -30,6 +31,14 @@ Help:
     Top: '&6&l----------[Help - %p/%m]-----------'
     #What should be displayed on the bottom.
     Bottom: '&6&l-----------------------------'
+    
+Info:
+  Format:
+    #What should be displayed on the top. 
+    Top: '&6&l---------[Info]----------'
+    #What should be displayed on the bottom.
+    Bottom: '&6&l-------------------------'
+    
 Join:
   #The message to be broadcasted when a player joins the server. (%p = playerName) 
   Message: '&6%p has joined the server!'

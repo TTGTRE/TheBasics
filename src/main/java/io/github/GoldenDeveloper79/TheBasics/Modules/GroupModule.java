@@ -39,7 +39,7 @@ public class GroupModule
 		try
 		{
 			this.groupName = name;
-			this.config = TheBasics.getGroupConfig().getConfig().getConfigurationSection("Groups." + name);
+			this.config = TheBasics.getGroupConfig().getConfigurationSection("Groups." + name);
 			this.prefix = config.getString("Prefix");
 			this.permissions = config.getStringList("Permissions");
 			this.players = new ArrayList<String>();

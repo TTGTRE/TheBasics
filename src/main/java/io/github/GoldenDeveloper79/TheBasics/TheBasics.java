@@ -26,6 +26,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import io.github.GoldenDeveloper79.TheBasics.Updater.UpdateResult;
 import io.github.GoldenDeveloper79.TheBasics.Updater.UpdateType;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BalanceCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BanCMD;
@@ -59,13 +60,15 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.TimeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.UnbanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.WarpCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.WeatherCMD;
+import io.github.GoldenDeveloper79.TheBasics.Configs.BasicConfig;
+import io.github.GoldenDeveloper79.TheBasics.Configs.BasicConfigManager;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerChatEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerJoinEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerQuitEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicServerPingEvent;
-import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
+import io.github.GoldenDeveloper79.TheBasics.Utils.BasicUtils;
 
 public class TheBasics extends JavaPlugin
 {
@@ -75,15 +78,16 @@ public class TheBasics extends JavaPlugin
 	
 	//Commands
 	private static BasicCommandExecutor cmdExecutor;
-	
+
 	//Configurations & Files
 	private static File mainDir;
 	private static File playerDir;
-	private static ConfigModule generalConfig;
-	private static ConfigModule dataConfig;
-	private static ConfigModule groupConfig;
-	private static ConfigModule textConfig;
-	private static ConfigModule languageConfig;
+	private static BasicConfigManager configManager;
+	private static BasicConfig generalConfig;
+	private static BasicConfig dataConfig;
+	private static BasicConfig groupConfig;
+	private static BasicConfig textConfig;
+	private static BasicConfig languageConfig;
 	
 	//Economy
 	private static Economy economy;
@@ -96,15 +100,21 @@ public class TheBasics extends JavaPlugin
 		plugin = this;
 		
 		loadConfigs();
+	
+		if(TheBasics.getGeneralConfig().getBoolean("AutoUpdating"))
+		{
+			Updater updater = new Updater(this, 97487, this.getFile(), UpdateType.DEFAULT, false);
+			
+			if(updater.getResult().equals(UpdateResult.SUCCESS))
+			{
+				//Just to reload them if I updated them.
+				loadConfigs();
+			}
+		}
+		
 		loadCommands();
 		loadEvents();
 		loadGroups();
-
-		if(TheBasics.getGeneralConfig().getBoolean("AutoUpdating"))
-		{
-			new Updater(this, 97487, this.getFile(), UpdateType.DEFAULT, false);
-			log.info("TheBasics has been updated!");
-		}
 		
 		economy = new Economy();
 		permissions = new Permissions();
@@ -141,11 +151,13 @@ public class TheBasics extends JavaPlugin
 		if(!mainDir.exists()) mainDir.mkdirs();
 		if(!playerDir.exists()) playerDir.mkdirs();
 		
-		generalConfig = new ConfigModule(new File(mainDir, "config.yml"));
-		dataConfig = new ConfigModule(new File(mainDir, "data.yml"));
-		groupConfig = new ConfigModule(new File(mainDir, "groups.yml"));
-		textConfig = new ConfigModule(new File(mainDir, "text.yml"));
-		languageConfig = new ConfigModule(new File(mainDir, "language.yml"));
+		configManager = new BasicConfigManager();
+		
+		generalConfig = configManager.getNewConfig("config.yml");
+		dataConfig = configManager.getNewConfig("data.yml");
+		groupConfig = configManager.getNewConfig("groups.yml");
+		textConfig = configManager.getNewConfig("text.yml");
+		languageConfig = configManager.getNewConfig("language.yml");
 	}
 	
 	/*
@@ -207,7 +219,7 @@ public class TheBasics extends JavaPlugin
 	private void loadGroups()
 	{
 		//Loads the groups up.
-		for(String groupNames : groupConfig.getConfig().getConfigurationSection("Groups").getKeys(false))
+		for(String groupNames : groupConfig.getConfigurationSection("Groups").getKeys(false))
 		{
 			new GroupModule(groupNames);
 		}
@@ -244,7 +256,7 @@ public class TheBasics extends JavaPlugin
 						{
 							String groupName = null;
 							
-							for(String group : TheBasics.getGroupConfig().getConfig().getConfigurationSection("Ranking.Ranks").getKeys(false))
+							for(String group : TheBasics.getGroupConfig().getConfigurationSection("Ranking.Ranks").getKeys(false))
 							{
 								if(permissions.groupExist(group))
 								{
@@ -304,7 +316,7 @@ public class TheBasics extends JavaPlugin
 	/*
 	 * Gets the general config for the plugin. Includes general settings. (config.yml)
 	 */
-	public static ConfigModule getGeneralConfig() 
+	public static BasicConfig getGeneralConfig() 
 	{
 		return generalConfig;
 	}
@@ -312,7 +324,7 @@ public class TheBasics extends JavaPlugin
 	/*
 	 * Gets the data config for the plugin. Includes things like offline players. (data.yml)
 	 */
-	public static ConfigModule getDataConfig()
+	public static BasicConfig getDataConfig()
 	{
 		return dataConfig;
 	}
@@ -320,7 +332,7 @@ public class TheBasics extends JavaPlugin
 	/*
 	 * Gets the group config for the plugin. Includes groups, permissions, and ranking system. (groups.yml)
 	 */
-	public static ConfigModule getGroupConfig()
+	public static BasicConfig getGroupConfig()
 	{
 		return groupConfig;
 	}
@@ -328,7 +340,7 @@ public class TheBasics extends JavaPlugin
 	/*
 	 * Gets the language config for the plugin. Includes messages. (language.yml)
 	 */
-	public static ConfigModule getLanguageConfig()
+	public static BasicConfig getLanguageConfig()
 	{
 		return languageConfig;
 	}
@@ -336,7 +348,7 @@ public class TheBasics extends JavaPlugin
 	/*
 	 * Gets the text config for the plugin. Includes Motd/Rules. (text.yml).
 	 */
-	public static ConfigModule getTextConfig() 
+	public static BasicConfig getTextConfig() 
 	{
 		return textConfig;
 	}
@@ -356,4 +368,20 @@ public class TheBasics extends JavaPlugin
 	{
 		return permissions;
 	}	
+	
+	/*
+	 * Gets the main file directory.
+	 */
+	public static File getMainDir() 
+	{
+		return mainDir;
+	}
+
+	/*
+	 * Gets the player file directory.
+	 */
+	public static File getPlayerDir() 
+	{
+		return playerDir;
+	}
 }

@@ -14,14 +14,9 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package io.github.GoldenDeveloper79.TheBasics;
+package io.github.GoldenDeveloper79.TheBasics.Utils;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Scanner;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -31,6 +26,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import io.github.GoldenDeveloper79.TheBasics.Registery;
+import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 import net.md_5.bungee.api.ChatColor;
 
@@ -223,66 +220,6 @@ public class BasicUtils
 		{
 			player.getWorld().dropItemNaturally(player.getLocation(), item);
 		}
-	}
-
-	/*
-	 * Updates the config values.
-	 */
-	public static void updateConfig(FileConfiguration config, File file) 
-	{
-		HashMap<String, Object> newConfig = getConfigValues(file);
-		
-		for(String var : config.getKeys(false))
-		{
-			newConfig.remove(var);
-		}
-		
-		if(newConfig.size() != 0)
-		{
-			for(String key : newConfig.keySet())
-			{
-				config.set(key, newConfig.get(key));
-			}
-			
-			try 
-			{
-				config.save(file);
-			} catch(IOException e) 
-			{
-				TheBasics.getLog().severe("Could not save " + file.getName() + ".");
-			}
-		}
-	}
-	
-	/*
-	 * Gets the content of that file as a hashmap.
-	 */
-	public static HashMap<String, Object> getConfigValues(File file) 
-	{
-		HashMap<String, Object> var = new HashMap<>();
-		YamlConfiguration config = new YamlConfiguration();
-		
-		try 
-		{
-			config.loadFromString(stringFromInputStream(file.getName()));
-		} catch(Exception e) {} //Just ignore it.
-		
-		for(String key : config.getKeys(false)) 
-		{
-			var.put(key, config.get(key));
-		}
-		
-		return var;
-	}
-	
-	/*
-	 * Gets the contents of that file as a string.
-	 */
-	@SuppressWarnings("resource")
-	public static String stringFromInputStream(String fileName) throws URISyntaxException, IOException
-	{
-		InputStream stream = TheBasics.getResourceURL(fileName).openStream();
-		return new Scanner(stream).useDelimiter("\\A").next();
 	}
 
 	/*

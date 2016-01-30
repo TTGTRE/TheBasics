@@ -22,10 +22,10 @@ import org.bukkit.World;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
+import io.github.GoldenDeveloper79.TheBasics.Utils.BasicUtils;
 
 public class WarpCMD extends CommandModule
 {
@@ -38,7 +38,7 @@ public class WarpCMD extends CommandModule
 	{
 		if(args.length < 1)
 		{
-			String warps = TheBasics.getDataConfig().getConfig().getConfigurationSection("Servers.Warps").getKeys(false)
+			String warps = TheBasics.getDataConfig().getConfigurationSection("Servers.Warps").getKeys(false)
 					.toString().replace("[", "").replace("]", "");
 			
 			BasicUtils.sendMessage(player, "&6Warps: &7" + warps + "&6.");

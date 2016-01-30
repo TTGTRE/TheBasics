@@ -22,9 +22,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
+import io.github.GoldenDeveloper79.TheBasics.Utils.BasicUtils;
 import net.md_5.bungee.api.ChatColor;
 
 public class BasicPlayerQuitEvent implements Listener

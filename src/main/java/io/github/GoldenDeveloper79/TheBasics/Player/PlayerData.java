@@ -16,6 +16,7 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Player;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.Location;
@@ -79,6 +80,7 @@ public class PlayerData extends PlayerBase
 		
 		//Only will update on quit/join.
 		update("Name", player.getName());
+		update("Displayname", player.getDisplayName());
 		update("IP", player.getAddress().toString());
 		update("LastLogin", System.currentTimeMillis());
 		
@@ -148,5 +150,10 @@ public class PlayerData extends PlayerBase
 	public UUID getUuid() 
 	{
 		return uuid;
+	}
+	
+	public HashMap<String, Object> getDefaults()
+	{
+		return null;
 	}
 }
