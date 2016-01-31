@@ -25,8 +25,10 @@ A set of basic functions for Minecraft servers. More details coming.
 - /home (Teleports yourself to your home).
 - /help (Sends yourself or another player the help list).
 - /ignore (Ignores a player on the server).
+- /info (Retrieves information about a player).
 - /kick (Kicks a player from the server).
 - /message (/msg, /tell) (Messages a player on the server).
+- /mute (Mutes a player on the server).
 - /nick (Modify the displayname of yourself).
 - /pay (Pays a player a balance).
 - /playtime (/ptime) (Checks the playtime for yourself or another player).
@@ -43,6 +45,7 @@ A set of basic functions for Minecraft servers. More details coming.
 - /tempban (Temporarily bans a player from the server).
 - /time (Gets or sets the time of the world you are in).
 - /unban (Unbans a player from the server).
+- /unmute (Unmutes a player on the server).
 - /vanish (/v) (Vanished yourself from players on the server).
 - /warp (List or teleport yourself to a warp).
 - /weather (Change the weather in your world).
@@ -50,8 +53,28 @@ A set of basic functions for Minecraft servers. More details coming.
 
 **Permissions**
 - The permissions are 'TheBasics.CommandLabel'.
-- Sub commands are typically 'TheBasics.CommandLabel.SubCommand'.
-- More permissions coming for subcommands & other additional uses.
+- The permission for punishment notifications are 'TheBasics.CommandLabel.Notify'
+- SubCommand permissions: 
+- TheBasics.Balance.Others (Gets the balance of other players).
+- TheBasics.Balance.Set (Sets the balance of a player).
+- TheBasics.Balance.Add (Adds an amount to a players balance).
+- TheBasics.Balance.Take (Takes an amount from a players balance).
+- TheBasics.ClearInventory.Others (Clears an inventory of a other player).
+- TheBasics.Feed.Others (Feeds another player).
+- TheBasics.Fly.Others (Toggles flying for another player).
+- TheBasics.Gamemode.Others (Changes the gamemode for another player).
+- TheBasics.Group.Set (Sets a players group).
+- TheBasics.Group.Get (Gets a players group).
+- TheBasics.Group.Create (Creates a group).
+- TheBasics.Heal.Others (Heal another player).
+- TheBasics.Help.Send (Sends help pages to another player).
+- TheBasics.Info.Others (Retrieves information of other player).
+- TheBasics.Message.Style (Sends messages to other players with color/style).
+- TheBasics.PlayTime.Others (Gets the play time of other players).
+- TheBasics.Rules.Send (Sends rules to another player).
+- TheBasics.SetHome.Unlimited (Be able to set unlimited homes).
+- TheBasics.Vanish.See (See other players in vanish).
+- TheBasics.Teleport.Override (Override the teleport delay for all teleporting).
 
 **Economy**
 - Can easily exchange money.
