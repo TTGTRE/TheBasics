@@ -19,9 +19,7 @@ package io.github.GoldenDeveloper79.TheBasics.Commands;
 import java.util.Date;
 
 import org.apache.commons.lang.time.DateUtils;
-import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -30,36 +28,43 @@ import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
-public class TempBanCMD extends CommandModule
+public class MuteCMD extends CommandModule
 {
-	public TempBanCMD() 
+	public MuteCMD() 
 	{
-		super(new String[] {"tempban"}, 2, Integer.MAX_VALUE, MultiPlayer.ALWAYS);
+		super(new String[] {"mute"}, 2, Integer.MAX_VALUE, MultiPlayer.ALWAYS);
 	}
 
 	public void performCommand(Player player, String[] args) 
 	{
 		PlayerData data = BasicUtils.getData(Bukkit.getPlayer(args[0]));
 		
-		String reason = BasicUtils.getMessage("TempBanDefault").replace("%p", player.getName());
-		
-		if(args.length > 2)
+		if(!data.isMuted())
 		{
-			reason = BasicUtils.combineString(2, args);
-		}
-		
-		Date expiry = getExpiry(args[1]);
-		
-		if(expiry != null)
-		{
-			Bukkit.getBanList(Type.NAME).addBan(args[0], reason, expiry, player.getName());
-			data.getPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
+			String reason = BasicUtils.getMessage("MuteDefault").replace("%p", player.getName());
 			
-			BasicUtils.notify("TheBasics.Tempban.Notify", BasicUtils.getMessage("TempBanNotify").replace("%p", player.getName()).replace("%s", args[0]).replace("%r", reason));
-			BasicUtils.sendMessage(player, BasicUtils.getMessage("TempBanSender").replace("%p", args[0]));
+			if(args.length > 2)
+			{
+				reason = BasicUtils.combineString(3, args);
+			}
+			
+			int seconds = getTimeInSeconds(args[1]);
+			
+			if(seconds != 0)
+			{
+				Date time = DateUtils.addSeconds(new Date(), seconds);
+				data.setMuted(time, reason);
+				
+				BasicUtils.notify("TheBasics.Mute.Notify", BasicUtils.getMessage("MuteNofiy").replace("%p", player.getName()).replace("%p2", args[0]).replace("%r", reason));
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("MuteSender").replace("%p", args[0]));
+				BasicUtils.sendMessage(data.getPlayer(), BasicUtils.getMessage("MuteReceiver").replace("%p", player.getName()).replace("%r", reason));
+			}else
+			{
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("MuteInvalidTime"));
+			}
 		}else
 		{
-			BasicUtils.sendMessage(player, BasicUtils.getMessage("TempBanInvalidTime"));
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("MuteAlready"));
 		}
 	}
 
@@ -67,29 +72,36 @@ public class TempBanCMD extends CommandModule
 	{
 		PlayerData data = BasicUtils.getData(Bukkit.getPlayer(args[0]));
 		
-		String reason = BasicUtils.getMessage("TempBanDefault").replace("%p", console.getName());
-		
-		if(args.length > 2)
+		if(!data.isMuted())
 		{
-			reason = BasicUtils.combineString(2, args);
-		}
-		
-		Date expiry = getExpiry(args[1]);
-		
-		if(expiry != null)
-		{
-			Bukkit.getBanList(Type.NAME).addBan(args[0], reason, expiry, console.getName());
-			data.getPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
+			String reason = BasicUtils.getMessage("MuteDefault").replace("%p", console.getName());
 			
-			BasicUtils.notify("TheBasics.Tempban.Notify", BasicUtils.getMessage("TempBanNotify").replace("%p", console.getName()).replace("%p2", args[0]).replace("%r", reason));
-			BasicUtils.sendMessage(console, BasicUtils.getMessage("TempBanSender").replace("%p", args[0]));
+			if(args.length > 2)
+			{
+				reason = BasicUtils.combineString(2, args);
+			}
+			
+			int seconds = getTimeInSeconds(args[1]);
+	
+			if(seconds != 0)
+			{
+				Date time = DateUtils.addSeconds(new Date(), seconds);
+				data.setMuted(time, reason);
+				
+				BasicUtils.notify("TheBasics.Mute.Notify", BasicUtils.getMessage("MuteNotify").replace("%p", console.getName()).replace("%s", args[0]).replace("%r", reason));
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("MuteSender").replace("%p", args[0]));
+				BasicUtils.sendMessage(data.getPlayer(), BasicUtils.getMessage("MuteReceiver").replace("%p", console.getName()).replace("%r", reason));
+			}else
+			{
+				BasicUtils.sendMessage(console, BasicUtils.getMessage("MuteInvalidTime"));
+			}
 		}else
 		{
-			BasicUtils.sendMessage(console, BasicUtils.getMessage("TempBanInvalidTime"));
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("MuteAlready"));
 		}
 	}
 	
-	public Date getExpiry(String date)
+	public int getTimeInSeconds(String date)
 	{
 		try
 		{
@@ -116,13 +128,14 @@ public class TempBanCMD extends CommandModule
 				seconds *= 1;
 			}else
 			{
-				return null;
+				return 0;
 			}
 			
-			return DateUtils.addSeconds(new Date(), (int) seconds);
+			return (int) seconds;
 		}catch(NumberFormatException e)
 		{
-			return null;
+			return 0;
 		}
 	}
 }
+

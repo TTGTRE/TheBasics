@@ -96,6 +96,11 @@ public class PlayerData extends PlayerBase
 			set("IgnoreList", new String[] {});
 		}
 		
+		if(contains("Muted.Is") && getBoolean("Muted.Is"))
+		{
+			setIsMuted(true);
+		}
+		
 		loadPermissions();
 	}
 	

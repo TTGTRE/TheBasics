@@ -5,13 +5,14 @@
 
 #Variables:
 #%p = player that is being discussed.
-#%p2 = an additional player that is being discussed.
+#%s = an additional player that is being discussed.
 #%r = reason for punishment
 #%t = time for world time or punishment time.
 #%a = amount/name, can be for balance, name of homes, names of items, modes for flying/creative, etc.
 #%a1 = amount/name 2, pretty much just used for item amount.
 #%u = usage for a command.
 #%t = time for teleporting.
+#%p = prefix
 
 #General Command Stuff
 NoPermission: '&cYou do not have enough permission to perform this command!'
@@ -33,7 +34,7 @@ BalanceTakeReceiver: '&6You lost &7%a from &6%p&6.'
 BalanceLackOfFunds: '&cThat player does not have enough money!'
 BanDefault: '&cYou have been banned by &7%p&c.'
 BanSender: '&6You have banned &7%p'
-BanNotify: '&6The player &7%p &6has banned the player &7%p2 &6for %r&6.'
+BanNotify: '&6The player &7%p &6has banned the player &7%s &6for &7%r&6.'
 ClearInventory: '&6You have cleared your inventory.'
 ClearInventorySender: '&6You have cleared the inventory for &7%p&6.'
 ClearInventoryReceiver: '&6Your inventory has been cleared by &7%p&6.'
@@ -49,7 +50,7 @@ FlyReceiver: '&6Flying has been &7%a &6by &7%p&6.'
 Gamemode: '&6You have changed your gamemode to &7%a&6.'
 GamemodeSender: '&6You have changed the gamemode for &7%p &6to &7%a&6.'
 GamemodeReceiver: '&6Your gamemode has been changed to &7%a &6by &7%p&6.'
-Give: '&6You have gave yourself &7%a2x &6of &7%a &6.'
+Give: '&6You have gave yourself &7%a2x &6of &7%a&6.'
 GiveSender: '&6You gave &7%p %a2x &6of &7%a &6.'
 GiveReceiver: '&6You received &7%a2x &6of &7%a &6from &7%p&6.'
 GroupSetSender: '&6You changed &7%p &6group to &7%a&6.'
@@ -58,6 +59,7 @@ GroupGet: '&6The player &7%p &6group is &7%a&6.'
 GroupCreate: '&6You have created the group called &7%a&6.'
 GroupExist: '&cThat group does not exist!'
 GroupExistTwo: '&cThat group already exist!'
+GroupPrefix: '&6You changed the prefix for the group &7%a &6to &7%p&6.'
 Heal: '&6You have healed yourself.'
 HealSender: '&6You have healed the player &7%p&6.'
 HealReceiver: '&6You have been healed by &7%p&6.'
@@ -71,7 +73,15 @@ AlreadyIgnored: '&cYou have already ignored that player!'
 IgnoreSelf: '&cYou cannot ignore yourself!'
 KickDefault: '&cYou have been kicked by &7%p&c.'
 KickSender: '&6You have kicked the player &7%p&6.' 
-KickNotify: '&6The player &7%p &6has kicked the player &7%p2 &6for &7%r&6.'
+KickNotify: '&6The player &7%p &6has kicked the player &7%s &6for &7%r&6.'
+MuteDefault: '&cYou have been muted by &7%p&c.'
+MuteSender: '&6You have muted &7%p&6.'
+MuteReceiver: '&6You have been muted by &7%p &6for &7%r&6.'
+MuteNotify: '&6The player &7%p &6has muted the player &7%s &6for &7%r&6.'
+MuteInvalidTime: '&cPlease specify a valid time in years, weeks, days, hours, minutes, or seconds.'
+Muted: '&cYou are muted and cannot talk till &7%a&c!'
+MuteAlready: '&cThat player is already muted!'
+MuteNot: '&cThat player is not muted!'
 Nick: '&6You have changed your nick to &7%a&6.'
 NickInvalid: '&cPlease specify a valid nickname!'
 NickDisabled: '&cChanging your nickname is disabled on this server!'
@@ -103,13 +113,16 @@ TeleportRequestDenyReceiver: '&6The player &7%p &6has denied your teleport reque
 TeleportRequestTimeout: '&cYou teleport request has timed out.'
 TempBanDefault: '&cYou have been tempbanned by &7%p&c.'
 TempBanSender: '&6You have tempbanend &7%p&6.'
-TempBanNotify: '&6The player &7%p &6has tempbanned the player &7%p2 &6for %r&6.'
+TempBanNotify: '&6The player &7%p &6has tempbanned the player &7%s &6for &7%r&6.'
 TempBanInvalidTime: '&cPlease specify a valid time in years, weeks, days, hours, minutes, or seconds.'
 TimeGet: '&6The time is &7%a&6.'
 TimeSet: '&6You set the time to &7%a&6.'
 TimeInvalid: '&cPlease specify a valid time.'
 UnbanSender: '&6You have unbanned the player &7%p&6.'
-UnbanNotify: '&6The player &7%p &6has unbanned the player &7%p2&6.'
+UnbanNotify: '&6The player &7%p &6has unbanned the player &7%s&6.'
+UnmuteReceiver: '&6You have been unmuted.'
+UnmuteSender: '&6You have unmuted the player &7%p&6.'
+UnmuteNotify: '&6The player &7%p &6has been unmuted.'
 PlayerNotBanned: '&cThat player is not banned!'
 Vanish: '&6You have &7%a&6.'
 VanishSender: '&6You have %a the player &7%p&6.'

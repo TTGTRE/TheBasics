@@ -87,26 +87,32 @@ public class PlayTimeCMD extends CommandModule
 		{
 			Player player2 = Bukkit.getPlayer(args[0]);
 			
-			if(player2 != null)
+			if(player.hasPermission("TheBasics.PlayTime.Others"))
 			{
-				String formatTime;
-				double time = BasicUtils.getData(player2).getDouble("PlayTime");
-				
-				if(time < 60)
+				if(player2 != null)
 				{
-					formatTime = String.valueOf(time) + "m";
+					String formatTime;
+					double time = BasicUtils.getData(player2).getDouble("PlayTime");
+					
+					if(time < 60)
+					{
+						formatTime = String.valueOf(time) + "m";
+					}else
+					{
+						BigDecimal bd = new BigDecimal(Double.toString(time));
+						bd = bd.setScale(1, BigDecimal.ROUND_HALF_UP);
+						
+						formatTime = String.valueOf(bd.doubleValue()) + "h";
+					}
+					
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayTimeGetOther").replace("%p", args[0]).replace("%a", formatTime));
 				}else
 				{
-					BigDecimal bd = new BigDecimal(Double.toString(time));
-					bd = bd.setScale(1, BigDecimal.ROUND_HALF_UP);
-					
-					formatTime = String.valueOf(bd.doubleValue()) + "h";
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("OfflinePlayer"));
 				}
-				
-				BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayTimeGetOther").replace("%p", args[0]).replace("%a", formatTime));
 			}else
 			{
-				BasicUtils.sendMessage(player, BasicUtils.getMessage("OfflinePlayer"));
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
 			}
 		}
 	}

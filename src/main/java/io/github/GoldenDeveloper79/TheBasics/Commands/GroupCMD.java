@@ -84,6 +84,17 @@ public class GroupCMD extends CommandModule
 				{
 					BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupExistTwo"));
 				}
+			}else if(args[0].equalsIgnoreCase("prefix"))
+			{
+				if(TheBasics.getPermissions().groupExist(args[1]))
+				{
+					TheBasics.getPermissions().getGroup(args[1]).setPrefix(args[2]);
+					
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupPrefix").replace("%a", args[1]).replace("%p", args[2]));
+				}else
+				{
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupExist"));
+				}
 			}else
 			{
 				BasicUtils.sendMessage(player, BasicUtils.getMessage("Usage").replace("%u", getUsage()));

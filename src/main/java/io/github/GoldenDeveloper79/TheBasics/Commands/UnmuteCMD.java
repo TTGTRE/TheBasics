@@ -23,45 +23,46 @@ import org.bukkit.entity.Player;
 import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
+import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
-public class FeedCMD extends CommandModule
+public class UnmuteCMD extends CommandModule
 {
-	public FeedCMD() 
+	public UnmuteCMD() 
 	{
-		super(new String[] {"feed"}, 0, 1, MultiPlayer.SOMETIMES);
+		super(new String[] {"unmute"}, 1, 1, MultiPlayer.ALWAYS);
 	}
 
-	public void performCommand(Player player, String[] args) 
+	public void performCommand(Player player, String[] args)
 	{
-		if(args.length < 1)
+		PlayerData data = BasicUtils.getData(Bukkit.getPlayer(args[0]));
+		
+		if(data.isMuted())
 		{
-			player.setFoodLevel(20);
+			data.setUnMuted();
 			
-			BasicUtils.sendMessage(player, BasicUtils.getMessage("Feed"));
+			BasicUtils.sendMessage(data.getPlayer(), BasicUtils.getMessage("UnmuteReceiver"));
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("UnmuteSender").replace("%p", args[0]));
+			BasicUtils.notify("TheBasics.Unmute.Notify", BasicUtils.getMessage("UnmuteNotify").replace("%p", args[0]));
 		}else
 		{
-			Player player2 = Bukkit.getPlayer(args[0]);
-			
-			if(player.hasPermission("TheBasics.Feed.Others"))
-			{
-				player2.setFoodLevel(20);
-				
-				BasicUtils.sendMessage(player, BasicUtils.getMessage("FeedSender").replace("%p", args[0]));
-				BasicUtils.sendMessage(player2, BasicUtils.getMessage("FeedReceiver").replace("%p", player.getName()));
-			}else
-			{
-				BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
-			}
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("MuteNot"));
 		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
-		Player player2 = Bukkit.getPlayer(args[0]);
-	
-		player2.setFoodLevel(20);
+		PlayerData data = BasicUtils.getData(Bukkit.getPlayer(args[0]));
+		
+		if(data.isMuted())
+		{
+			data.setUnMuted();
 			
-		BasicUtils.sendMessage(console, BasicUtils.getMessage("FeedSender").replace("%p", args[0]));
-		BasicUtils.sendMessage(player2, BasicUtils.getMessage("FeedReceiver").replace("%p", console.getName()));
+			BasicUtils.sendMessage(data.getPlayer(), BasicUtils.getMessage("UnmuteReceiver"));
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("UnmuteSender").replace("%p", args[0]));
+			BasicUtils.notify("TheBasics.Unmute.Notify", BasicUtils.getMessage("UnmuteNotify").replace("%p", args[0]));
+		}else
+		{
+			BasicUtils.sendMessage(console, BasicUtils.getMessage("MuteNot"));
+		}
 	}
 }

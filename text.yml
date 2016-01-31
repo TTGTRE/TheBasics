@@ -33,6 +33,16 @@ Help:
     Bottom: '&6&l-----------------------------'
     
 Info:
+  #What to display in /info.
+  #Max variables used.
+  List:
+  - '&6Name: &7%n'
+  - '&6Displayname: &7%d'
+  - '&6Address: &7%a'
+  - '&6Balance: &7%b'
+  - '&6Group: &7%g'
+  - '&6Playtime: &7%p'
+  - '&6LastLogin: &7%l'
   Format:
     #What should be displayed on the top. 
     Top: '&6&l---------[Info]----------'

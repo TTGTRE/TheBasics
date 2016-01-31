@@ -1,5 +1,5 @@
 name: TheBasics
-version: 1.05
+version: 1.06
 main: io.github.GoldenDeveloper79.TheBasics.TheBasics
 description: A basic set of functions for Minecraft servers.
 author: [GoldenDeveloper]
@@ -48,6 +48,9 @@ commands:
   ignore:
     description: Ignores a player on the server.
     usage: /ignore <name>.
+  info:
+    description: Retrieves information about a player.
+    usage: /info <name>.
   kick:
     description: Kicks a player from the server.
     usage: /kick <name> <reason>.
@@ -55,6 +58,9 @@ commands:
     description: Message a player on the server.
     usage: /message <name> <message>.
     aliases: [msg, tell]
+  mute:
+    description: Mutes a player on the server.
+    usage: /mute <name> <time><unit y/w/d/h/m/s> <reason>.
   nick:
     description: Changes the displayname of yourself.
     usage: /nick <name>
@@ -112,8 +118,11 @@ commands:
   unban:
     description: Unbans a player from the server.
     usage: /unban <name>.
+  unmute:
+    description: Unmutes a player on the server.
+    usage: /unmute <name>
   vanish:
-    descripton: Vanish yourself or another player.
+    description: Vanish yourself or another player.
     usage: /vanish <name>.
     aliases: [v]
   warp:

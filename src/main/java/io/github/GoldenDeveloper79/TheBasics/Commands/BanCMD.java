@@ -36,7 +36,7 @@ public class BanCMD extends CommandModule
 
 	public void performCommand(Player player, String[] args)
 	{
-		PlayerData data = BasicUtils.getData(args[0]);
+		PlayerData data = BasicUtils.getData(Bukkit.getPlayer(args[0]));
 
 		String reason = BasicUtils.getMessage("BanDefault").replace("%p", player.getName());
 		
@@ -48,13 +48,13 @@ public class BanCMD extends CommandModule
 		Bukkit.getBanList(Type.NAME).addBan(args[0], reason, null, player.getName());
 		data.getPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
 		
-		BasicUtils.notify("TheBasics.Ban.Notify", BasicUtils.getMessage("BanNotify").replace("%p", player.getName()).replace("%p2", args[0]).replace("%r", reason));
+		BasicUtils.notify("TheBasics.Ban.Notify", BasicUtils.getMessage("BanNotify").replace("%p", player.getName()).replace("%s", args[0]).replace("%r", reason));
 		BasicUtils.sendMessage(player, BasicUtils.getMessage("BanSender").replace("%p", args[0]));
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
-		PlayerData data = BasicUtils.getData(args[0]);
+		PlayerData data = BasicUtils.getData(Bukkit.getPlayer(args[0]));
 
 		String reason = BasicUtils.getMessage("BanDefault").replace("%p", console.getName());
 		

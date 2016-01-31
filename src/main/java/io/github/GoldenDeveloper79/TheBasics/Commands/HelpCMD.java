@@ -162,7 +162,13 @@ public class HelpCMD extends CommandModule
 			}
 		}
 		
-		if(args.length == 1)
+		if(args.length < 1)
+		{
+			for(String m : formatHelp(help, 0))
+			{
+				console.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
+			}
+		}else if(args.length == 1)
 		{
 			try
 			{

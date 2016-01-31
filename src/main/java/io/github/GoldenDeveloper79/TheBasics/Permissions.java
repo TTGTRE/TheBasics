@@ -23,7 +23,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import io.github.GoldenDeveloper79.TheBasics.API.BasicPermissions;
-import io.github.GoldenDeveloper79.TheBasics.Configs.BasicConfig;
+import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
@@ -97,7 +97,7 @@ public class Permissions implements BasicPermissions
 			if(player.isOnline())
 			{
 				group.getPlayers().add(player.getName());
-				PlayerData data = BasicUtils.getData(player.getName());
+				PlayerData data = BasicUtils.getData((Player) player);
 				data.set("Group", group.getGroupName());
 				
 				data.loadPermissions();
@@ -125,7 +125,7 @@ public class Permissions implements BasicPermissions
 			
 			if(player.isOnline())
 			{
-				PlayerData data = BasicUtils.getData(player.getName());
+				PlayerData data = BasicUtils.getData((Player) player);
 				data.set("Group", null);
 			}else
 			{
@@ -147,7 +147,7 @@ public class Permissions implements BasicPermissions
 	{
 		if(player.isOnline())
 		{
-			return BasicUtils.getData(player.getName()).getString("Group").equalsIgnoreCase(group.getGroupName());
+			return BasicUtils.getData((Player) player).getString("Group").equalsIgnoreCase(group.getGroupName());
 		}else
 		{
 			return BasicUtils.getConfig(player.getName()).getString("Group").equalsIgnoreCase(group.getGroupName());
@@ -212,7 +212,7 @@ public class Permissions implements BasicPermissions
 	{
 		if(!groupExist(name))
 		{
-			BasicConfig conf = TheBasics.getGroupConfig();
+			ConfigModule conf = TheBasics.getGroupConfig();
 			
 			conf.set("Groups." + name + ".Default", false);
 			conf.set("Groups." + name + ".Prefix", "[" + name + "] ");

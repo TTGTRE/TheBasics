@@ -16,12 +16,16 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Events;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
@@ -33,6 +37,25 @@ public class BasicPlayerChatEvent implements Listener
 	public void onPlayerChat(AsyncPlayerChatEvent event)
 	{
 		Player player = event.getPlayer();
+		PlayerData playerData = BasicUtils.getData(player);
+		
+		if(playerData.isMuted())
+		{
+			Date expiry = new Date((long) playerData.getDouble("Muted.Time"));
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/M/dd hh:mm:ss");  
+			
+			if(expiry.getTime() <= (new Date().getTime()))
+			{
+				playerData.setUnMuted();
+				BasicUtils.notify("TheBasics.Unmute.Notify", BasicUtils.getMessage("UnmuteNotify").replace("%p", player.getName()));
+			}else
+			{
+				event.setCancelled(true);
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("Muted").replace("%a", dateFormat.format(expiry)));
+				return;
+			}
+		}
+		
 		GroupModule group = TheBasics.getPermissions().getPlayerGroup(event.getPlayer());
 		
 		if(TheBasics.getGeneralConfig().contains("ChatFormat." + group.getGroupName()))

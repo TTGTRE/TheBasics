@@ -44,7 +44,7 @@ public class KickCMD extends CommandModule
 		}
 		
 		player2.kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
-		BasicUtils.notify("TheBasics.Kick.Notify", BasicUtils.getMessage("KickNotify").replace("%p", player.getName()).replace("%p2", args[0]).replace("%r", reason));
+		BasicUtils.notify("TheBasics.Kick.Notify", BasicUtils.getMessage("KickNotify").replace("%p", player.getName()).replace("%s", args[0]).replace("%r", reason));
 		BasicUtils.sendMessage(player, BasicUtils.getMessage("KickSender").replace("%p", args[0]));
 	}
 

@@ -14,36 +14,59 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package io.github.GoldenDeveloper79.TheBasics.Player;
+package io.github.GoldenDeveloper79.TheBasics.Modules;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.InvalidConfigurationException;
 
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
+import io.github.GoldenDeveloper79.TheBasics.Config.CommentedConfiguration;
+import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
-public abstract class PlayerFileBase
+public abstract class ConfigModule 
 {
 	private File file;
-	private FileConfiguration config;
+	private CommentedConfiguration config;
 	
-	public PlayerFileBase(Player player)
+	public ConfigModule(String fileName)
 	{
-		file = new File("plugins/TheBasics/Players/" + player.getUniqueId().toString() + ".yml");
+		this.file = new File(TheBasics.getMainDir(), fileName);
 		
 		if(!file.exists())
 		{
 			try 
 			{
 				file.createNewFile();
-			} catch (IOException e) {}
+				
+				if(!(this instanceof PlayerData))
+				{
+					TheBasics.getPlugin().saveResource(fileName, true);
+				}
+			}catch(IOException e) 
+			{
+				TheBasics.getLog().severe("Could not create " + file.getName() + "!");
+			}
 		}
 		
-		config = YamlConfiguration.loadConfiguration(file);
+		config = new CommentedConfiguration(file);
+	}
+	
+	public abstract void loadDefaults();
+	
+	public void load()
+	{
+		try
+		{
+			config.load(file);
+		}catch(IOException | InvalidConfigurationException e)
+		{
+			TheBasics.getLog().severe("Could not load the file " + file.getName() + "!");
+		}
 	}
 	
 	/*
@@ -52,22 +75,15 @@ public abstract class PlayerFileBase
 	public void set(String key, Object value)
 	{
 		config.set(key, value);
-
-		try 
-		{
-			config.save(file);
-		} catch (IOException e) 
-		{
-			TheBasics.getLog().severe("Could not save the config for " + file.getName() + "!");
-		}
+		config.save();
 	}
 
 	/*
-	 * Sets a value to the specified key when the value does not equal the same in the config.
+	 * Sets a value to the specified key when the value does not exist.
 	 */
 	public void update(String key, Object value)
 	{
-		if(!contains(key) || !get(key).equals(value))
+		if(!contains(key))
 		{
 			set(key, value);
 		}
@@ -88,7 +104,15 @@ public abstract class PlayerFileBase
 	{
 		return config.getString(key);
 	}
-
+	
+	/*
+	 * Gets a string from a specified key with a default.
+	 */
+	public String getString(String key, String def)
+	{
+		return config.getString(key, def);
+	}
+	
 	/*
 	 * Gets an integer from a specified key.
 	 */
@@ -128,7 +152,23 @@ public abstract class PlayerFileBase
 	{
 		return config.getStringList(key);
 	}
-
+	
+	/*
+	 * Gets a configuration section from a specified key.
+	 */
+	public ConfigurationSection getConfigurationSection(String key)
+	{
+		return config.getConfigurationSection(key);
+	}
+	
+	/*
+	 * Gets the keys of the file.
+	 */
+	public Set<String> getKey(boolean value)
+	{
+		return config.getKeys(value);
+	}
+	
 	/*
 	 * Gets the file associated with the configuration.
 	 */
@@ -136,11 +176,11 @@ public abstract class PlayerFileBase
 	{
 		return file;
 	}
-
+	
 	/*
 	 * Gets the configuration.
 	 */
-	public FileConfiguration getConfig() 
+	public CommentedConfiguration getConfig() 
 	{
 		return config;
 	}

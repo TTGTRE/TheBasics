@@ -45,7 +45,7 @@ public class UnbanCMD extends CommandModule
 				Bukkit.getBanList(Type.NAME).pardon(args[0]);
 				
 				BasicUtils.sendMessage(player, BasicUtils.getMessage("UnbanSender").replace("%p", args[0]));
-				BasicUtils.notify("TheBasics.Unban.Notify", BasicUtils.getMessage("UnbanNotify").replace("%p", player.getName()).replace("%p2", args[0]));
+				BasicUtils.notify("TheBasics.Unban.Notify", BasicUtils.getMessage("UnbanNotify").replace("%p", player.getName()).replace("%s", args[0]));
 			}else
 			{
 				BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerNotBanned"));

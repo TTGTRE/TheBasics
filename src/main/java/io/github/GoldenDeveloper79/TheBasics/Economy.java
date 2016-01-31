@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics;
 
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 import io.github.GoldenDeveloper79.TheBasics.API.BasicEconomy;
 
@@ -57,7 +58,7 @@ public class Economy implements BasicEconomy
 	{
 		if(player.isOnline())
 		{
-			BasicUtils.getData(player.getName()).set("Balance", amount);
+			BasicUtils.getData((Player) player).set("Balance", amount);
 		}else
 		{
 			BasicUtils.getConfig(player.getName()).set("Balance", amount);
@@ -73,7 +74,7 @@ public class Economy implements BasicEconomy
 	{
 		if(player.isOnline())
 		{
-			BasicUtils.getData(player.getName()).set("Balance", getStartingBalance());
+			BasicUtils.getData((Player) player).set("Balance", getStartingBalance());
 		}else
 		{
 			BasicUtils.getConfig(player.getName()).set("Balance", getStartingBalance());
@@ -89,7 +90,7 @@ public class Economy implements BasicEconomy
 	{
 		if(player.isOnline())
 		{
-			BasicUtils.getData(player.getName()).set("Balance", getBalance(player) + amount);
+			BasicUtils.getData((Player) player).set("Balance", getBalance(player) + amount);
 		}else
 		{
 			BasicUtils.getConfig(player.getName()).set("Balance", getBalance(player) + amount);
@@ -107,7 +108,7 @@ public class Economy implements BasicEconomy
 		{
 			if(player.isOnline())
 			{
-				BasicUtils.getData(player.getName()).set("Balance", getBalance(player) - amount);
+				BasicUtils.getData((Player) player).set("Balance", getBalance(player) - amount);
 			}else
 			{
 				BasicUtils.getConfig(player.getName()).set("Balance", getBalance(player) - amount);
@@ -119,7 +120,7 @@ public class Economy implements BasicEconomy
 		{
 			if(player.isOnline())
 			{
-				BasicUtils.getData(player.getName()).set("Balance", getBalance(player) - amount);
+				BasicUtils.getData((Player) player).set("Balance", getBalance(player) - amount);
 			}else
 			{
 				BasicUtils.getConfig(player.getName()).set("Balance", getBalance(player) - amount);

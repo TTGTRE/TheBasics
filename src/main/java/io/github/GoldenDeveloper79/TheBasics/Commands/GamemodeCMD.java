@@ -114,8 +114,14 @@ public class GamemodeCMD extends CommandModule
 				BasicUtils.sendMessage(player, BasicUtils.getMessage("Gamemode").replace("%a", mode.name().toLowerCase()));
 			}else
 			{
-				BasicUtils.sendMessage(player, BasicUtils.getMessage("GamemodeSender").replace("%p", receiver.getName()).replace("%a", mode.name().toLowerCase()));
-				BasicUtils.sendMessage(receiver, BasicUtils.getMessage("GamemodeReceiver").replace("%p", player.getName()).replace("%a", mode.name().toLowerCase()));
+				if(player.hasPermission("TheBasics.Gamemode.Others"))
+				{
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("GamemodeSender").replace("%p", receiver.getName()).replace("%a", mode.name().toLowerCase()));
+					BasicUtils.sendMessage(receiver, BasicUtils.getMessage("GamemodeReceiver").replace("%p", player.getName()).replace("%a", mode.name().toLowerCase()));
+				}else
+				{
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
+				}
 			}
 		}else
 		{

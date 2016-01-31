@@ -17,7 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics;
 
 import java.io.File;
-import java.net.URL;
+import java.io.Reader;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -42,8 +42,10 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.HealCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.HelpCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.HomeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.IgnoreCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.InfoCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.KickCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.MessageCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.MuteCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.NickCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.PayCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.PlayTimeCMD;
@@ -61,15 +63,20 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportRequestDenyCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TempBanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TimeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.UnbanCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.UnmuteCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.VanishCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.WarpCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.WeatherCMD;
-import io.github.GoldenDeveloper79.TheBasics.Configs.BasicConfig;
-import io.github.GoldenDeveloper79.TheBasics.Configs.BasicConfigManager;
+import io.github.GoldenDeveloper79.TheBasics.Config.DataConfig;
+import io.github.GoldenDeveloper79.TheBasics.Config.GeneralConfig;
+import io.github.GoldenDeveloper79.TheBasics.Config.GroupConfig;
+import io.github.GoldenDeveloper79.TheBasics.Config.LanguageConfig;
+import io.github.GoldenDeveloper79.TheBasics.Config.TextConfig;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerChatEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerJoinEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerQuitEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicServerPingEvent;
+import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
@@ -85,12 +92,11 @@ public class TheBasics extends JavaPlugin
 	//Configurations & Files
 	private static File mainDir;
 	private static File playerDir;
-	private static BasicConfigManager configManager;
-	private static BasicConfig generalConfig;
-	private static BasicConfig dataConfig;
-	private static BasicConfig groupConfig;
-	private static BasicConfig textConfig;
-	private static BasicConfig languageConfig;
+	private static ConfigModule generalConfig;
+	private static ConfigModule dataConfig;
+	private static ConfigModule groupConfig;
+	private static ConfigModule textConfig;
+	private static ConfigModule languageConfig;
 	
 	//Economy
 	private static Economy economy;
@@ -153,13 +159,11 @@ public class TheBasics extends JavaPlugin
 		if(!mainDir.exists()) mainDir.mkdirs();
 		if(!playerDir.exists()) playerDir.mkdirs();
 		
-		configManager = new BasicConfigManager();
-		
-		generalConfig = configManager.getNewConfig("config.yml");
-		dataConfig = configManager.getNewConfig("data.yml");
-		groupConfig = configManager.getNewConfig("groups.yml");
-		textConfig = configManager.getNewConfig("text.yml");
-		languageConfig = configManager.getNewConfig("language.yml");
+		generalConfig = new GeneralConfig("config.yml");
+		dataConfig = new DataConfig("data.yml");
+		groupConfig = new GroupConfig("groups.yml");
+		textConfig = new TextConfig("text.yml");
+		languageConfig = new LanguageConfig("language.yml");
 	}
 	
 	/*
@@ -182,8 +186,10 @@ public class TheBasics extends JavaPlugin
 		new HelpCMD();
 		new HomeCMD();
 		new IgnoreCMD();
+		new InfoCMD();
 		new KickCMD();
 		new MessageCMD();
+		new MuteCMD();
 		new NickCMD();
 		new PayCMD();
 		new PlayTimeCMD();
@@ -201,6 +207,7 @@ public class TheBasics extends JavaPlugin
 		new TempBanCMD();
 		new TimeCMD();
 		new UnbanCMD();
+		new UnmuteCMD();
 		new VanishCMD();
 		new WarpCMD();
 		new WeatherCMD();
@@ -288,11 +295,11 @@ public class TheBasics extends JavaPlugin
 	}
 	
 	/*
-	 * Get a url by its filename.
+	 * Get a reader by its filename.
 	 */
-	public static URL getResourceURL(String fileName)
+	public static Reader getResourceReader(String fileName)
 	{
-		return plugin.getClassLoader().getResource(fileName); 
+		return plugin.getTextResource(fileName);
 	}
 	
 	/*
@@ -322,7 +329,7 @@ public class TheBasics extends JavaPlugin
 	/*
 	 * Gets the general config for the plugin. Includes general settings. (config.yml)
 	 */
-	public static BasicConfig getGeneralConfig() 
+	public static ConfigModule getGeneralConfig() 
 	{
 		return generalConfig;
 	}
@@ -330,7 +337,7 @@ public class TheBasics extends JavaPlugin
 	/*
 	 * Gets the data config for the plugin. Includes things like offline players. (data.yml)
 	 */
-	public static BasicConfig getDataConfig()
+	public static ConfigModule getDataConfig()
 	{
 		return dataConfig;
 	}
@@ -338,7 +345,7 @@ public class TheBasics extends JavaPlugin
 	/*
 	 * Gets the group config for the plugin. Includes groups, permissions, and ranking system. (groups.yml)
 	 */
-	public static BasicConfig getGroupConfig()
+	public static ConfigModule getGroupConfig()
 	{
 		return groupConfig;
 	}
@@ -346,7 +353,7 @@ public class TheBasics extends JavaPlugin
 	/*
 	 * Gets the language config for the plugin. Includes messages. (language.yml)
 	 */
-	public static BasicConfig getLanguageConfig()
+	public static ConfigModule getLanguageConfig()
 	{
 		return languageConfig;
 	}
@@ -354,7 +361,7 @@ public class TheBasics extends JavaPlugin
 	/*
 	 * Gets the text config for the plugin. Includes Motd/Rules. (text.yml).
 	 */
-	public static BasicConfig getTextConfig() 
+	public static ConfigModule getTextConfig() 
 	{
 		return textConfig;
 	}

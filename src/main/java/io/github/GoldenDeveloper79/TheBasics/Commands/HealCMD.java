@@ -44,12 +44,18 @@ public class HealCMD extends CommandModule
 		{
 			Player player2 = Bukkit.getPlayer(args[0]);
 			
-			player2.setHealth(player2.getMaxHealth());
-			player2.setFoodLevel(20);
-			player2.setFireTicks(0);
-				
-			BasicUtils.sendMessage(player, BasicUtils.getMessage("HealSender").replace("%p", args[0]));
-			BasicUtils.sendMessage(player2, BasicUtils.getMessage("HealReceiver").replace("%p", player.getName()));
+			if(player.hasPermission("TheBasics.Heal.Others"))
+			{
+				player2.setHealth(player2.getMaxHealth());
+				player2.setFoodLevel(20);
+				player2.setFireTicks(0);
+					
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("HealSender").replace("%p", args[0]));
+				BasicUtils.sendMessage(player2, BasicUtils.getMessage("HealReceiver").replace("%p", player.getName()));
+			}else
+			{
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
+			}
 		}
 	}
 

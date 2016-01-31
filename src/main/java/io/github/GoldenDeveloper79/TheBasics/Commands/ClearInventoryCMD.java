@@ -41,9 +41,15 @@ public class ClearInventoryCMD extends CommandModule
 		{
 			Player player2 = Bukkit.getPlayer(args[0]);
 			
-			player2.getInventory().clear();
-			BasicUtils.sendMessage(player, BasicUtils.getMessage("ClearInventorySender").replace("%p", args[0]));
-			BasicUtils.sendMessage(player2, BasicUtils.getMessage("ClearInventoryReceiver").replace("%p", player.getName()));
+			if(player.hasPermission("TheBasics.ClearInventory.Others"))
+			{
+				player2.getInventory().clear();
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("ClearInventorySender").replace("%p", args[0]));
+				BasicUtils.sendMessage(player2, BasicUtils.getMessage("ClearInventoryReceiver").replace("%p", player.getName()));
+			}else
+			{
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
+			}
 		}
 	}
 

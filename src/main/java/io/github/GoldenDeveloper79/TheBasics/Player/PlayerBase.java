@@ -16,6 +16,7 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Player;
 
+import java.util.Date;
 import java.util.List;
 
 import org.bukkit.Location;
@@ -25,8 +26,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
+import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
 
-public abstract class PlayerBase extends PlayerFileBase
+public abstract class PlayerBase extends ConfigModule
 {
 	private Player player;
 	private boolean afk = false;
@@ -37,7 +39,7 @@ public abstract class PlayerBase extends PlayerFileBase
 	
 	public PlayerBase(Player player)
 	{
-		super(player);
+		super("/Players/" + player.getUniqueId().toString() + ".yml");
 		
 		this.player = player;
 
@@ -141,7 +143,7 @@ public abstract class PlayerBase extends PlayerFileBase
 	
 	public double getMaxHomes()
 	{
-		if(player.hasPermission("thebasics.home.unlimited"))
+		if(player.hasPermission("thebasics.sethome.unlimited"))
 		{
 			return Double.MAX_VALUE;
 		}else if(TheBasics.getGeneralConfig().contains("Homes." + TheBasics.getPermissions().getPlayerGroup(player).getGroupName()))
@@ -180,9 +182,27 @@ public abstract class PlayerBase extends PlayerFileBase
 		return muted;
 	}
 
-	public void setMuted(boolean muted) 
+	public void setMuted(Date time, String reason) 
+	{
+		setIsMuted(true);
+		
+		set("Muted.Is", true);
+		set("Muted.Time", time.getTime());
+		set("Muted.Reason", reason);
+	}
+	
+	public void setIsMuted(boolean muted)
 	{
 		this.muted = muted;
+	}
+	
+	public void setUnMuted()
+	{
+		this.muted = false;
+		
+		set("Muted.Is", false);
+		set("Muted.Time", null);
+		set("Muted.Reason", null);
 	}
 	
 	public Player getLastMessaged()
@@ -199,4 +219,7 @@ public abstract class PlayerBase extends PlayerFileBase
 	{
 		return ignoredPlayers;
 	}
+	
+	//May use this eventually.
+	public void loadDefaults() {}
 }

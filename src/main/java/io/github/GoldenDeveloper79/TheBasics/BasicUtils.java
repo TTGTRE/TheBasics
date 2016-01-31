@@ -96,20 +96,6 @@ public class BasicUtils
 	}
 
 	/*
-	 * Gets a player data by the player name.
-	 * Use only if your 100% confident it won't return null.
-	 */
-	public static PlayerData getData(String player)
-	{
-		if(Registery.players.containsKey(player))
-		{
-			return Registery.players.get(player);
-		}
-		
-		return null;
-	}
-
-	/*
 	 * Gets the config for offline players.
 	 */
 	public static FileConfiguration getConfig(String offlinePlayer)
