@@ -46,7 +46,7 @@ public abstract class PlayerBase extends ConfigModule
 		ignoredPlayers = getStringList("IgnoredPlayer");
 	}
 	
-	public void initTeleport(Location loc, String locName)
+	public void initTeleport(final Location loc, final String locName)
 	{
 		if(loc != null)
 		{
@@ -56,7 +56,7 @@ public abstract class PlayerBase extends ConfigModule
 				BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportToLocation").replace("%a", locName));
 			}else
 			{
-				int delay = TheBasics.getGeneralConfig().getInt("TeleportDelay");
+				final int delay = TheBasics.getGeneralConfig().getInt("TeleportDelay");
 				
 				if(delay > 0)
 				{

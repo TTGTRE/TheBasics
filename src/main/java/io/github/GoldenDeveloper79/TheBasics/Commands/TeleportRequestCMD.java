@@ -34,7 +34,7 @@ public class TeleportRequestCMD extends CommandModule
 		super(new String[] {"teleportrequest", "tr"}, 1, 1, MultiPlayer.ALWAYS);
 	}
 
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, String[] args)
 	{
 		Player player2 = Bukkit.getPlayer(args[0]);
 		
