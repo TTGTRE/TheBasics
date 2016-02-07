@@ -49,15 +49,16 @@ public abstract class PlayerBase extends ConfigModule
 
 		ignoredPlayers = getStringList("IgnoredPlayer");
 	}
-	
-	public boolean initTeleport(Location loc, String locName)
+
+	public boolean initTeleport(final Location loc, final String locName)
 	{
 		if((!combatTagged && TheBasics.getGeneralConfig().getBoolean("CombatTag.Enabled")) || player.hasPermission("TheBasics.CombatTag.Never"))
 		{
 			if(loc != null)
 			{
 				lastLocation = player.getLocation();
-				
+				final int delay = TheBasics.getGeneralConfig().getInt("TeleportDelay");
+
 				if(!loc.getChunk().isLoaded())
 				{
 					loc.getChunk().load();
@@ -69,8 +70,6 @@ public abstract class PlayerBase extends ConfigModule
 					BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportToLocation").replace("%a", locName));
 				}else
 				{
-					int delay = TheBasics.getGeneralConfig().getInt("TeleportDelay");
-					
 					if(delay > 0)
 					{
 						BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportInitialize").replace("%t", String.valueOf(delay)));
