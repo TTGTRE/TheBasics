@@ -58,6 +58,11 @@ public class GeneralConfig extends ConfigModule
 		config.addComment("Homes", " ", 
 				"#The max homes per a group. Must use TheBasics permissions/groups. If no value is set, its assumed unlimited.", 
 				"#Can also use 'TheBasics.Home.Unlimited' for max homes.");
+		config.addDefault("CombatTag.Enabled", true);
+		config.addDefault("CombatTag.Time", 10);
+		config.addComment("CombatTag.Enabled", "#If combat tagging should be enabled. If a player is tagged they cannot teleport.");
+		config.addComment("CombatTag.Time", "#The time in seconds that tagging a player will last.");
+		config.addComment("CombatTag", " ");
 		
 		//Economy Settings
 		config.addDefault("StartingBalance", 250);
@@ -104,5 +109,31 @@ public class GeneralConfig extends ConfigModule
 	    config.addComment("MessageFormat", " ", "#The format for messaging players. (%p = sender/recevier, %m = message)");
 	    config.addComment("MessageFormat.Sender", "#What the sender will see.");
 	    config.addComment("MessageFormat.Receiver", " ", "#What the receiver will see.");
+	    
+	    config.addDefault("Kits", "");
+	    config.addComment("Kits",
+				" ",
+				"#######################", 
+				"#    Kit Settings    #", 
+				"#(Used for kits stuff)#", 
+				"#######################",
+				" ",
+				"#To ask questions about creating kits, please check message me on Bukkit or Spigot.",
+				"#The time is in seconds.",
+				"#Commands to be run during this kit don't need to include a '/'. Also the commands are ran by the console.",
+				"#Enchantment format is Enchant: <Enchantment>-<LeveL>.",
+				"#Item format is <ItemID:ItemData/ItemName> <Amount>",
+				"#Naming format is Name: <Name>.",
+				"#To create a kit, simply follow this format (It includes the maximium you can do and the variety you can do):",
+				"#  Member:",
+				"#    Time: 6000",
+	            "#    Items: ",
+	            "#    - stone_spade 1",
+	            "#    - 1 6",
+	            "#    - 5:1 2",
+	            "#    - stone_sword 1 Name: &6Derp Sword",
+	            "#    - stone_axe 1 Name: &2&lSpecial Axe Enchant: Efficiency 1",
+	            "#    Commands:",
+	            "#    - balance add %p 200");
 	}
 }

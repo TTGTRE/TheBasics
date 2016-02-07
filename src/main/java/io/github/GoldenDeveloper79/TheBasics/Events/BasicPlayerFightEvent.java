@@ -16,19 +16,26 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Events;
 
-import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.server.ServerListPingEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import io.github.GoldenDeveloper79.TheBasics.TheBasics;
+import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
+import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
-public class BasicServerPingEvent implements Listener
+public class BasicPlayerFightEvent implements Listener
 {
 	@EventHandler
-	public void onServerPing(ServerListPingEvent event)
+	public void onPlayerFight(EntityDamageByEntityEvent event)
 	{
-		String motd = ChatColor.translateAlternateColorCodes('&', TheBasics.getTextConfig().getString("ListMOTD"));
-		event.setMotd(motd);
+		if(event.getEntity() instanceof Player && event.getDamager() instanceof Player)
+		{
+			PlayerData attacker = BasicUtils.getData((Player) event.getDamager());
+			PlayerData defender = BasicUtils.getData((Player) event.getDamager());
+			
+			attacker.setCombatTagged();
+			defender.setCombatTagged();
+		}
 	}
 }

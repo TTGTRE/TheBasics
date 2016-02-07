@@ -44,17 +44,20 @@ public class HelpCMD extends CommandModule
 
 		for(Plugin plugin : Bukkit.getPluginManager().getPlugins())
 		{
-			for(String cmdLabel : plugin.getDescription().getCommands().keySet())
+			if(plugin.getDescription().getCommands() != null || !plugin.getDescription().getCommands().isEmpty())
 			{
-				PluginCommand command = Bukkit.getPluginCommand(cmdLabel.replace("/", ""));
-	
-				if(command != null)
+				for(String cmdLabel : plugin.getDescription().getCommands().keySet())
 				{
-					if(command.getPermission() != null)
+					PluginCommand command = Bukkit.getPluginCommand(cmdLabel.replace("/", ""));
+		
+					if(command != null)
 					{
-						if(player.hasPermission(command.getPermission()))
+						if(command.getPermission() != null)
 						{
-							help.add("- &6/" + cmdLabel + " &7: " + command.getDescription());
+							if(player.hasPermission(command.getPermission()))
+							{
+								help.add("- &6/" + cmdLabel + " &7: " + command.getDescription());
+							}
 						}
 					}
 				}

@@ -19,6 +19,7 @@ package io.github.GoldenDeveloper79.TheBasics.Player;
 import java.util.Date;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -34,9 +35,12 @@ public abstract class PlayerBase extends ConfigModule
 	private boolean afk = false;
 	private boolean vanished = false;
 	private boolean muted = false;
+	private boolean combatTagged = false;
+	private int combatTagTimer;
 	private Player lastMessaged;
+	private Location lastLocation;
 	private List<String> ignoredPlayers;
-	
+
 	public PlayerBase(Player player)
 	{
 		super("/Players/" + player.getUniqueId().toString() + ".yml");
@@ -46,52 +50,94 @@ public abstract class PlayerBase extends ConfigModule
 		ignoredPlayers = getStringList("IgnoredPlayer");
 	}
 	
-	public void initTeleport(Location loc, String locName)
+	public boolean initTeleport(Location loc, String locName)
 	{
-		if(loc != null)
+		if((!combatTagged && TheBasics.getGeneralConfig().getBoolean("CombatTag.Enabled")) || player.hasPermission("TheBasics.CombatTag.Never"))
 		{
-			if(player.hasPermission("TheBasics.Teleport.Override"))
+			if(loc != null)
 			{
-				player.teleport(loc);
-				BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportToLocation").replace("%a", locName));
-			}else
-			{
-				int delay = TheBasics.getGeneralConfig().getInt("TeleportDelay");
+				lastLocation = player.getLocation();
 				
-				if(delay > 0)
+				if(!loc.getChunk().isLoaded())
 				{
-					BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportInitialize").replace("%t", String.valueOf(delay)));
-					Registery.teleportQue.add(player.getName());
-					
-					new BukkitRunnable()
-					{
-						int counter = 0;
-						
-						public void run()
-						{
-							if(Registery.teleportQue.contains(player.getName()))
-							{
-								counter++;
-								
-								if((delay - counter) <= 0)
-								{
-									player.teleport(loc);
-									BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportToLocation").replace("%a", locName));;
-									
-									this.cancel();
-									return;
-								}else
-								{
-									BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportTimeRemaing").replace("%t", String.valueOf(delay - counter)));
-								}
-							}
-						}
-					}.runTaskTimer(TheBasics.getPlugin(), 20L, 20L);
-				}else
+					loc.getChunk().load();
+				}
+				
+				if(player.hasPermission("TheBasics.Teleport.Override"))
 				{
 					player.teleport(loc);
 					BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportToLocation").replace("%a", locName));
+				}else
+				{
+					int delay = TheBasics.getGeneralConfig().getInt("TeleportDelay");
+					
+					if(delay > 0)
+					{
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportInitialize").replace("%t", String.valueOf(delay)));
+						Registery.teleportQue.add(player.getName());
+						
+						new BukkitRunnable()
+						{
+							int counter = 0;
+							
+							public void run()
+							{
+								if(Registery.teleportQue.contains(player.getName()))
+								{
+									counter++;
+									
+									if((delay - counter) <= 0)
+									{
+										player.teleport(loc);
+										BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportToLocation").replace("%a", locName));;
+										
+										this.cancel();
+										return;
+									}else
+									{
+										BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportTimeRemaing").replace("%t", String.valueOf(delay - counter)));
+									}
+								}
+							}
+						}.runTaskTimer(TheBasics.getPlugin(), 20L, 20L);
+					}else
+					{
+						player.teleport(loc);
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportToLocation").replace("%a", locName));
+					}
 				}
+				
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public void setCombatTagged()
+	{
+		if(!player.hasPermission("TheBasics.CombatTag.Never"))
+		{
+			if(TheBasics.getGeneralConfig().getBoolean("CombatTag.Enabled"))
+			{
+				if(combatTagged && combatTagTimer != 0)
+				{
+					Bukkit.getScheduler().cancelTask(combatTagTimer);
+				}else
+				{
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("CombatTagged"));
+				}
+				
+				combatTagged = true;
+				
+				combatTagTimer = new BukkitRunnable()
+				{
+					public void run()
+					{
+						combatTagged = false;
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("UnCombatTagged"));
+					}
+				}.runTaskLater(TheBasics.getPlugin(), TheBasics.getGeneralConfig().getInt("CombatTag.Time") * 20L).getTaskId();
 			}
 		}
 	}
@@ -218,6 +264,11 @@ public abstract class PlayerBase extends ConfigModule
 	public List<String> getIgnoredPlayers()
 	{
 		return ignoredPlayers;
+	}
+	
+	public Location getLastLocation()
+	{
+		return lastLocation;
 	}
 	
 	//May use this eventually.

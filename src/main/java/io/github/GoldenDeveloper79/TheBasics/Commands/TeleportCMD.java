@@ -37,7 +37,10 @@ public class TeleportCMD extends CommandModule
 		PlayerData data = BasicUtils.getData(player);
 		Player player2 = Bukkit.getPlayer(args[0]);
 		
-		data.initTeleport(player2.getLocation(), "&7" + args[0]);
+		if(!data.initTeleport(player2.getLocation(), "&7" + args[0]))
+		{
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("CombatTagNoTeleport"));
+		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 

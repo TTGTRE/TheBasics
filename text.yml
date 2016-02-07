@@ -48,7 +48,16 @@ Info:
     Top: '&6&l---------[Info]----------'
     #What should be displayed on the bottom.
     Bottom: '&6&l-------------------------'
-    
+  
+List:
+  #The amount of players displayed per a page. (Default = 15)
+  PerPage: 15
+  Format:
+    #What should be displayed on the top.
+    Top: '&6&l----------[List - %p]----------'
+    #What should be displayed on the bottom.
+    Bottom: '&6&l---------------------------'    
+  
 Join:
   #The message to be broadcasted when a player joins the server. (%p = playerName) 
   Message: '&6%p has joined the server!'

@@ -16,6 +16,7 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -24,7 +25,6 @@ import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
-import net.md_5.bungee.api.ChatColor;
 
 public class ReplyCMD extends CommandModule
 {

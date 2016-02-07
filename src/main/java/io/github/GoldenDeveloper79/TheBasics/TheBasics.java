@@ -28,11 +28,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import io.github.GoldenDeveloper79.TheBasics.Updater.UpdateResult;
 import io.github.GoldenDeveloper79.TheBasics.Updater.UpdateType;
+import io.github.GoldenDeveloper79.TheBasics.Commands.BackCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BalanceCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BasicCommandExecutor;
 import io.github.GoldenDeveloper79.TheBasics.Commands.ClearInventoryCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.DeleteHomeCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.EnchantCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.FeedCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.FlyCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.GamemodeCMD;
@@ -44,6 +46,8 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.HomeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.IgnoreCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.InfoCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.KickCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.KitCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.ListCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.MessageCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.MuteCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.NickCMD;
@@ -57,6 +61,7 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.SetSpawnCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.SetWarpCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.SpawnCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportPositionCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportRequestAcceptCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportRequestCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportRequestDenyCMD;
@@ -65,6 +70,7 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.TimeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.UnbanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.UnmuteCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.VanishCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.WarnCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.WarpCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.WeatherCMD;
 import io.github.GoldenDeveloper79.TheBasics.Config.DataConfig;
@@ -73,6 +79,7 @@ import io.github.GoldenDeveloper79.TheBasics.Config.GroupConfig;
 import io.github.GoldenDeveloper79.TheBasics.Config.LanguageConfig;
 import io.github.GoldenDeveloper79.TheBasics.Config.TextConfig;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerChatEvent;
+import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerFightEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerJoinEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerQuitEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicServerPingEvent;
@@ -117,7 +124,7 @@ public class TheBasics extends JavaPlugin
 			if(updater.getResult().equals(UpdateResult.SUCCESS))
 			{
 				loadConfigs();
-			}
+			}	
 		}
 		
 		loadCommands();
@@ -173,10 +180,12 @@ public class TheBasics extends JavaPlugin
 	{
 		cmdExecutor = new BasicCommandExecutor();
 		
+		new BackCMD();
 		new BalanceCMD();
 		new BanCMD();
 		new ClearInventoryCMD();
 		new DeleteHomeCMD();
+		new EnchantCMD();
 		new FeedCMD();
 		new FlyCMD();
 		new GamemodeCMD();
@@ -188,6 +197,8 @@ public class TheBasics extends JavaPlugin
 		new IgnoreCMD();
 		new InfoCMD();
 		new KickCMD();
+		new KitCMD();
+		new ListCMD();
 		new MessageCMD();
 		new MuteCMD();
 		new NickCMD();
@@ -201,6 +212,7 @@ public class TheBasics extends JavaPlugin
 		new SetWarpCMD();
 		new SpawnCMD();
 		new TeleportCMD();
+		new TeleportPositionCMD();
 		new TeleportRequestAcceptCMD();
 		new TeleportRequestCMD();
 		new TeleportRequestDenyCMD();
@@ -210,6 +222,7 @@ public class TheBasics extends JavaPlugin
 		new UnmuteCMD();
 		new VanishCMD();
 		new WarpCMD();
+		new WarnCMD();
 		new WeatherCMD();
 	}
 
@@ -224,6 +237,7 @@ public class TheBasics extends JavaPlugin
 		pm.registerEvents(new BasicPlayerQuitEvent(), this);
 		pm.registerEvents(new BasicPlayerChatEvent(), this);
 		pm.registerEvents(new BasicServerPingEvent(), this);
+		pm.registerEvents(new BasicPlayerFightEvent(), this);
 	}
 	
 	/*

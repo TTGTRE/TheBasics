@@ -31,6 +31,9 @@ public class GroupCMD extends CommandModule
 	 * group set <player> <group>
 	 * group create <name>
 	 * group get <player>
+	 * group prefix <group> <prefix>
+	 * group addpermission <group> <perm>
+	 * group removepermission <group> <perm>
 	 */
 	public GroupCMD()
 	{
@@ -95,6 +98,34 @@ public class GroupCMD extends CommandModule
 				{
 					BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupExist"));
 				}
+			}else if(args[0].equalsIgnoreCase("addpermission"))
+			{
+				if(TheBasics.getPermissions().groupExist(args[1]))
+				{
+					TheBasics.getPermissions().getGroup(args[1]).addPermission(args[2]);
+					
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupAddPerm").replace("%a", args[1]).replace("%p", args[2]));
+				}else
+				{
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupExist"));
+				}
+			}else if(args[0].equalsIgnoreCase("removepermission"))
+			{
+				if(TheBasics.getPermissions().groupExist(args[1]))
+				{
+					if(TheBasics.getPermissions().getGroup(args[1]).getPermissions().contains(args[2]))
+					{
+						TheBasics.getPermissions().getGroup(args[1]).removePermission(args[2]);
+					
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupRemovePerm").replace("%a", args[1]).replace("%p", args[2]));
+					}else
+					{
+						BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupContainsPermission"));
+					}
+				}else
+				{
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("GroupExist"));
+				}
 			}else
 			{
 				BasicUtils.sendMessage(player, BasicUtils.getMessage("Usage").replace("%u", getUsage()));
@@ -151,6 +182,45 @@ public class GroupCMD extends CommandModule
 				}else
 				{
 					BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupExistTwo"));
+				}
+			}else if(args[0].equalsIgnoreCase("prefix"))
+			{
+				if(TheBasics.getPermissions().groupExist(args[1]))
+				{
+					TheBasics.getPermissions().getGroup(args[1]).setPrefix(args[2]);
+					
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupPrefix").replace("%a", args[1]).replace("%p", args[2]));
+				}else
+				{
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupExist"));
+				}
+			}else if(args[0].equalsIgnoreCase("addpermission"))
+			{
+				if(TheBasics.getPermissions().groupExist(args[1]))
+				{
+					TheBasics.getPermissions().getGroup(args[1]).addPermission(args[2]);
+					
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupAddPerm").replace("%a", args[1]).replace("%p", args[2]));
+				}else
+				{
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupExist"));
+				}
+			}else if(args[0].equalsIgnoreCase("removepermission"))
+			{
+				if(TheBasics.getPermissions().groupExist(args[1]))
+				{
+					if(TheBasics.getPermissions().getGroup(args[1]).getPermissions().contains(args[2]))
+					{
+						TheBasics.getPermissions().getGroup(args[1]).removePermission(args[2]);
+					
+						BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupRemovePerm").replace("%a", args[1]).replace("%p", args[2]));
+					}else
+					{
+						BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupContainsPermission"));
+					}
+				}else
+				{
+					BasicUtils.sendMessage(console, BasicUtils.getMessage("GroupExist"));
 				}
 			}else
 			{

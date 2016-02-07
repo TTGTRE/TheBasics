@@ -33,7 +33,7 @@ public class PlayerData extends PlayerBase
 	private String name;
 	private UUID uuid;
 	private PermissionAttachment perm;
-	
+
 	public PlayerData(Player player)
 	{
 		super(player);
@@ -90,7 +90,12 @@ public class PlayerData extends PlayerBase
 		update("LastLocation.Z", loc.getZ());
 		update("LastLocation.Yaw", loc.getYaw());
 		update("LastLocation.Pitch", loc.getPitch());
-	
+		
+		if(!contains("Kits"))
+		{
+			set("Kits", "");
+		}
+		
 		if(!contains("IgnoreList"))
 		{
 			set("IgnoreList", new String[] {});
@@ -107,7 +112,11 @@ public class PlayerData extends PlayerBase
 	public void loadPermissions()
 	{
 		GroupModule group = TheBasics.getPermissions().getGroup(getString("Group"));
-		group.getPlayers().add(name);
+		
+		if(!group.getPlayers().contains(name))
+		{
+			group.getPlayers().add(name);
+		}
 		
 		perm = player.addAttachment(TheBasics.getPlugin());
 		

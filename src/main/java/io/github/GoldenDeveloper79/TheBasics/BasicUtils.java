@@ -17,17 +17,20 @@
 package io.github.GoldenDeveloper79.TheBasics;
 
 import java.io.File;
+import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import io.github.GoldenDeveloper79.TheBasics.Enums.EnchantType;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
-import net.md_5.bungee.api.ChatColor;
 
 public class BasicUtils
 {
@@ -40,7 +43,7 @@ public class BasicUtils
 		{
 			String prefix = TheBasics.getGeneralConfig().getString("Prefix");
 	
-			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + message));
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + message.replace("CONSOLE", "console")));
 		}
 	}
 
@@ -208,11 +211,11 @@ public class BasicUtils
 	}
 
 	/*
-	 * Checks if an item can be repaired.
+	 * Checks if an item can be repaired or enchanted.
 	 */
-	public static boolean isRepairable(ItemStack item)
+	public static boolean isModifiable(ItemStack item)
 	{
-		for(Material material : Registery.repairableItems)
+		for(Material material : Registery.modifiableItems)
 		{
 			if(item.getType().equals(material))
 			{
@@ -221,5 +224,53 @@ public class BasicUtils
 		}
 		
 		return false;
+	}
+	
+	/*
+	 * Gets an enchantment by its name.
+	 */
+	public static Enchantment getEnchantment(String name)
+	{
+		//Bukkit
+		for(Enchantment enchant : Enchantment.values())
+		{
+			if(enchant.getName().equalsIgnoreCase(name))
+			{
+				return enchant;
+			}else if(enchant.getName().replaceAll("_", "").equalsIgnoreCase(name))
+			{
+				return enchant;
+			}
+		}
+		
+		//TheBasics
+		for(EnchantType enchantType : EnchantType.values())
+		{
+			if(enchantType.name().equalsIgnoreCase(name))
+			{
+				return enchantType.getEnchantment();
+			}else if(enchantType.name().replaceAll("_", "").equalsIgnoreCase(name))
+			{
+				return enchantType.getEnchantment();
+			}
+		}
+		
+		return null;
+	}
+	
+	/*
+	 * Gets the index of an array by a word.
+	 */
+	public static int getIndex(List<String> list, String word)
+	{
+		for(int i = 0; i < list.size(); i++)
+		{
+			if(list.get(i).equalsIgnoreCase(word))
+			{
+				return i;
+			}
+		}
+		
+		return 0;
 	}
 }

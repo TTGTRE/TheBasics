@@ -44,6 +44,7 @@ public class LanguageConfig extends ConfigModule
 		config.addDefault("InvalidValue", "&cPlease specify a valid value!");
 		config.addDefault("PlayerCommand", "&cYou must be a player to perform this command!");
 		
+		config.addDefault("BackNoLocation", "&cYou have no previous location to teleport to.");
 		config.addDefault("BalanceGet", "&6Your balance is &7$%a&6.");
 		config.addDefault("BalanceGetOthers", "&6The balance of &7%p &6is &7$%a&6.");
 		config.addDefault("BalanceSetSender", "&6You have set the balance for &7%p &6to &7$%a&6.");
@@ -59,7 +60,13 @@ public class LanguageConfig extends ConfigModule
 		config.addDefault("ClearInventory", "&6You have cleared your inventory.");
 		config.addDefault("ClearInventorySender", "&6You have cleared the inventory for &7%p&6.");
 		config.addDefault("ClearInventoryReceiver", "&6Your inventory has been cleared by &7%p&6.");
+		config.addDefault("CombatTagged", "&6You have been &7combat tagged.");
+		config.addDefault("UnCombatTagged", "&6You have been &7uncombat tagged.");
+		config.addDefault("CombatTagNoTeleport", "&cYou are combat tagged and cannot teleport!");
 		config.addDefault("DeleteHome", "&6You have deleted the home &7%a&6.");
+		config.addDefault("Enchant", "&6You have enchanted the item in your hand with &7%a&6.");
+		config.addDefault("EnchantInvalidItem", "&cThat item is not enchantable!");
+		config.addDefault("EnchantInvalid", "&cPlease specify a valid enchantment and value!");
 		config.addDefault("HomeExist", "&cThat home does not exist!");
 		config.addDefault("DefaultHome", "&cYou cannot delete your default home!");
 		config.addDefault("Feed", "&6You have fed yourself.");
@@ -81,6 +88,9 @@ public class LanguageConfig extends ConfigModule
 		config.addDefault("GroupExist", "&cThat group does not exist!");
 		config.addDefault("GroupExistTwo", "&cThat group already exist!");
 		config.addDefault("GroupPrefix", "&6You changed the prefix for the group &7%a &6to &7%p&6.");
+		config.addDefault("GroupAddPerm", "&6You have addded the permission &7%p &6to the group &7%a&6.");
+		config.addDefault("GroupRemovePerm", "&6You have removed the permission &7%p &6from the group &7%a&6.");
+		config.addDefault("GroupContainsPermission", "&cThat group does not have that permission!");
 		config.addDefault("Heal", "&6You have healed yourself.");
 		config.addDefault("HealSender", "&6You have healed the player &7%p&6.");
 		config.addDefault("HealReceiver", "&6You have been healed by &7%p&6.");
@@ -95,6 +105,11 @@ public class LanguageConfig extends ConfigModule
 		config.addDefault("KickDefault", "&cYou have been kicked by &7%p&c.");
 		config.addDefault("KickSender", "&6You have kicked the player &7%p&6."); 
 		config.addDefault("KickNotify", "&6The player &7%p &6has kicked the player &7%s &6for &7%r&6.");
+		config.addDefault("KitUse", "&6You have used the kit &7%a&6.");
+		config.addDefault("KitExist", "&cThat kit does not exist!");
+		config.addDefault("KitTime", "&cYou cannot use that kit for another &7%a&c.");
+		config.addDefault("KitList", "&6Kits: &7%a&6.");
+		config.addDefault("KitError", "&cThere has been an error giving you the kit. Please contact an admin.");
 		config.addDefault("MuteDefault", "&cYou have been muted by &7%p&c.");
 		config.addDefault("MuteSender", "&6You have muted &7%p&6.");
 		config.addDefault("MuteReceiver", "&6You have been muted by &7%p &6for &7%r&6.");
@@ -149,6 +164,10 @@ public class LanguageConfig extends ConfigModule
 		config.addDefault("VanishSender", "&6You have %a the player &7%p&6.");
 		config.addDefault("VanishReceiver", "&6You have been %a by &7%p&6.");
 		config.addDefault("WarpExist", "&cThat warp does not exist!");
+		config.addDefault("WarnDefault", "&cYou have been warned by &7%p&c.");
+		config.addDefault("WarnReceiver", "&6You have been warned because of &7%r&6.");
+		config.addDefault("WarnSender", "&6You have warned &7%p");
+		config.addDefault("WarnNotify", "&6The player &7%p &6has warned the player &7%s &6for &7%r&6.");
 		config.addDefault("WeatherSender", "&6You have set the weather to &7%a&6.");
 		config.addDefault("WeatherInvalid", "&cPlease specify a valid weather.");
 			
@@ -158,7 +177,7 @@ public class LanguageConfig extends ConfigModule
 				"#I have put in the maximum amount of variables possible.",
 				"",
 				"#Variables:",
-				"#%p = player that is being discussed.",
+				"#%p = player that is being discussed, prefix, or permission.",
 				"#%s = an additional player that is being discussed.",
 				"#%r = reason for punishment",
 				"#%t = time for world time or punishment time.",
@@ -166,9 +185,8 @@ public class LanguageConfig extends ConfigModule
 				"#%a1 = amount/name 2, pretty much just used for item amount.",
 				"#%u = usage for a command.",
 				"#%t = time for teleporting.",
-				"#%p = prefix",
 				"",
 				"#General Command Stuff");
-		config.addComment("BalanceGet", " ", "#Per Command Stuff");
+		config.addComment("BackNoLocation", " ", "#Per Command Stuff");
 	}
 }

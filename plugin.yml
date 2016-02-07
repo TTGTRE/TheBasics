@@ -1,9 +1,13 @@
 name: TheBasics
-version: 1.06
+version: 1.09
 main: io.github.GoldenDeveloper79.TheBasics.TheBasics
 description: A basic set of functions for Minecraft servers.
 author: [GoldenDeveloper]
 commands:
+  back:
+    description: Teleports yourself to your last location.
+    usage: /back.
+    aliases: [b]
   balance:
     description: Retrieves or modifies the balance of yourself or another player.
     usage: /balance <set/take/add> <name> <amount>.
@@ -19,6 +23,9 @@ commands:
     description: Deletes one of your homes.
     usage: /deletehome <name>.
     aliases: [delhome]
+  enchant:
+    description: Enchants an item in your hand.
+    usage: /enchant <enchant> <level>
   feed:
     description: Feeds yourself or another player.
     usage: /feed <name>.
@@ -34,7 +41,7 @@ commands:
     usage: /give <name> <itemID:itemData/itemName> <amount>.
   group:
     description: Create groups, set a player to group, and get a player group.
-    usage: /group <set/create/get> <player/group> <group>
+    usage: /group <set/create/get/prefix/addpermission/removepermission> <player/group> <group>.
   heal:
     description: Heals yourself or another player.
     usage: /heal <name>.
@@ -54,6 +61,12 @@ commands:
   kick:
     description: Kicks a player from the server.
     usage: /kick <name> <reason>.
+  kit:
+    description: Give yourself a kit.
+    usage: /kit <name>.
+  list:
+    description: Retrieves a list of online players.
+    usage: /list <page>.
   message:
     description: Message a player on the server.
     usage: /message <name> <message>.
@@ -97,6 +110,10 @@ commands:
     description: Teleport yourself to a player forcefully.
     usage: /teleport <name>.
     aliases: [tp]
+  teleportposition:
+    description: Teleport yourself to coordinates.
+    usage: /teleportposition <world> <x> <y> <z>.
+    aliases: [tppos]
   teleportrequest:
     description: Request to teleport to another player.
     usage: /teleportrequest <name>.
@@ -128,6 +145,9 @@ commands:
   warp:
     description: Gets a list of warps or teleport yourself to a warp.
     usage: /warp <name>.
+  warn:
+    description: Warns a player on the server.
+    usage: /warn <player> <reason>.
   weather:
     description: Changes the weather in your world.
     usage: /weather <sun/rain>.

@@ -88,11 +88,20 @@ public class TextConfig extends ConfigModule
 		config.addDefault("Info.Format.Top", "&6&l----------[Info]----------");
 		config.addDefault("Info.Format.Bottom", "&6&l---------------------------");
 		config.addComment("Info", " ");
-		config.addComment("Info.PerPage", "#The amount of Info to list per page. (Default = 3)");
 		config.addComment("Info.List", "#The list of actual Info to be displayed.", "#Max variables are being used.");
 		config.addComment("Info.Format", "#The formating of the Info.");
 		config.addComment("Info.Format.Top", "#What should be displayed on the top.");
 		config.addComment("Info.Format.Bottom", "#What should be displayed on the bottom.");
+		
+		//List
+		config.addDefault("List.PerPage", 15);
+		config.addDefault("List.Format.Top", "&6&l----------[List - %p]----------");
+		config.addDefault("List.Format.Bottom", "&6&l---------------------------");
+		config.addComment("List", " ");
+		config.addComment("List.PerPage", "#The amount of players to list per page. (Default = 15)");
+		config.addComment("List.Format", "#The formating of the List.");
+		config.addComment("List.Format.Top", "#What should be displayed on the top. (%p = page number)");
+		config.addComment("List.Format.Bottom", "#What should be displayed on the bottom");
 		
 		//Join
 		config.addDefault("Join.Message", "&6%p has joined the server!");

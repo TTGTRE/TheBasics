@@ -21,6 +21,12 @@ Homes:
   Member: 2
   Admin: 3
 
+CombatTag:
+  #If combat tagging should be enabled. If a player is combat tagged they will not be able to teleport. 
+  Enabled: true
+  #The duration of being combat tagged last in seconds. If attacked during combat, it will just restart the time.
+  Time: 10
+  
 ##########################
 #    Economy Settings    #
 #(Used for economy stuff)#
@@ -64,3 +70,20 @@ MessageFormat:
   Sender: '&f[&6You &f-> &6%p&f] %m' 
   #What the receiver will see.
   Receiver: '&f[&6%p &f-> &6You&f] %m' 
+  
+######################
+#    Kit Settings    #
+#(Used for kit stuff)#
+######################
+
+Kits:
+  Member: 
+    Time: 6000
+    Items:
+    - stone_spade 1
+	- 1 6
+	- 5:1 2
+    - stone_sword 1 Name: &6Derp Sword
+	- stone_axe 1 Name: &2&lSpecial Axe Enchant: Efficiency 1
+	Commands:
+	- balance add %p 200

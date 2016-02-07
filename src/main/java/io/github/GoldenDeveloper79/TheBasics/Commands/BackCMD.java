@@ -16,62 +16,38 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
-import java.util.Map.Entry;
-
-import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
-import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
+import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
-public class TeleportRequestAcceptCMD extends CommandModule
+public class BackCMD extends CommandModule
 {
-	public TeleportRequestAcceptCMD()
+	public BackCMD()
 	{
-		super(new String[] {"teleportrequestaccept", "traccept"}, 0, 0, MultiPlayer.OTHER);
+		super(new String[] {"back", "b"}, 0, 0, MultiPlayer.OTHER);
 	}
 
 	public void performCommand(Player player, String[] args)
 	{
-		if(Registery.teleportRequest.containsValue(player.getName()))
+		PlayerData data = BasicUtils.getData(player);
+		
+		if(data.getLastLocation() != null)
 		{
-			String playerName = null;
-			
-			for(Entry<String, String> players : Registery.teleportRequest.entrySet())
+			if(!data.initTeleport(data.getLastLocation(), "last location"))
 			{
-				if(players.getValue().equals(player.getName()))
-				{
-					playerName = players.getKey();
-					break;
-				}
-			}
-			
-			Player player2 = Bukkit.getPlayer(playerName);
-			
-			if(player2 != null)
-			{
-				Registery.teleportRequest.remove(playerName);
-				
-				if(!BasicUtils.getData(player2).initTeleport(player.getLocation(), "&7" + player.getName()))
-				{
-					BasicUtils.sendMessage(player2, BasicUtils.getMessage("CombatTagNoTeleport"));
-				}
-				
-				BasicUtils.sendMessage(player2, BasicUtils.getMessage("TeleportRequestAcceptReceiver").replace("%p", player.getName()));
-			}else
-			{
-				BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportNoRequest"));
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("CombatTagNoTeleport"));
 			}
 		}else
 		{
-			BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportNoRequest"));
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("BackNoLocation"));
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(ConsoleCommandSender console, String[] args)
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}

@@ -23,54 +23,68 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
-import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
 
-public class WarpCMD extends CommandModule
+public class TeleportPositionCMD extends CommandModule
 {
-	public WarpCMD()
+	//tppos x y z
+	//tppos world x y z
+	public TeleportPositionCMD()
 	{
-		super(new String[] {"warp"}, 0, 1, MultiPlayer.OTHER);
+		super(new String[] {"teleportposition", "tppos"}, 3, 4, MultiPlayer.OTHER);
 	}
-	
-	public void performCommand(Player player, String[] args) 
+
+	public void performCommand(Player player, String[] args)
 	{
-		if(args.length < 1)
+		World world = player.getWorld();
+		double x = 0, y = 0, z = 0;
+		
+		if(args.length == 3)
 		{
-			if(TheBasics.getDataConfig().contains("Servers.Warps"))
+			try
 			{
-				String warps = TheBasics.getDataConfig().getConfigurationSection("Servers.Warps").getKeys(false)
-						.toString().replace("[", "").replace("]", "");
-				
-				BasicUtils.sendMessage(player, "&6Warps: &7" + warps + "&6.");
-			}else
+				x = Double.parseDouble(args[0]);
+				y = Double.parseDouble(args[1]);
+				z = Double.parseDouble(args[2]);
+			}catch(NumberFormatException e)
 			{
-				BasicUtils.sendMessage(player, "&6Warps:.");
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidValue"));
+				return;
 			}
-		}else if(args.length == 1)
+		}else if(args.length == 4)
 		{
-			String root = "Servers.Warps." + args[0].toLowerCase();
+			world = Bukkit.getWorld(args[0]);
 			
-			if(TheBasics.getDataConfig().contains(root))
+			if(world == null)
 			{
-				World world = Bukkit.getWorld(TheBasics.getDataConfig().getString(root + ".World"));
-				double x = TheBasics.getDataConfig().getDouble(root + ".X");
-				double y = TheBasics.getDataConfig().getDouble(root + ".Y");
-				double z = TheBasics.getDataConfig().getDouble(root + ".Z");
-				double yaw = TheBasics.getDataConfig().getDouble(root + ".Yaw");
-				double pitch = TheBasics.getDataConfig().getDouble(root + ".Pitch");
-				
-				Location loc = new Location(world, x, y, z, (float) yaw, (float) pitch);
-				
-				if(!BasicUtils.getData(player).initTeleport(loc, "&6the warp &7" + args[0]))
-				{
-					BasicUtils.sendMessage(player, BasicUtils.getMessage("CombatTagNoTeleport"));
-				}
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidValue"));
+				return;
+			}
+			
+			try
+			{
+				x = Double.parseDouble(args[1]);
+				y = Double.parseDouble(args[2]);
+				z = Double.parseDouble(args[3]);
+			}catch(NumberFormatException e)
+			{
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidValue"));
+				return;
+			}
+		}
+		
+		Location loc = new Location(world, x, y, z);
+		
+		if(loc != null)
+		{
+			if(!BasicUtils.getData(player).initTeleport(loc, "world: " + world.getName() + " x: " + x + " y: " + y + " z: " + z))
+			{
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("CombatTagNoTeleport"));
 			}
 		}
 	}
-	
+
 	public void performCommand(ConsoleCommandSender console, String[] args)
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));

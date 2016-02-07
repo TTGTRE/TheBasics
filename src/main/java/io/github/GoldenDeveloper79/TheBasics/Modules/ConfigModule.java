@@ -26,7 +26,6 @@ import org.bukkit.configuration.InvalidConfigurationException;
 
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Config.CommentedConfiguration;
-import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
 public abstract class ConfigModule 
 {
@@ -42,11 +41,6 @@ public abstract class ConfigModule
 			try 
 			{
 				file.createNewFile();
-				
-				if(!(this instanceof PlayerData))
-				{
-					TheBasics.getPlugin().saveResource(fileName, true);
-				}
 			}catch(IOException e) 
 			{
 				TheBasics.getLog().severe("Could not create " + file.getName() + "!");
@@ -83,7 +77,7 @@ public abstract class ConfigModule
 	 */
 	public void update(String key, Object value)
 	{
-		if(!contains(key))
+		if(!contains(key) || get(key) != value)
 		{
 			set(key, value);
 		}
@@ -122,11 +116,27 @@ public abstract class ConfigModule
 	}
 
 	/*
+	 * Gets an integer from a specified key with a default.
+	 */
+	public int getInt(String key, int def)
+	{
+		return config.getInt(key, def);
+	}
+	
+	/*
 	 * Gets a double from a specified key.
 	 */
 	public double getDouble(String key)
 	{
 		return config.getDouble(key);
+	}
+	
+	/*
+	 * Gets a long from a specified key.
+	 */
+	public long getLong(String key)
+	{
+		return config.getLong(key);
 	}
 
 	/*

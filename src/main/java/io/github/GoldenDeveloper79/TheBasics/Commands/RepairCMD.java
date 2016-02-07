@@ -37,7 +37,7 @@ public class RepairCMD extends CommandModule
 		
 		if(item != null)
 		{
-			if(BasicUtils.isRepairable(item))
+			if(BasicUtils.isModifiable(item))
 			{
 				item.setDurability((short) 0);
 			

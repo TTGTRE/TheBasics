@@ -34,7 +34,11 @@ public class SpawnCMD extends CommandModule
 	public void performCommand(Player player, String[] args) 
 	{
 		PlayerData data = BasicUtils.getData(player);
-		data.initTeleport(player.getWorld().getSpawnLocation(), "&7spawn");
+		
+		if(!data.initTeleport(player.getWorld().getSpawnLocation(), "&7spawn"))
+		{
+			BasicUtils.sendMessage(player, BasicUtils.getMessage("CombatTagNoTeleport"));
+		}
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args)

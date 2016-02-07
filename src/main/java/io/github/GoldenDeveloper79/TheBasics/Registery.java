@@ -61,7 +61,7 @@ public class Registery
 	 */
 	public static ArrayList<String> teleportQue = new ArrayList<String>();
 	
-	public static Material[] repairableItems = new Material[] 
+	public static Material[] modifiableItems = new Material[] 
 	{
 		Material.CHAINMAIL_CHESTPLATE, Material.CHAINMAIL_HELMET, Material.CHAINMAIL_LEGGINGS,
 		Material.DIAMOND_AXE, Material.DIAMOND_BOOTS, Material.DIAMOND_CHESTPLATE, Material.DIAMOND_HELMET,

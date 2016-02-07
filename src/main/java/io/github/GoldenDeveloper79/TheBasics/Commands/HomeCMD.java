@@ -63,7 +63,10 @@ public class HomeCMD extends CommandModule
 			
 			Location loc = new Location(world, x, y, z, (float) yaw, (float) pitch);
 			
-			data.initTeleport(loc, "&6your home &7" + home);
+			if(!data.initTeleport(loc, "&6your home &7" + home))
+			{
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("CombatTagNoTeleport"));
+			}
 		}else
 		{
 			String homes = data.getConfig().getConfigurationSection("Home").getKeys(false)

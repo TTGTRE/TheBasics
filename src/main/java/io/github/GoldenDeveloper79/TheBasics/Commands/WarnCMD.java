@@ -16,63 +16,48 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
-import java.util.Map.Entry;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
-import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.Enums.MultiPlayer;
 import io.github.GoldenDeveloper79.TheBasics.Modules.CommandModule;
 
-public class TeleportRequestAcceptCMD extends CommandModule
+public class WarnCMD extends CommandModule
 {
-	public TeleportRequestAcceptCMD()
+	public WarnCMD()
 	{
-		super(new String[] {"teleportrequestaccept", "traccept"}, 0, 0, MultiPlayer.OTHER);
+		super(new String[] {"warn"}, 1, Integer.MAX_VALUE, MultiPlayer.ALWAYS);
 	}
-
+	
 	public void performCommand(Player player, String[] args)
 	{
-		if(Registery.teleportRequest.containsValue(player.getName()))
+		Player player2 = Bukkit.getPlayer(args[0]);
+		String reason = BasicUtils.getMessage("WarnDefault").replace("%p", player.getName());
+		
+		if(args.length > 1)
 		{
-			String playerName = null;
-			
-			for(Entry<String, String> players : Registery.teleportRequest.entrySet())
-			{
-				if(players.getValue().equals(player.getName()))
-				{
-					playerName = players.getKey();
-					break;
-				}
-			}
-			
-			Player player2 = Bukkit.getPlayer(playerName);
-			
-			if(player2 != null)
-			{
-				Registery.teleportRequest.remove(playerName);
-				
-				if(!BasicUtils.getData(player2).initTeleport(player.getLocation(), "&7" + player.getName()))
-				{
-					BasicUtils.sendMessage(player2, BasicUtils.getMessage("CombatTagNoTeleport"));
-				}
-				
-				BasicUtils.sendMessage(player2, BasicUtils.getMessage("TeleportRequestAcceptReceiver").replace("%p", player.getName()));
-			}else
-			{
-				BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportNoRequest"));
-			}
-		}else
-		{
-			BasicUtils.sendMessage(player, BasicUtils.getMessage("TeleportNoRequest"));
+			reason = BasicUtils.combineString(1, args);
 		}
+		
+		BasicUtils.notify("TheBasics.Warn.Notify", BasicUtils.getMessage("WarnNotify").replace("%p", player.getName()).replace("%s", args[0]).replace("%r", reason));
+		BasicUtils.sendMessage(player, BasicUtils.getMessage("WarnSender").replace("%p", args[0]));
+		BasicUtils.sendMessage(player2, BasicUtils.getMessage("WarnReceiver").replace("%r", reason));
 	}
 
 	public void performCommand(ConsoleCommandSender console, String[] args) 
 	{
-		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
+		Player player2 = Bukkit.getPlayer(args[0]);
+		String reason = BasicUtils.getMessage("WarnDefault").replace("%p", console.getName());
+		
+		if(args.length > 1)
+		{
+			reason = BasicUtils.combineString(1, args);
+		}
+		
+		BasicUtils.notify("TheBasics.Warn.Notify", BasicUtils.getMessage("WarnNotify").replace("%p", console.getName()).replace("%p2", args[0]).replace("%r", reason));
+		BasicUtils.sendMessage(console, BasicUtils.getMessage("WarnSender").replace("%p", args[0]));
+		BasicUtils.sendMessage(player2, BasicUtils.getMessage("WarnReceiver").replace("%r", reason));
 	}
 }

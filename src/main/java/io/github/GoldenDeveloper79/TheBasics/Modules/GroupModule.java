@@ -19,10 +19,13 @@ package io.github.GoldenDeveloper79.TheBasics.Modules;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 
+import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
 import io.github.GoldenDeveloper79.TheBasics.Registery;
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
+import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
 public class GroupModule
 {
@@ -78,16 +81,42 @@ public class GroupModule
 	
 	public void addPermission(String permission)
 	{
-		permissions.add(permission);
-		
-		TheBasics.getGroupConfig().set("Groups." + groupName + ".Permissions", permissions);
+		if(!permissions.contains(permission))
+		{
+			permissions.add(permission);
+			
+			for(String player : players)
+			{
+				PlayerData data = BasicUtils.getData(Bukkit.getPlayer(player));
+				
+				if(data != null)
+				{
+					data.addPermission(permission);
+				}
+			}
+			
+			TheBasics.getGroupConfig().set("Groups." + groupName + ".Permissions", permissions);
+		}
 	}
 	
 	public void removePermission(String permission)
 	{
-		permissions.remove(permission);
-		
-		TheBasics.getGroupConfig().set("Groups." + groupName + ".Permissions", permissions);
+		if(permissions.contains(permission))
+		{
+			permissions.remove(permission);
+			
+			for(String player : players)
+			{
+				PlayerData data = BasicUtils.getData(Bukkit.getPlayer(player));
+				
+				if(data != null)
+				{
+					data.removePermission(permission);
+				}
+			}
+			
+			TheBasics.getGroupConfig().set("Groups." + groupName + ".Permissions", permissions);
+		}
 	}
 	
 	public void setPrefix(String prefix)
