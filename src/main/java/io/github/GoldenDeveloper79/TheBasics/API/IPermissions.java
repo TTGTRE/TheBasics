@@ -22,7 +22,7 @@ import org.bukkit.OfflinePlayer;
 
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 
-public interface BasicPermissions 
+public interface IPermissions 
 {
 	/*
 	 * Gets a group by its name.

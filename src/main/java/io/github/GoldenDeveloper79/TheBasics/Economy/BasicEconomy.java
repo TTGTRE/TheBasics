@@ -14,14 +14,19 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package io.github.GoldenDeveloper79.TheBasics;
+package io.github.GoldenDeveloper79.TheBasics.Economy;
+
+import java.text.DecimalFormat;
 
 import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import io.github.GoldenDeveloper79.TheBasics.API.BasicEconomy;
+import io.github.GoldenDeveloper79.TheBasics.BasicUtils;
+import io.github.GoldenDeveloper79.TheBasics.TheBasics;
+import io.github.GoldenDeveloper79.TheBasics.API.IEconomy;
 
-public class Economy implements BasicEconomy
+public class BasicEconomy implements IEconomy
 {
 	/*
 	 * (non-Javadoc)
@@ -29,7 +34,14 @@ public class Economy implements BasicEconomy
 	 */
 	public double getBalance(OfflinePlayer player)
 	{
-		return BasicUtils.getConfig(player.getName()).getDouble("Balance");
+		FileConfiguration config = BasicUtils.getConfig(player.getName());
+		
+		if(config != null)
+		{
+			return BasicUtils.getConfig(player.getName()).getDouble("Balance");
+		}
+		
+		return 0;
 	}
 
 	/*
@@ -173,5 +185,15 @@ public class Economy implements BasicEconomy
 	{	
 		return TheBasics.getGeneralConfig().getBoolean("Loaning.Enabled");
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * @see io.github.GoldenDeveloper79.TheBasics.API.IEconomy#format(double)
+	 */
+	public String format(double amount)
+	{
+		DecimalFormat format = new DecimalFormat("###,###,##0.###");
+		
+		return format.format(amount);
+	}
 }

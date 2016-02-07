@@ -3,6 +3,7 @@ version: 1.09
 main: io.github.GoldenDeveloper79.TheBasics.TheBasics
 description: A basic set of functions for Minecraft servers.
 author: [GoldenDeveloper]
+softdepend: [Vault]
 commands:
   back:
     description: Teleports yourself to your last location.
@@ -32,6 +33,9 @@ commands:
   fly:
     description: Toggles flying for yourself or another player.
     usage: /fly <name>.
+  flyspeed:
+    description: Changes your fly speed.
+    usage: /flyspeed <speed>.
   gamemode:
     description: Change the gamemode of yourself or another player.
     usage: /gamemode <name> <mode>.
@@ -106,6 +110,9 @@ commands:
   spawn:
     description: Teleport yourself to spawn.
     usage: /spawn.
+  speed:
+    description: Changes your walking speed.
+    usage: /speed <speed>.
   teleport:
     description: Teleport yourself to a player forcefully.
     usage: /teleport <name>.

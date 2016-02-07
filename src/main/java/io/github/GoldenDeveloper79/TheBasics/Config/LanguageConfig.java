@@ -43,7 +43,6 @@ public class LanguageConfig extends ConfigModule
 		config.addDefault("Usage", "&cUsage: &7%u");
 		config.addDefault("InvalidValue", "&cPlease specify a valid value!");
 		config.addDefault("PlayerCommand", "&cYou must be a player to perform this command!");
-		
 		config.addDefault("BackNoLocation", "&cYou have no previous location to teleport to.");
 		config.addDefault("BalanceGet", "&6Your balance is &7$%a&6.");
 		config.addDefault("BalanceGetOthers", "&6The balance of &7%p &6is &7$%a&6.");
@@ -75,6 +74,9 @@ public class LanguageConfig extends ConfigModule
 		config.addDefault("Fly", "&6You have &7%a &6flying for yourself."); 
 		config.addDefault("FlySender", "&6You have &7%a &6flying for &7%p&6."); 
 		config.addDefault("FlyReceiver", "&6Flying has been &7%a &6by &7%p&6.");
+		config.addDefault("FlySpeedChange", "&6You have changed your flying speed to &7%a&6.");
+		config.addDefault("FlySpeedChangeSender", "&6You have changed the flying speed for &7%p &6to &7%a&6.");
+		config.addDefault("FlySpeedChangeReceiver", "&6Your flying speed has been changed to &7%a &6by &7%p&6.");
 		config.addDefault("Gamemode", "&6You have changed your gamemode to &7%a&6.");
 		config.addDefault("GamemodeSender", "&6You have changed the gamemode for &7%p &6to &7%a&6.");
 		config.addDefault("GamemodeReceiver", "&6Your gamemode has been changed to &7%a &6by &7%p&6.");
@@ -137,6 +139,9 @@ public class LanguageConfig extends ConfigModule
 		config.addDefault("SetHomeMaxHome", "&cYou have reached your max sethome limit!");
 		config.addDefault("SetSpawn", "&6You have set spawn at your location.");
 		config.addDefault("SetWarp", "&6You have set the warp &7%a &6at your location.");
+		config.addDefault("SpeedChange", "&6You have changed your walking speed to &7%a&6.");
+		config.addDefault("SpeedChangeSender", "&6You have changed the walking speed for &7%p &6to &7%a&6.");
+		config.addDefault("SpeedChangeReceiver", "&6Your waling speed has been changed to &7%a &6by &7%p&6.");
 		config.addDefault("TeleportToLocation", "&6You have teleported to &7%a&6.");
 		config.addDefault("TeleportInitialize", "&6You will teleport in &7%ts&6.");
 		config.addDefault("TeleportTimeRemaing", "&7%ts&6...");

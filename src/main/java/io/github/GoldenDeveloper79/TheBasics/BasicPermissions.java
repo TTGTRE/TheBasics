@@ -22,12 +22,12 @@ import java.util.Collections;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-import io.github.GoldenDeveloper79.TheBasics.API.BasicPermissions;
+import io.github.GoldenDeveloper79.TheBasics.API.IPermissions;
 import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
 import io.github.GoldenDeveloper79.TheBasics.Modules.GroupModule;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
-public class Permissions implements BasicPermissions 
+public class BasicPermissions implements IPermissions 
 {
 	/*
 	 * (non-Javadoc)

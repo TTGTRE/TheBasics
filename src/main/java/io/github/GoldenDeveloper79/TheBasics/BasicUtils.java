@@ -28,6 +28,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 import io.github.GoldenDeveloper79.TheBasics.Enums.EnchantType;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
@@ -252,6 +253,22 @@ public class BasicUtils
 			}else if(enchantType.name().replaceAll("_", "").equalsIgnoreCase(name))
 			{
 				return enchantType.getEnchantment();
+			}
+		}
+		
+		return null;
+	}
+	
+	/*
+	 * Gets a potion effect type by its name.
+	 */
+	public static PotionEffectType getPotionEffectType(String name)
+	{
+		for(PotionEffectType type : PotionEffectType.values())
+		{
+			if(type.getName().equalsIgnoreCase(name) || type.getName().replace("_", "").equalsIgnoreCase(name))
+			{
+				return type;
 			}
 		}
 		

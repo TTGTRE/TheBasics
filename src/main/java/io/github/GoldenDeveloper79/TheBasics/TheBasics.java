@@ -37,6 +37,7 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.DeleteHomeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.EnchantCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.FeedCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.FlyCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.FlySpeedCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.GamemodeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.GiveCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.GroupCMD;
@@ -60,6 +61,7 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.SetHomeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.SetSpawnCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.SetWarpCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.SpawnCMD;
+import io.github.GoldenDeveloper79.TheBasics.Commands.SpeedCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportPositionCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.TeleportRequestAcceptCMD;
@@ -78,6 +80,8 @@ import io.github.GoldenDeveloper79.TheBasics.Config.GeneralConfig;
 import io.github.GoldenDeveloper79.TheBasics.Config.GroupConfig;
 import io.github.GoldenDeveloper79.TheBasics.Config.LanguageConfig;
 import io.github.GoldenDeveloper79.TheBasics.Config.TextConfig;
+import io.github.GoldenDeveloper79.TheBasics.Economy.BasicEconomy;
+import io.github.GoldenDeveloper79.TheBasics.Economy.VaultEconomy;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerChatEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerFightEvent;
 import io.github.GoldenDeveloper79.TheBasics.Events.BasicPlayerJoinEvent;
@@ -106,10 +110,10 @@ public class TheBasics extends JavaPlugin
 	private static ConfigModule languageConfig;
 	
 	//Economy
-	private static Economy economy;
+	private static BasicEconomy economy;
 	
 	//Permissions
-	private static Permissions permissions;
+	private static BasicPermissions permissions;
 	
 	public void onEnable()
 	{
@@ -130,9 +134,9 @@ public class TheBasics extends JavaPlugin
 		loadCommands();
 		loadEvents();
 		loadGroups();
+		loadEconomy();
 		
-		economy = new Economy();
-		permissions = new Permissions();
+		permissions = new BasicPermissions();
 		
 		loadPlayers();
 	}
@@ -188,6 +192,7 @@ public class TheBasics extends JavaPlugin
 		new EnchantCMD();
 		new FeedCMD();
 		new FlyCMD();
+		new FlySpeedCMD();
 		new GamemodeCMD();
 		new GiveCMD();
 		new GroupCMD();
@@ -211,6 +216,7 @@ public class TheBasics extends JavaPlugin
 		new SetSpawnCMD();
 		new SetWarpCMD();
 		new SpawnCMD();
+		new SpeedCMD();
 		new TeleportCMD();
 		new TeleportPositionCMD();
 		new TeleportRequestAcceptCMD();
@@ -309,6 +315,21 @@ public class TheBasics extends JavaPlugin
 	}
 	
 	/*
+	 * Loads the economy and vault if existing.
+	 */
+	private void loadEconomy()
+	{
+		economy = new BasicEconomy();
+		
+		if(getServer().getPluginManager().getPlugin("Vault") != null)
+		{
+			new VaultEconomy();
+			
+			log.info("Vault has been found and hooked into to!");
+		}	
+	}
+	
+	/*
 	 * Get a reader by its filename.
 	 */
 	public static Reader getResourceReader(String fileName)
@@ -383,7 +404,7 @@ public class TheBasics extends JavaPlugin
 	/*
 	 * Gets the economy methods.
 	 */
-	public static Economy getEconomy() 
+	public static BasicEconomy getEconomy() 
 	{
 		return economy;
 	}
@@ -391,7 +412,7 @@ public class TheBasics extends JavaPlugin
 	/*
 	 * Gets the permission methods.
 	 */
-	public static Permissions getPermissions() 
+	public static BasicPermissions getPermissions() 
 	{
 		return permissions;
 	}	

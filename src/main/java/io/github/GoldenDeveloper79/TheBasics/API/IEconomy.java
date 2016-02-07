@@ -18,7 +18,7 @@ package io.github.GoldenDeveloper79.TheBasics.API;
 
 import org.bukkit.OfflinePlayer;
 
-public interface BasicEconomy 
+public interface IEconomy 
 {
 	/*
 	 * Gets the balance of a player.
@@ -72,4 +72,9 @@ public interface BasicEconomy
 	 * If players are allowed to loan.
 	 */
 	boolean canLoan();
+	
+	/*
+	 * Formats the amount.
+	 */
+	String format(double amount);
 }
