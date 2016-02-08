@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
@@ -38,7 +39,7 @@ public class HelpCMD extends CommandModule
 		super(new String[] {"help", "?"}, 0, 2, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, final String[] args)
 	{
 		ArrayList<String> help = new ArrayList<String>();
 
@@ -148,7 +149,7 @@ public class HelpCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		ArrayList<String> help = new ArrayList<String>();
 
@@ -248,6 +249,8 @@ public class HelpCMD extends CommandModule
 		}
 	}
 
+	public void performCommand(final CommandSender sender, final String[] args){}
+	
 	private List<String> formatHelp(List<String> helpList, int page)
 	{
 		int perPage = TheBasics.getTextConfig().getInt("Help.PerPage");

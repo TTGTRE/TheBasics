@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -31,7 +32,7 @@ public class HealCMD extends CommandModule
 		super(new String[] {"heal"}, 0, 1, MultiPlayer.SOMETIMES);
 	}
 
-	public void performCommand(Player player, String[] args) 
+	public void performCommand(final Player player, final String[] args) 
 	{
 		if(args.length < 1)
 		{
@@ -59,7 +60,7 @@ public class HealCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		Player player2 = Bukkit.getPlayer(args[0]);
 
@@ -70,4 +71,6 @@ public class HealCMD extends CommandModule
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("HealSender").replace("%p", args[0]));
 		BasicUtils.sendMessage(player2, BasicUtils.getMessage("HealReceiver").replace("%p", console.getName()));
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

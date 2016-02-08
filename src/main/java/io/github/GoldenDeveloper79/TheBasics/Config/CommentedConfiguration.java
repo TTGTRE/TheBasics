@@ -1,19 +1,3 @@
-/*******************************************************************************
- *  Copyright (C) 2016  Levi P. (GoldenDeveloper69)
- *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Config;
 
 import java.io.BufferedReader;
@@ -31,42 +15,31 @@ import java.util.HashMap;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-public class CommentedConfiguration extends YamlConfiguration
-{
-	private HashMap<String, String> comments;
-	private File file;
+import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 
+public class CommentedConfiguration extends YamlConfiguration
+{	
+	private File file;
+	private HashMap<String, String> comments;
+	
 	public CommentedConfiguration(File file)
 	{
 		this.file = file;
 		
-		comments = new HashMap<>();
+		comments = new HashMap<String, String>();
 		
 		try
 		{ 
 			this.load(file);
 		}catch(IOException | InvalidConfigurationException e)
 		{
-			e.printStackTrace();
+			TheBasics.getLog().severe("Could not load " + file.getName() + "!");
 		}
 	}
 	
 	/*
-	 * Use this for local files only, since we don't need to call the save function.
+	 * Saves the config, comments, and file.
 	 */
-	public CommentedConfiguration(Reader reader)
-	{
-		comments = new HashMap<>();
-		
-		try
-		{
-			this.load(reader);
-		}catch(IOException | InvalidConfigurationException e)
-		{
-			e.printStackTrace();
-		}
-	}
-
 	public boolean save()
 	{
 		boolean saved = true;
@@ -208,12 +181,10 @@ public class CommentedConfiguration extends YamlConfiguration
 		
 		return saved;
 	}
-
-	public String getComment(String path)
-	{
-		return comments.get(path);
-	}
 	
+	/*
+	 * Adds a comment to the file.
+	 */
 	public void addComment(String path, String... commentLines)
 	{
 		StringBuilder commentstring = new StringBuilder();
@@ -248,6 +219,9 @@ public class CommentedConfiguration extends YamlConfiguration
 		comments.put(path, commentstring.toString());
 	}
 
+	/*
+	 * Converts the file to a string.
+	 */
 	public String convertFileToString(File file)
 	{
 		if(file != null && file.exists() && file.canRead() && !file.isDirectory())
@@ -282,6 +256,9 @@ public class CommentedConfiguration extends YamlConfiguration
 		return "";
 	}
 
+	/*
+	 * Converts a string to a file.
+	 */
 	public boolean stringToFile(String source, File file)
 	{
 		try(OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(file), "UTF-8"))
@@ -294,6 +271,9 @@ public class CommentedConfiguration extends YamlConfiguration
 		}
 	}
 
+	/*
+	 * Gets the comments.
+	 */
 	public HashMap<String, String> getComments()
 	{
 		return comments;

@@ -19,6 +19,7 @@ package io.github.GoldenDeveloper79.TheBasics.Commands;
 import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -34,7 +35,7 @@ public class TeleportRequestDenyCMD extends CommandModule
 		super(new String[] {"teleportrequestdeny", "trdeny"}, 0, 0, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, final String[] args)
 	{
 		if(Registery.teleportRequest.containsValue(player.getName()))
 		{
@@ -66,8 +67,10 @@ public class TeleportRequestDenyCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

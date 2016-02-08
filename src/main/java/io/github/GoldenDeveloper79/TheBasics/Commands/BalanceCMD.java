@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -32,7 +33,7 @@ public class BalanceCMD extends CommandModule
 		super(new String[] {"balance", "bal"}, 0, 3, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, final String[] args)
 	{
 		if(args.length < 1)
 		{
@@ -118,7 +119,7 @@ public class BalanceCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		if(args.length == 1)
 		{
@@ -198,4 +199,6 @@ public class BalanceCMD extends CommandModule
 			BasicUtils.sendMessage(console, BasicUtils.getMessage("Usage").replace("%u", getUsage()));
 		}
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

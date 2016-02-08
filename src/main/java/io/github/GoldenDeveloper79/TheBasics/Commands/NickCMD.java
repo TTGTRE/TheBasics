@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -32,7 +33,7 @@ public class NickCMD extends CommandModule
 		super(new String[] {"nick"}, 1, 1, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, final String[] args)
 	{
 		if(TheBasics.getGeneralConfig().getBoolean("Nickname.Enabled"))
 		{
@@ -52,8 +53,10 @@ public class NickCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

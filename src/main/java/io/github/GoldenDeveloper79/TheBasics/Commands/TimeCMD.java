@@ -16,6 +16,7 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -30,7 +31,7 @@ public class TimeCMD extends CommandModule
 		super(new String[] {"time"}, 0, 2, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args) 
+	public void performCommand(final Player player, final String[] args) 
 	{
 		if(args.length < 1)
 		{
@@ -69,10 +70,12 @@ public class TimeCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 	
 	private String formatTime(long time)
 	{

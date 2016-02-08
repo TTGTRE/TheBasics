@@ -16,7 +16,6 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Player;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.Location;
@@ -48,8 +47,7 @@ public class PlayerData extends PlayerBase
 	public void join()
 	{
 		Registery.players.put(name.toLowerCase(), this);
-		TheBasics.getDataConfig().update("Players." + name, player.getUniqueId().toString());
-		
+	
 		Location loc = player.getLocation();
 		
 		if(!contains("Name"))
@@ -76,6 +74,19 @@ public class PlayerData extends PlayerBase
 			set("Home.Default.Pitch", loc.getPitch());
 
 			set("Group", TheBasics.getPermissions().getDefaultGroup().getGroupName());
+			
+			TheBasics.getDataConfig().set("Players." + name, player.getUniqueId().toString());
+		}
+		
+		for(String name : TheBasics.getDataConfig().getConfigurationSection("Players").getKeys(false))
+		{
+			if(TheBasics.getDataConfig().getString("Players." + name).equalsIgnoreCase(player.getUniqueId().toString()))
+			{
+				if(!name.equals(player.getName()))
+				{
+					TheBasics.getDataConfig().set("Players." + name, null);
+				}
+			}
 		}
 		
 		//Only will update on quit/join.
@@ -169,10 +180,5 @@ public class PlayerData extends PlayerBase
 	public UUID getUuid() 
 	{
 		return uuid;
-	}
-	
-	public HashMap<String, Object> getDefaults()
-	{
-		return null;
 	}
 }

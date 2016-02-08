@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.WeatherType;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -31,7 +32,7 @@ public class WeatherCMD extends CommandModule
 		super(new String[] {"weather"}, 1, 1, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args) 
+	public void performCommand(final Player player, final String[] args) 
 	{
 		if(args[0].equalsIgnoreCase("sun") || args[0].equalsIgnoreCase("s")|| args[0].equals("c") || args[0].equals("clear"))
 		{
@@ -61,8 +62,10 @@ public class WeatherCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args)
+	public void performCommand(final ConsoleCommandSender console, final String[] args)
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}	
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

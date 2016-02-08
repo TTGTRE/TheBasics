@@ -19,6 +19,7 @@ package io.github.GoldenDeveloper79.TheBasics.Commands;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -35,7 +36,7 @@ public class TeleportPositionCMD extends CommandModule
 		super(new String[] {"teleportposition", "tppos"}, 3, 4, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, final String[] args)
 	{
 		World world = player.getWorld();
 		double x = 0, y = 0, z = 0;
@@ -85,8 +86,10 @@ public class TeleportPositionCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args)
+	public void performCommand(final ConsoleCommandSender console, final String[] args)
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

@@ -1,0 +1,89 @@
+##########################
+#    General Settings    #
+#(Used for general stuff)#
+##########################
+
+#If auto updating should be allowed. (Default=true)
+AutoUpdating: true
+
+#The prefix for all messaging/broadcasting. (Default='&0&l[&6&lTheBasics&0&l]&6 ')
+Prefix: '&0&l[&6&lTheBasics&0&l]&6 '
+
+#The delay for teleporting in seconds. Use the permission'TheBasics.Teleport.Override' to ignore the timer. (Default=3)
+TeleportDelay: 3
+
+#The time for a player to accept a teleport request. Will cancel after that time in seconds. (Default=60)
+TeleportRequestTime: 60
+
+#The max homes per a group. Must use TheBasics permissions/groups. If no value is set, its assumed unlimited.
+#Can also use 'TheBasics.Home.Unlimited' for max homes.
+Homes:
+  Member: 2
+  Admin: 3
+
+CombatTag:
+  #If combat tagging should be enabled. If a player is combat tagged they will not be able to teleport. 
+  Enabled: true
+  #The duration of being combat tagged last in seconds. If attacked during combat, it will just restart the time.
+  Time: 10
+  
+##########################
+#    Economy Settings    #
+#(Used for economy stuff)#
+##########################
+
+#The balance that all players start with. (Default=250)
+StartingBalance: 250
+
+Loaning:
+  #If players should be allowed to loan. (Defualt=true)
+  Enabled: true
+  
+  #The maximum amount a player can loan for. (Default=500)
+  MaxAmount: 500
+
+#######################
+#    Chat Settings    #
+#(Used for chat stuff)#
+#######################
+
+Nickname:
+  #If the command /nick should be allowed.(Default=true)
+  Enabled: true
+  #The maximum length of a nick. Includes coloring/style. Ex: &6&lGoldenDeveloper is 19. (Default = 20)
+  MaxLength: 20
+  #The minimum length of a nick. Includes coloring/style. Ex: &6&lAu_79 is 9. (Default = 8) 
+  MinLength: 5
+
+#The chat format for groups.
+#<World> = world name.
+#<Prefix> = prefix name (Must use TheBasics permissions).
+#<Name> = player name.
+#<Message> = message.
+ChatFormat:
+  Member: '&f[&6<World>&f] <Prefix> &6<Name> &f: &6<Message>'
+  Admin: '&f[&c<World>&f] <Prefix> &c<Name> &f: &c<Message>'
+  
+#The format for messaging players. (%p = sender/recevier, %m = message)
+MessageFormat: 
+  #What the sender will see.
+  Sender: '&f[&6You &f-> &6%p&f] %m' 
+  #What the receiver will see.
+  Receiver: '&f[&6%p &f-> &6You&f] %m' 
+  
+######################
+#    Kit Settings    #
+#(Used for kit stuff)#
+######################
+
+Kits:
+  Member: 
+    Time: '6000'
+    Items:
+    - 'stone_spade 1'
+    - '1 6'
+    - '5:1 2'
+    - 'stone_sword 1 Name: &6Derp Sword'
+    - 'stone_axe 1 Name: &2&lSpecial Axe Enchant: Efficiency 1'
+    Commands:
+    - 'balance add %p 200'

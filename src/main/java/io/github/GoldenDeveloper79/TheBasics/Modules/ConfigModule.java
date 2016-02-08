@@ -26,8 +26,9 @@ import org.bukkit.configuration.InvalidConfigurationException;
 
 import io.github.GoldenDeveloper79.TheBasics.TheBasics;
 import io.github.GoldenDeveloper79.TheBasics.Config.CommentedConfiguration;
+import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
 
-public abstract class ConfigModule 
+public abstract class ConfigModule
 {
 	private File file;
 	private CommentedConfiguration config;
@@ -41,6 +42,11 @@ public abstract class ConfigModule
 			try 
 			{
 				file.createNewFile();
+				
+				if(!(this instanceof PlayerData))
+				{
+					TheBasics.getPlugin().saveResource(fileName, true);
+				}
 			}catch(IOException e) 
 			{
 				TheBasics.getLog().severe("Could not create " + file.getName() + "!");
@@ -52,6 +58,9 @@ public abstract class ConfigModule
 	
 	public abstract void loadDefaults();
 	
+	/*
+	 * Loads the config.
+	 */
 	public void load()
 	{
 		try
@@ -59,7 +68,8 @@ public abstract class ConfigModule
 			config.load(file);
 		}catch(IOException | InvalidConfigurationException e)
 		{
-			TheBasics.getLog().severe("Could not load the file " + file.getName() + "!");
+			TheBasics.getLog().severe("Could not load " + file.getName() + "!");
+			e.printStackTrace();
 		}
 	}
 	

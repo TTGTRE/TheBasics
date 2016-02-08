@@ -154,6 +154,5 @@ public class GroupModule
 	public boolean isDefault()
 	{
 		return isDefault;
-		
 	}
 }

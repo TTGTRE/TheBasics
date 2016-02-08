@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -32,7 +33,7 @@ public class UnmuteCMD extends CommandModule
 		super(new String[] {"unmute"}, 1, 1, MultiPlayer.ALWAYS);
 	}
 
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, final String[] args)
 	{
 		PlayerData data = BasicUtils.getData(Bukkit.getPlayer(args[0]));
 		
@@ -49,7 +50,7 @@ public class UnmuteCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		PlayerData data = BasicUtils.getData(Bukkit.getPlayer(args[0]));
 		
@@ -65,4 +66,6 @@ public class UnmuteCMD extends CommandModule
 			BasicUtils.sendMessage(console, BasicUtils.getMessage("MuteNot"));
 		}
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

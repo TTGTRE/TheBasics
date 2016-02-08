@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -37,7 +38,7 @@ public class ListCMD extends CommandModule
 		super(new String[] {"list"}, 0, 1, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, final String[] args)
 	{
 		int page = 0;
 		
@@ -65,7 +66,7 @@ public class ListCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args)
+	public void performCommand(final ConsoleCommandSender console, final String[] args)
 	{
 		int page = 0;
 		
@@ -92,6 +93,8 @@ public class ListCMD extends CommandModule
 			console.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
 		}
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 	
 	private List<String> formatList(int page)
 	{

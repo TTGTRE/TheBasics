@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -62,8 +63,10 @@ public class TeleportRequestCMD extends CommandModule
 		}.runTaskLater(TheBasics.getPlugin(), (long) (20 * TheBasics.getGeneralConfig().getDouble("TeleportRequestTime")));
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

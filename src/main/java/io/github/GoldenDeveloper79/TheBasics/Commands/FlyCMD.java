@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -31,7 +32,7 @@ public class FlyCMD extends CommandModule
 		super(new String[] {"fly"}, 0, 1, MultiPlayer.SOMETIMES);
 	}
 
-	public void performCommand(Player player, String[] args) 
+	public void performCommand(final Player player, final String[] args) 
 	{
 		if(args.length < 1)
 		{
@@ -77,7 +78,7 @@ public class FlyCMD extends CommandModule
 		
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args)
+	public void performCommand(final ConsoleCommandSender console, final String[] args)
 	{
 		if(console.hasPermission("TheBasics.Fly.Others"))
 		{
@@ -102,5 +103,10 @@ public class FlyCMD extends CommandModule
 		{
 			BasicUtils.sendMessage(console, BasicUtils.getMessage("NoPermission"));
 		}
+	}
+	
+	public void performCommand(final CommandSender sender, final String[] args)
+	{
+		
 	}
 }

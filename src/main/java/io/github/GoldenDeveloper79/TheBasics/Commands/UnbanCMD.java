@@ -19,6 +19,7 @@ package io.github.GoldenDeveloper79.TheBasics.Commands;
 import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -34,7 +35,7 @@ public class UnbanCMD extends CommandModule
 	}
 
 	@SuppressWarnings("deprecation")
-	public void performCommand(Player player, String[] args) 
+	public void performCommand(final Player player, final String[] args) 
 	{
 		OfflinePlayer player2 = Bukkit.getOfflinePlayer(args[0]);
 		
@@ -57,7 +58,7 @@ public class UnbanCMD extends CommandModule
 	}
 	
 	@SuppressWarnings("deprecation")
-	public void performCommand(ConsoleCommandSender console, String[] args)
+	public void performCommand(final ConsoleCommandSender console, final String[] args)
 	{
 		OfflinePlayer player2 = Bukkit.getOfflinePlayer(args[0]);
 		
@@ -78,4 +79,6 @@ public class UnbanCMD extends CommandModule
 			BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerNeverPlayed"));
 		}
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

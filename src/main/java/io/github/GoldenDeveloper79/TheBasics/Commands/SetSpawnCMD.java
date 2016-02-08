@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -31,7 +32,7 @@ public class SetSpawnCMD extends CommandModule
 		super(new String[] {"setspawn"}, 0, 0, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args) 
+	public void performCommand(final Player player, final String[] args) 
 	{
 		Location loc = player.getLocation();
 		player.getWorld().setSpawnLocation(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
@@ -39,8 +40,10 @@ public class SetSpawnCMD extends CommandModule
 		BasicUtils.sendMessage(player, BasicUtils.getMessage("SetSpawn"));
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args)
+	public void performCommand(final ConsoleCommandSender console, final String[] args)
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));	
 	}	
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

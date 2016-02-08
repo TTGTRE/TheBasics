@@ -20,19 +20,15 @@ import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
 
 public class GeneralConfig extends ConfigModule
 {
-	private CommentedConfiguration config;
-	
 	public GeneralConfig(String fileName)
 	{
 		super(fileName);
 		
-		config = getConfig();
-		
 		loadDefaults();
 		load();
-		config.options().header("Please contact me on Bukkit/Spigot if you have any questions.");
-		config.options().copyDefaults(true);
-		config.save();
+		getConfig().options().header("Please contact me on Bukkit/Spigot if you have any questions.");
+		getConfig().options().copyDefaults(true);
+		getConfig().save();
 		load();
 	}
 
@@ -40,33 +36,33 @@ public class GeneralConfig extends ConfigModule
 	public void loadDefaults()
 	{
 		//General Settings
-		config.addDefault("AutoUpdating", true);
-		config.addComment("AutoUpdating", "",
+		getConfig().addDefault("AutoUpdating", true);
+		getConfig().addComment("AutoUpdating", "",
 				"##########################",
 				"#    General Settings    #",
 				"#(Used for general stuff)#", 
 				"##########################",
 				" ",
 				"#If auto updating should be allowed. (Default=true)");
-		config.addDefault("Prefix", "&0&l[&6&lTheBasics&0&l]&6 ");
-		config.addComment("Prefix", " ", "#The prefix for all messaging/broadcasting. (Default='&0&l[&6&lTheBasics&0&l]&6 ')");
-		config.addDefault("TeleportDelay", 3);
-		config.addComment("TeleportDelay", " ", "#The delay for teleporting in seconds. Use the permission'TheBasics.Teleport.Override' to ignore the timer. (Default=3)");
-		config.addDefault("TeleportRequestTime", 60);
-		config.addComment("TeleportRequestTime", " ", "#The time for a player to accept a teleport request. Will cancel after that time in seconds. (Default=60)");
-		config.addDefault("Homes", "");
-		config.addComment("Homes", " ", 
+		getConfig().addDefault("Prefix", "&0&l[&6&lTheBasics&0&l]&6 ");
+		getConfig().addComment("Prefix", " ", "#The prefix for all messaging/broadcasting. (Default='&0&l[&6&lTheBasics&0&l]&6 ')");
+		getConfig().addDefault("TeleportDelay", 3);
+		getConfig().addComment("TeleportDelay", " ", "#The delay for teleporting in seconds. Use the permission'TheBasics.Teleport.Override' to ignore the timer. (Default=3)");
+		getConfig().addDefault("TeleportRequestTime", 60);
+		getConfig().addComment("TeleportRequestTime", " ", "#The time for a player to accept a teleport request. Will cancel after that time in seconds. (Default=60)");
+		getConfig().addDefault("Homes", "");
+		getConfig().addComment("Homes", " ", 
 				"#The max homes per a group. Must use TheBasics permissions/groups. If no value is set, its assumed unlimited.", 
 				"#Can also use 'TheBasics.Home.Unlimited' for max homes.");
-		config.addDefault("CombatTag.Enabled", true);
-		config.addDefault("CombatTag.Time", 10);
-		config.addComment("CombatTag.Enabled", "#If combat tagging should be enabled. If a player is tagged they cannot teleport.");
-		config.addComment("CombatTag.Time", "#The time in seconds that tagging a player will last.");
-		config.addComment("CombatTag", " ");
+		getConfig().addDefault("CombatTag.Enabled", true);
+		getConfig().addDefault("CombatTag.Time", 10);
+		getConfig().addComment("CombatTag.Enabled", "#If combat tagging should be enabled. If a player is tagged they cannot teleport.");
+		getConfig().addComment("CombatTag.Time", "#The time in seconds that tagging a player will last.");
+		getConfig().addComment("CombatTag", " ");
 		
 		//Economy Settings
-		config.addDefault("StartingBalance", 250);
-		config.addComment("StartingBalance", 
+		getConfig().addDefault("StartingBalance", 250);
+		getConfig().addComment("StartingBalance", 
 				" ",
 				"##########################", 
 				"#    Economy Settings    #", 
@@ -74,20 +70,20 @@ public class GeneralConfig extends ConfigModule
 				"##########################",
 				"",
 				"#The balance that all players start with. (Default=250)");
-		config.addDefault("Loaning.Enabled", true);
-		config.addComment("Loaning.Enabled", "#If players should be allowed to loan. (Defualt=true)");
-		config.addDefault("Loaning.MaxAmount", 500);
-		config.addComment("Loaning.MaxAmount"," ", "#The maximum amount a player can loan for. (Default=500)");
-		config.addComment("Loaning", " ");
+		getConfig().addDefault("Loaning.Enabled", true);
+		getConfig().addComment("Loaning.Enabled", "#If players should be allowed to loan. (Defualt=true)");
+		getConfig().addDefault("Loaning.MaxAmount", 500);
+		getConfig().addComment("Loaning.MaxAmount"," ", "#The maximum amount a player can loan for. (Default=500)");
+		getConfig().addComment("Loaning", " ");
 		
 		//ChatSettings
-		config.addDefault("Nickname.Enabled", true);
-		config.addComment("Nickname.Enabled", "#If the command /nick should be allowed.(Default=true)");
-		config.addDefault("Nickname.MaxLength", 20);
-		config.addComment("Nickname.MaxLength"," ", "#The maximum length of a nick. Includes coloring/style. Ex: &6&lGoldenDeveloper is 19. (Default = 20)");
-		config.addDefault("Nickname.MinLength", 5);
-		config.addComment("Nickname.MinLength"," ", "#The minimum length of a nick. Includes coloring/style. Ex: &6&lAu_79 is 9. (Default = 8)");
-		config.addComment("Nickname",
+		getConfig().addDefault("Nickname.Enabled", true);
+		getConfig().addComment("Nickname.Enabled", "#If the command /nick should be allowed.(Default=true)");
+		getConfig().addDefault("Nickname.MaxLength", 20);
+		getConfig().addComment("Nickname.MaxLength"," ", "#The maximum length of a nick. Includes coloring/style. Ex: &6&lGoldenDeveloper is 19. (Default = 20)");
+		getConfig().addDefault("Nickname.MinLength", 5);
+		getConfig().addComment("Nickname.MinLength"," ", "#The minimum length of a nick. Includes coloring/style. Ex: &6&lAu_79 is 9. (Default = 8)");
+		getConfig().addComment("Nickname",
 				" ",
 				"#######################", 
 				"#    Chat Settings    #", 
@@ -95,8 +91,8 @@ public class GeneralConfig extends ConfigModule
 				"#######################",
 				" ");
 		
-		config.addDefault("ChatFormat", "");
-	    config.addComment("ChatFormat", 
+		getConfig().addDefault("ChatFormat", "");
+	    getConfig().addComment("ChatFormat", 
 	    		" ",
 	    		"#The chat format for groups.",
 				"#<World> = world name.",
@@ -104,14 +100,14 @@ public class GeneralConfig extends ConfigModule
 				"#<Name> = player name.",
 				"#<Message> = message.",
 				"#Example: Admin: &f[&c<World>&f] <Prefix> &c<Name> &f: &c<Message>");
-	    config.addDefault("MessageFormat.Sender", "&f[&6You &f-> &6%p&f] %m");
-	    config.addDefault("MessageFormat.Receiver", "&f[&6%p &f-> &6You&f] %m");
-	    config.addComment("MessageFormat", " ", "#The format for messaging players. (%p = sender/recevier, %m = message)");
-	    config.addComment("MessageFormat.Sender", "#What the sender will see.");
-	    config.addComment("MessageFormat.Receiver", " ", "#What the receiver will see.");
+	    getConfig().addDefault("MessageFormat.Sender", "&f[&6You &f-> &6%p&f] %m");
+	    getConfig().addDefault("MessageFormat.Receiver", "&f[&6%p &f-> &6You&f] %m");
+	    getConfig().addComment("MessageFormat", " ", "#The format for messaging players. (%p = sender/recevier, %m = message)");
+	    getConfig().addComment("MessageFormat.Sender", "#What the sender will see.");
+	    getConfig().addComment("MessageFormat.Receiver", " ", "#What the receiver will see.");
 	    
-	    config.addDefault("Kits", "");
-	    config.addComment("Kits",
+	    getConfig().addDefault("Kits", "");
+	    getConfig().addComment("Kits",
 				" ",
 				"#######################", 
 				"#    Kit Settings    #", 

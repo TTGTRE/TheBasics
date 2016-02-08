@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -31,7 +32,7 @@ public class WarnCMD extends CommandModule
 		super(new String[] {"warn"}, 1, Integer.MAX_VALUE, MultiPlayer.ALWAYS);
 	}
 	
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, final String[] args)
 	{
 		Player player2 = Bukkit.getPlayer(args[0]);
 		String reason = BasicUtils.getMessage("WarnDefault").replace("%p", player.getName());
@@ -46,7 +47,7 @@ public class WarnCMD extends CommandModule
 		BasicUtils.sendMessage(player2, BasicUtils.getMessage("WarnReceiver").replace("%r", reason));
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		Player player2 = Bukkit.getPlayer(args[0]);
 		String reason = BasicUtils.getMessage("WarnDefault").replace("%p", console.getName());
@@ -60,4 +61,6 @@ public class WarnCMD extends CommandModule
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("WarnSender").replace("%p", args[0]));
 		BasicUtils.sendMessage(player2, BasicUtils.getMessage("WarnReceiver").replace("%r", reason));
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

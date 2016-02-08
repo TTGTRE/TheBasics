@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -40,7 +41,7 @@ public class GroupCMD extends CommandModule
 		super(new String[] {"group"}, 2, 3, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args) 
+	public void performCommand(final Player player, final String[] args) 
 	{
 		if(player.hasPermission("TheBasics.Group." + args[0]))
 		{
@@ -136,7 +137,7 @@ public class GroupCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args)
+	public void performCommand(final ConsoleCommandSender console, final String[] args)
 	{
 		if(console.hasPermission("TheBasics.Group." + args[0]))
 		{
@@ -231,5 +232,7 @@ public class GroupCMD extends CommandModule
 			BasicUtils.sendMessage(console, BasicUtils.getMessage("NoPermission"));
 		}
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }
 

@@ -22,18 +22,14 @@ import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
 
 public class TextConfig extends ConfigModule
 {
-	private CommentedConfiguration config;
-	
 	public TextConfig(String fileName)
 	{
 		super(fileName);
-		
-		config = getConfig();
-		
+
 		loadDefaults();
 		load();
-		config.options().copyDefaults(true);
-		config.save();
+		getConfig().options().copyDefaults(true);
+		getConfig().save();
 		load();
 	}
 
@@ -41,41 +37,41 @@ public class TextConfig extends ConfigModule
 	public void loadDefaults()
 	{
 		//MOTD Stuff
-		config.addDefault("ListMOTD", "&6Welcome to -=Server=-. It is powered by TheBasics.");
-		config.addComment("ListMOTD", "#The server motd on the server list.");
-		config.addDefault("JoinMOTD", "&6Welcome back to -=Server=-!");
-		config.addComment("JoinMOTD", "#The join message motd.");
-		config.addDefault("FirstJoinMOTD", "&6Welcome to the -=Server=- %p!");
-		config.addComment("FirstJoinMOTD", "#The join message motd for new players.");
+		getConfig().addDefault("ListMOTD", "&6Welcome to -=Server=-. It is powered by TheBasics.");
+		getConfig().addComment("ListMOTD", "#The server motd on the server list.");
+		getConfig().addDefault("JoinMOTD", "&6Welcome back to -=Server=-!");
+		getConfig().addComment("JoinMOTD", "#The join message motd.");
+		getConfig().addDefault("FirstJoinMOTD", "&6Welcome to the -=Server=- %p!");
+		getConfig().addComment("FirstJoinMOTD", "#The join message motd for new players.");
 		
 		//Rules
-		config.addDefault("Rules.PerPage", 3);
-		config.addDefault("Rules.List", Arrays.asList(new String[] 
+		getConfig().addDefault("Rules.PerPage", 3);
+		getConfig().addDefault("Rules.List", Arrays.asList(new String[] 
 				{"&7Please do not swear!",
 				 "&7Please do not grief!",
 				 "&7Please smile more!"
 				}));
-		config.addDefault("Rules.Format.Top", "&6&l----------[Rules - %p/%m]----------");
-		config.addDefault("Rules.Format.Bottom", "&6&l-----------------------------");
-		config.addComment("Rules", " ");
-		config.addComment("Rules.PerPage", "#The amount of rules to list per page. (Default = 3)");
-		config.addComment("Rules.List", "#The list of actual rules.");
-		config.addComment("Rules.Format", "#The formating of the rules.");
-		config.addComment("Rules.Format.Top", "#What should be displayed on the top.(%p = page #, %m = maxPage)");
-		config.addComment("Rules.Format.Bottom", "#What should be displayed on the bottom.");
+		getConfig().addDefault("Rules.Format.Top", "&6&l----------[Rules - %p/%m]----------");
+		getConfig().addDefault("Rules.Format.Bottom", "&6&l-----------------------------");
+		getConfig().addComment("Rules", " ");
+		getConfig().addComment("Rules.PerPage", "#The amount of rules to list per page. (Default = 3)");
+		getConfig().addComment("Rules.List", "#The list of actual rules.");
+		getConfig().addComment("Rules.Format", "#The formating of the rules.");
+		getConfig().addComment("Rules.Format.Top", "#What should be displayed on the top.(%p = page #, %m = maxPage)");
+		getConfig().addComment("Rules.Format.Bottom", "#What should be displayed on the bottom.");
 		
 		//Help
-		config.addDefault("Help.PerPage", 3);
-		config.addDefault("Help.Format.Top", "&6&l----------[Help - %p/%m]----------");
-		config.addDefault("Help.Format.Bottom", "&6&l-----------------------------");
-		config.addComment("Help", " ");
-		config.addComment("Help.PerPage", "#The amount of Help to list per page. (Default = 3)");
-		config.addComment("Help.Format", "#The formating of the Help.");
-		config.addComment("Help.Format.Top", "#What should be displayed on the top.(%p = page #, %m = maxPage)");
-		config.addComment("Help.Format.Bottom", "#What should be displayed on the bottom.");
+		getConfig().addDefault("Help.PerPage", 3);
+		getConfig().addDefault("Help.Format.Top", "&6&l----------[Help - %p/%m]----------");
+		getConfig().addDefault("Help.Format.Bottom", "&6&l-----------------------------");
+		getConfig().addComment("Help", " ");
+		getConfig().addComment("Help.PerPage", "#The amount of Help to list per page. (Default = 3)");
+		getConfig().addComment("Help.Format", "#The formating of the Help.");
+		getConfig().addComment("Help.Format.Top", "#What should be displayed on the top.(%p = page #, %m = maxPage)");
+		getConfig().addComment("Help.Format.Bottom", "#What should be displayed on the bottom.");
 		
 		//Info
-		config.addDefault("Info.List", Arrays.asList(new String[] 
+		getConfig().addDefault("Info.List", Arrays.asList(new String[] 
 				{"&6Name: &7%n",
 				"&6Displayname: &7%d",
 				"&6Address: &7%a",
@@ -85,36 +81,36 @@ public class TextConfig extends ConfigModule
 				"&6LastLogin: &7%l",
 				}));
 		
-		config.addDefault("Info.Format.Top", "&6&l----------[Info]----------");
-		config.addDefault("Info.Format.Bottom", "&6&l---------------------------");
-		config.addComment("Info", " ");
-		config.addComment("Info.List", "#The list of actual Info to be displayed.", "#Max variables are being used.");
-		config.addComment("Info.Format", "#The formating of the Info.");
-		config.addComment("Info.Format.Top", "#What should be displayed on the top.");
-		config.addComment("Info.Format.Bottom", "#What should be displayed on the bottom.");
+		getConfig().addDefault("Info.Format.Top", "&6&l----------[Info]----------");
+		getConfig().addDefault("Info.Format.Bottom", "&6&l---------------------------");
+		getConfig().addComment("Info", " ");
+		getConfig().addComment("Info.List", "#The list of actual Info to be displayed.", "#Max variables are being used.");
+		getConfig().addComment("Info.Format", "#The formating of the Info.");
+		getConfig().addComment("Info.Format.Top", "#What should be displayed on the top.");
+		getConfig().addComment("Info.Format.Bottom", "#What should be displayed on the bottom.");
 		
 		//List
-		config.addDefault("List.PerPage", 15);
-		config.addDefault("List.Format.Top", "&6&l----------[List - %p]----------");
-		config.addDefault("List.Format.Bottom", "&6&l---------------------------");
-		config.addComment("List", " ");
-		config.addComment("List.PerPage", "#The amount of players to list per page. (Default = 15)");
-		config.addComment("List.Format", "#The formating of the List.");
-		config.addComment("List.Format.Top", "#What should be displayed on the top. (%p = page number)");
-		config.addComment("List.Format.Bottom", "#What should be displayed on the bottom");
+		getConfig().addDefault("List.PerPage", 15);
+		getConfig().addDefault("List.Format.Top", "&6&l----------[List - %p]----------");
+		getConfig().addDefault("List.Format.Bottom", "&6&l---------------------------");
+		getConfig().addComment("List", " ");
+		getConfig().addComment("List.PerPage", "#The amount of players to list per page. (Default = 15)");
+		getConfig().addComment("List.Format", "#The formating of the List.");
+		getConfig().addComment("List.Format.Top", "#What should be displayed on the top. (%p = page number)");
+		getConfig().addComment("List.Format.Bottom", "#What should be displayed on the bottom");
 		
 		//Join
-		config.addDefault("Join.Message", "&6%p has joined the server!");
-		config.addDefault("Join.SilentJoin", true);
-		config.addComment("Join", " ");
-		config.addComment("Join.Message", "#The message to be broadcasted when a player joins the server. (%p = playerName)");
-		config.addComment("Join.SilentJoin", "#If players with the permission 'TheBasics.SilentJoin' should not be broadcasted on join. (Defaut = true)");
+		getConfig().addDefault("Join.Message", "&6%p has joined the server!");
+		getConfig().addDefault("Join.SilentJoin", true);
+		getConfig().addComment("Join", " ");
+		getConfig().addComment("Join.Message", "#The message to be broadcasted when a player joins the server. (%p = playerName)");
+		getConfig().addComment("Join.SilentJoin", "#If players with the permission 'TheBasics.SilentJoin' should not be broadcasted on join. (Defaut = true)");
 		
 		//Quit
-		config.addDefault("Quit.Message", "&6%p has left the server!");
-		config.addDefault("Quit.SilentQuit", true);
-		config.addComment("Quit", " ");
-		config.addComment("Quit.Message", "#The message to be broadcasted when a player quit the server. (%p = playerName)");
-		config.addComment("Quit.SilentQuit", "#If players with the permission 'TheBasics.SilentQuit' should not be broadcasted on Quit. (Defaut = true)");
+		getConfig().addDefault("Quit.Message", "&6%p has left the server!");
+		getConfig().addDefault("Quit.SilentQuit", true);
+		getConfig().addComment("Quit", " ");
+		getConfig().addComment("Quit.Message", "#The message to be broadcasted when a player quit the server. (%p = playerName)");
+		getConfig().addComment("Quit.SilentQuit", "#If players with the permission 'TheBasics.SilentQuit' should not be broadcasted on Quit. (Defaut = true)");
 	}
 }

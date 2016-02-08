@@ -22,6 +22,7 @@ import org.apache.commons.lang.time.DateUtils;
 import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -37,7 +38,7 @@ public class TempBanCMD extends CommandModule
 		super(new String[] {"tempban"}, 2, Integer.MAX_VALUE, MultiPlayer.ALWAYS);
 	}
 
-	public void performCommand(Player player, String[] args) 
+	public void performCommand(final Player player, final String[] args) 
 	{
 		PlayerData data = BasicUtils.getData(Bukkit.getPlayer(args[0]));
 		
@@ -63,7 +64,7 @@ public class TempBanCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args)
+	public void performCommand(final ConsoleCommandSender console, final String[] args)
 	{
 		PlayerData data = BasicUtils.getData(Bukkit.getPlayer(args[0]));
 		
@@ -125,4 +126,6 @@ public class TempBanCMD extends CommandModule
 			return null;
 		}
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

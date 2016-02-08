@@ -18,6 +18,7 @@ package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -34,7 +35,7 @@ public class MessageCMD extends CommandModule
 		super(new String[] {"message", "msg", "tell"}, 2, Integer.MAX_VALUE, MultiPlayer.ALWAYS);
 	}
 
-	public void performCommand(Player player, String[] args) 
+	public void performCommand(final Player player, final String[] args) 
 	{
 		PlayerData sender = BasicUtils.getData(player);
 		PlayerData receiver = BasicUtils.getData(Bukkit.getPlayer(args[0]));
@@ -69,7 +70,7 @@ public class MessageCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		Player receiver = Bukkit.getPlayer(args[0]);
 		
@@ -80,4 +81,6 @@ public class MessageCMD extends CommandModule
 		console.sendMessage(messageFormatSender.replace("%p", args[0]).replace("%m", message));
 		receiver.getPlayer().sendMessage(messageFormatReceiver.replace("%p", console.getName()).replace("%m", message));
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

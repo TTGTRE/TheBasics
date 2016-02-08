@@ -22,27 +22,23 @@ import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
 
 public class DataConfig extends ConfigModule
 {
-	private CommentedConfiguration config;
-	
 	public DataConfig(String fileName)
 	{
 		super(fileName);
 		
-		config = getConfig();
-		
 		loadDefaults();
 		load();
-		config.options().copyDefaults(true);
-		config.save();
+		getConfig().options().copyDefaults(true);
+		getConfig().save();
 		load();
 	}
 
 	public void loadDefaults()
 	{
-		config.addDefault("Server", new ArrayList<String>());
-		config.addDefault("Players", new ArrayList<String>());
-		config.addDefault("IpBans", new ArrayList<String>());
+		getConfig().addDefault("Server", new ArrayList<String>());
+		getConfig().addDefault("Players", new ArrayList<String>());
+		getConfig().addDefault("IpBans", new ArrayList<String>());
 		
-		config.addComment("Server", "#Please do not modify this file. It will just mess things up...", " ");
+		getConfig().addComment("Server", "#Please do not modify this file. It will just mess things up...", " ");
 	}
 }

@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -31,17 +32,22 @@ public class FlySpeedCMD extends CommandModule
 		super(new String[] {"flyspeed"}, 1, 2, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, final String[] args)
 	{
 		if(args.length == 1)
 		{
+			if(!player.getAllowFlight())
+			{
+				player.setAllowFlight(true);
+			}
+			
 			try
 			{
 				float speed = Float.parseFloat(args[0]);
 				
 				if(speed <= 20 && speed >= -20)
 				{
-					player.setFlySpeed(speed / 20);
+					player.setFlySpeed((float) (speed / 20));
 					
 					BasicUtils.sendMessage(player, BasicUtils.getMessage("FlySpeedChange").replace("%a", args[0]));
 				}else
@@ -54,37 +60,50 @@ public class FlySpeedCMD extends CommandModule
 			}
 		}else
 		{
-			Player receiver = Bukkit.getPlayer(args[0]);
-			
-			if(receiver != null)
+			if(player.hasPermission("TheBasics.FlySpeed.Others"))
 			{
-				try
+				Player receiver = Bukkit.getPlayer(args[0]);
+				
+				if(receiver != null)
 				{
-					float speed = Float.parseFloat(args[1]);
-					
-					if(speed <= 20 && speed >= -20)
+					if(!receiver.getAllowFlight())
 					{
-						receiver.setFlySpeed(speed / 20);
+						receiver.setAllowFlight(true);
+					}
+					
+					try
+					{
+						float speed = Float.parseFloat(args[1]);
 						
-						BasicUtils.sendMessage(player, BasicUtils.getMessage("FlySpeedChangeSender").replace("%p", args[0]).replace("%a", args[1]));
-						BasicUtils.sendMessage(player, BasicUtils.getMessage("FlySpeedChangeReceiver").replace("%p", player.getName()).replace("%a", args[1]));
-					}else
+						if(speed <= 20 && speed >= -20)
+						{
+							receiver.setFlySpeed((float) (speed / 20));
+							
+							BasicUtils.sendMessage(player, BasicUtils.getMessage("FlySpeedChangeSender").replace("%p", args[0]).replace("%a", args[1]));
+							BasicUtils.sendMessage(player, BasicUtils.getMessage("FlySpeedChangeReceiver").replace("%p", player.getName()).replace("%a", args[1]));
+						}else
+						{
+							BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidValue"));
+						}
+					}catch(NumberFormatException e)
 					{
 						BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidValue"));
 					}
-				}catch(NumberFormatException e)
+				}else
 				{
-					BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidValue"));
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
 				}
 			}else
 			{
-				BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
 			}
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args)
+	public void performCommand(final ConsoleCommandSender console, final String[] args)
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

@@ -28,7 +28,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffectType;
 
 import io.github.GoldenDeveloper79.TheBasics.Enums.EnchantType;
 import io.github.GoldenDeveloper79.TheBasics.Player.PlayerData;
@@ -43,7 +42,7 @@ public class BasicUtils
 		if(message != null && sender != null)
 		{
 			String prefix = TheBasics.getGeneralConfig().getString("Prefix");
-	
+
 			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + message.replace("CONSOLE", "console")));
 		}
 	}
@@ -61,7 +60,7 @@ public class BasicUtils
 			}
 		}
 	}
-	
+
 	/*
 	 * Gets a message from the language config
 	 */
@@ -71,7 +70,7 @@ public class BasicUtils
 		{
 			return TheBasics.getLanguageConfig().getString(key);
 		}
-		
+
 		return null;
 	}
 
@@ -155,7 +154,8 @@ public class BasicUtils
 
 		for(int i = start; i < strings.length; i++)
 		{
-			sb.append(strings[i] + " ");
+			sb.append(strings[i]);
+			sb.append(" ");
 		}
 
 		return sb.toString();
@@ -223,71 +223,50 @@ public class BasicUtils
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	/*
 	 * Gets an enchantment by its name.
 	 */
 	public static Enchantment getEnchantment(String name)
 	{
+		String enchantName;
+		String enchantSpacedName;
+
 		//Bukkit
 		for(Enchantment enchant : Enchantment.values())
 		{
-			if(enchant.getName().equalsIgnoreCase(name))
-			{
-				return enchant;
-			}else if(enchant.getName().replaceAll("_", "").equalsIgnoreCase(name))
+			enchantName = enchant.getName();
+			enchantSpacedName = name.replaceAll("_", "");
+
+			if(enchantName.equalsIgnoreCase(name) || enchantSpacedName.equalsIgnoreCase(name))
 			{
 				return enchant;
 			}
 		}
-		
+
 		//TheBasics
 		for(EnchantType enchantType : EnchantType.values())
 		{
-			if(enchantType.name().equalsIgnoreCase(name))
-			{
-				return enchantType.getEnchantment();
-			}else if(enchantType.name().replaceAll("_", "").equalsIgnoreCase(name))
+			enchantName = enchantType.name();
+			enchantSpacedName = enchantName.replace("_", "");
+
+			if(enchantName.equalsIgnoreCase(name) || enchantSpacedName.equalsIgnoreCase(name)) 
 			{
 				return enchantType.getEnchantment();
 			}
 		}
-		
+
 		return null;
 	}
-	
-	/*
-	 * Gets a potion effect type by its name.
-	 */
-	public static PotionEffectType getPotionEffectType(String name)
-	{
-		for(PotionEffectType type : PotionEffectType.values())
-		{
-			if(type.getName().equalsIgnoreCase(name) || type.getName().replace("_", "").equalsIgnoreCase(name))
-			{
-				return type;
-			}
-		}
-		
-		return null;
-	}
-	
+
 	/*
 	 * Gets the index of an array by a word.
 	 */
 	public static int getIndex(List<String> list, String word)
-	{
-		for(int i = 0; i < list.size(); i++)
-		{
-			if(list.get(i).equalsIgnoreCase(word))
-			{
-				return i;
-			}
-		}
-		
-		return 0;
+	{	
+		return list.contains(word) ? list.indexOf(word) : 0;
 	}
 }

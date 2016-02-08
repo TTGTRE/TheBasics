@@ -32,6 +32,7 @@ import io.github.GoldenDeveloper79.TheBasics.Commands.BackCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BalanceCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BanCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.BasicCommandExecutor;
+import io.github.GoldenDeveloper79.TheBasics.Commands.BroadcastCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.ClearInventoryCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.DeleteHomeCMD;
 import io.github.GoldenDeveloper79.TheBasics.Commands.EnchantCMD;
@@ -187,6 +188,7 @@ public class TheBasics extends JavaPlugin
 		new BackCMD();
 		new BalanceCMD();
 		new BanCMD();
+		new BroadcastCMD();
 		new ClearInventoryCMD();
 		new DeleteHomeCMD();
 		new EnchantCMD();
@@ -251,16 +253,31 @@ public class TheBasics extends JavaPlugin
 	 */
 	private void loadGroups()
 	{
-		//Loads the groups up.
-		for(String groupNames : groupConfig.getConfigurationSection("Groups").getKeys(false))
+		try
 		{
-			new GroupModule(groupNames);
-		}
-		
-		//Loads the inheritances.
-		for(GroupModule mod : Registery.groups.values())
+			//Loads the groups up.
+			for(String groupNames : groupConfig.getConfigurationSection("Groups").getKeys(false))
+			{
+				new GroupModule(groupNames);
+			}
+			
+			//Loads the inheritances.
+			for(GroupModule mod : Registery.groups.values())
+			{
+				mod.loadInheritance();
+			}
+		}catch(Exception e)
 		{
-			mod.loadInheritance();
+			TheBasics.getLog().severe("Could not read from groups.yml! Creating a new file, please look into groups-error.yml!");
+			
+			File newFile = new File("plugins/TheBasics/groups-error.yml");
+			
+			if(newFile.exists()) newFile.delete();
+			
+			groupConfig.getFile().renameTo(newFile);
+			groupConfig = new GroupConfig("groups.yml");
+			
+			loadGroups();
 		}
 	}
 	

@@ -76,10 +76,10 @@ public class BasicCommandExecutor implements CommandExecutor
 					}else if(sender instanceof ConsoleCommandSender && args.length >= 1)
 					{
 						mod.performCommand((ConsoleCommandSender) sender, args);
-					}else
-					{
-						BasicUtils.sendMessage(sender, BasicUtils.getMessage("PlayerCommand"));
 					}
+					
+					//If its alright to have either.
+					mod.performCommand(sender, args);
 				}else
 				{
 					BasicUtils.sendMessage(sender, BasicUtils.getMessage("Usage").replace("%u", mod.getUsage()));

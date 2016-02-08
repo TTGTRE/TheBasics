@@ -19,6 +19,7 @@ package io.github.GoldenDeveloper79.TheBasics.Commands;
 import java.math.BigDecimal;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -36,7 +37,7 @@ public class PlayTimeCMD extends CommandModule
 		super(new String[] {"playtime", "ptime"}, 0, 1, MultiPlayer.SOMETIMES);
 	}
 
-	public void performCommand(Player player, String[] args) 
+	public void performCommand(final Player player, final String[] args) 
 	{
 		if(args.length < 1)
 		{
@@ -117,7 +118,7 @@ public class PlayTimeCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		if(args.length == 1)
 		{
@@ -149,4 +150,6 @@ public class PlayTimeCMD extends CommandModule
 			BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 		}
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

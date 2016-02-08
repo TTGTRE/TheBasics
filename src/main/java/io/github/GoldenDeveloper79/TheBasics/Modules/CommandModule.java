@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Modules;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
@@ -62,12 +63,17 @@ public abstract class CommandModule
 	/*
 	 * Will perform the command if its a player sent command.
 	 */
-	public abstract void performCommand(Player player, String[] args);
+	public abstract void performCommand(final Player player, final String[] args);
 	
 	/*
 	 * Will perform the command if its a console sent command.
 	 */
-	public abstract void performCommand(ConsoleCommandSender console, String[] args);
+	public abstract void performCommand(final ConsoleCommandSender console, final String[] args);
+	
+	/*
+	 * Will perform the command for both.
+	 */
+	public abstract void performCommand(final CommandSender sender, final String[] args);
 	
 	/*
 	 * The labels/aliases of the command.

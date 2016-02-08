@@ -16,6 +16,7 @@
  *******************************************************************************/
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -31,7 +32,7 @@ public class RepairCMD extends CommandModule
 		super(new String[] {"repair"}, 0, 0, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args) 
+	public void performCommand(final Player player, final String[] args) 
 	{
 		ItemStack item = player.getItemInHand();
 		
@@ -52,9 +53,11 @@ public class RepairCMD extends CommandModule
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }
 

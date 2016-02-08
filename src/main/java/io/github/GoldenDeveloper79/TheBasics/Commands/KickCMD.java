@@ -18,6 +18,7 @@ package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -32,7 +33,7 @@ public class KickCMD extends CommandModule
 		super(new String[] {"kick"}, 1, Integer.MAX_VALUE, MultiPlayer.ALWAYS);
 	}
 
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, final String[] args)
 	{
 		Player player2 = Bukkit.getPlayer(args[0]);
 
@@ -48,7 +49,7 @@ public class KickCMD extends CommandModule
 		BasicUtils.sendMessage(player, BasicUtils.getMessage("KickSender").replace("%p", args[0]));
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args) 
+	public void performCommand(final ConsoleCommandSender console, final String[] args) 
 	{
 		Player player2 = Bukkit.getPlayer(args[0]);
 	
@@ -64,4 +65,6 @@ public class KickCMD extends CommandModule
 		BasicUtils.notify("TheBasics.Kick.Notify", BasicUtils.getMessage("KickNotify").replace("%p", console.getName()).replace("%p2", args[0]).replace("%r", reason));
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("KickSender").replace("%p", args[0]));
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

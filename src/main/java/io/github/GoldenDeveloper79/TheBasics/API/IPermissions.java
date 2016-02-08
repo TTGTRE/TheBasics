@@ -85,7 +85,7 @@ public interface IPermissions
 	boolean createGroup(String name);
 	
 	/*
-	 * Inheritats the permissions from a group.
+	 * Inherits the permissions from a group.
 	 */
 	void setInheritance(GroupModule to, GroupModule from);
 }

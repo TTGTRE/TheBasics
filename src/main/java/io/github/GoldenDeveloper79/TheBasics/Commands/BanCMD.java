@@ -19,6 +19,7 @@ package io.github.GoldenDeveloper79.TheBasics.Commands;
 import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -34,39 +35,24 @@ public class BanCMD extends CommandModule
 		super(new String[] {"ban"}, 1, Integer.MAX_VALUE, MultiPlayer.ALWAYS);
 	}
 
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, final String[] args) {}
+	public void performCommand(final ConsoleCommandSender console, final String[] args) {}
+	
+	public void performCommand(final CommandSender sender, final String[] args)
 	{
 		PlayerData data = BasicUtils.getData(Bukkit.getPlayer(args[0]));
 
-		String reason = BasicUtils.getMessage("BanDefault").replace("%p", player.getName());
+		String reason = BasicUtils.getMessage("BanDefault").replace("%p", sender.getName());
 		
 		if(args.length > 1)
 		{
 			reason = BasicUtils.combineString(1, args);
 		}
 		
-		Bukkit.getBanList(Type.NAME).addBan(args[0], reason, null, player.getName());
+		Bukkit.getBanList(Type.NAME).addBan(args[0], reason, null, sender.getName());
 		data.getPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
 		
-		BasicUtils.notify("TheBasics.Ban.Notify", BasicUtils.getMessage("BanNotify").replace("%p", player.getName()).replace("%s", args[0]).replace("%r", reason));
-		BasicUtils.sendMessage(player, BasicUtils.getMessage("BanSender").replace("%p", args[0]));
-	}
-
-	public void performCommand(ConsoleCommandSender console, String[] args) 
-	{
-		PlayerData data = BasicUtils.getData(Bukkit.getPlayer(args[0]));
-
-		String reason = BasicUtils.getMessage("BanDefault").replace("%p", console.getName());
-		
-		if(args.length > 1)
-		{
-			reason = BasicUtils.combineString(1, args);
-		}
-		
-		Bukkit.getBanList(Type.NAME).addBan(args[0], reason, null, console.getName());
-		data.getPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', reason));
-		
-		BasicUtils.notify("TheBasics.Ban.Notify", BasicUtils.getMessage("BanNotify").replace("%p", console.getName()).replace("%p2", args[0]).replace("%r", reason));
-		BasicUtils.sendMessage(console, BasicUtils.getMessage("BanSender").replace("%p", args[0]));
+		BasicUtils.notify("TheBasics.Ban.Notify", BasicUtils.getMessage("BanNotify").replace("%p", sender.getName()).replace("%s", args[0]).replace("%r", reason));
+		BasicUtils.sendMessage(sender, BasicUtils.getMessage("BanSender").replace("%p", args[0]));
 	}
 }

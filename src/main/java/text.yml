@@ -1,0 +1,70 @@
+
+#The server motd on the server list.
+ListMOTD: '&6Welcome to -=Server=-. It is powered by TheBasics.'
+
+#The join message motd.
+JoinMOTD: '&6Welcome back to -=Server=-!'
+
+#The join message motd for new players.
+FirstJoinMOTD: '&6Welcome to the -=Server=- %p!'
+
+Rules:
+  #The amount of rules to list per page. (Default = 3)
+  PerPage: 3
+  #The list of actual rules.
+  List:
+  - '&7Please do not swear!'
+  - '&7Please do not grief!'
+  - '&7Please smile more!'
+  #The formating of the rules.
+  Format:
+    #What should be displayed on the top.(%p = page #, %m = maxPage) 
+    Top: '&6&l----------[Rules - %p/%m]----------'
+    #What should be displayed on the bottom.
+    Bottom: '&6&l-----------------------------'
+
+Help:
+  #The amount of help to list per page. (Default = 5)
+  PerPage: 5
+  Format:
+    #What should be displayed on the top. (%p = page #, %m = maxPage) 
+    Top: '&6&l----------[Help - %p/%m]-----------'
+    #What should be displayed on the bottom.
+    Bottom: '&6&l-----------------------------'
+    
+Info:
+  #What to display in /info.
+  #Max variables used.
+  List:
+  - '&6Name: &7%n'
+  - '&6Displayname: &7%d'
+  - '&6Address: &7%a'
+  - '&6Balance: &7%b'
+  - '&6Group: &7%g'
+  - '&6Playtime: &7%p'
+  - '&6LastLogin: &7%l'
+  Format:
+    #What should be displayed on the top. 
+    Top: '&6&l---------[Info]----------'
+    #What should be displayed on the bottom.
+    Bottom: '&6&l-------------------------'
+  
+List:
+  #The amount of players displayed per a page. (Default = 15)
+  PerPage: 15
+  Format:
+    #What should be displayed on the top.
+    Top: '&6&l----------[List - %p]----------'
+    #What should be displayed on the bottom.
+    Bottom: '&6&l---------------------------'    
+  
+Join:
+  #The message to be broadcasted when a player joins the server. (%p = playerName) 
+  Message: '&6%p has joined the server!'
+  #If players with the permission 'TheBasics.SilentJoin' should not be broadcasted on join. (Defaut = true)
+  SilentJoin: true
+Quit:
+  #The message to be broadcasted when a player quits the server. (%p = playerName) 
+  Message: '&6%p has left the server!'
+  #If players with the permission 'TheBasics.SilentQuit' should not be broadcasted on quit. (Default = true)
+  SilentQuit: true

@@ -1,5 +1,5 @@
 name: TheBasics
-version: 1.09
+version: 1.10
 main: io.github.GoldenDeveloper79.TheBasics.TheBasics
 description: A basic set of functions for Minecraft servers.
 author: [GoldenDeveloper]
@@ -16,6 +16,9 @@ commands:
   ban:
     description: Bans a player from the server.
     usage: /ban <name> <reason>.
+  broadcast:
+    description: Broadcast a message on the server.
+    usage: /broadcast <message>.
   clearinventory:
     description: Clears your or another players inventory.
     usage: /clearinventory <name>.

@@ -17,6 +17,7 @@
 package io.github.GoldenDeveloper79.TheBasics.Commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
@@ -31,7 +32,7 @@ public class SpeedCMD extends CommandModule
 		super(new String[] {"speed"}, 1, 2, MultiPlayer.OTHER);
 	}
 
-	public void performCommand(Player player, String[] args)
+	public void performCommand(final Player player, final String[] args)
 	{
 		if(args.length == 1)
 		{
@@ -53,37 +54,45 @@ public class SpeedCMD extends CommandModule
 			}
 		}else
 		{
-			Player receiver = Bukkit.getPlayer(args[0]);
-			
-			if(receiver != null)
+			if(player.hasPermission("TheBasics.Speed.Others"))
 			{
-				try
+				Player receiver = Bukkit.getPlayer(args[0]);
+				
+				if(receiver != null)
 				{
-					float speed = Float.parseFloat(args[1]);
-					
-					if(speed <= 20 && speed >= -20)
+					try
 					{
-						receiver.setWalkSpeed(speed / 20);
+						float speed = Float.parseFloat(args[1]);
 						
-						BasicUtils.sendMessage(player, BasicUtils.getMessage("SpeedChangeSender").replace("%p", args[0]).replace("%a", args[1]));
-						BasicUtils.sendMessage(player, BasicUtils.getMessage("SpeedChangeReceiver").replace("%p", player.getName()).replace("%a", args[1]));
-					}else
+						if(speed <= 20 && speed >= -20)
+						{
+							receiver.setWalkSpeed(speed / 20);
+							
+							BasicUtils.sendMessage(player, BasicUtils.getMessage("SpeedChangeSender").replace("%p", args[0]).replace("%a", args[1]));
+							BasicUtils.sendMessage(player, BasicUtils.getMessage("SpeedChangeReceiver").replace("%p", player.getName()).replace("%a", args[1]));
+						}else
+						{
+							BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidValue"));
+						}
+					}catch(NumberFormatException e)
 					{
 						BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidValue"));
 					}
-				}catch(NumberFormatException e)
+				}else
 				{
-					BasicUtils.sendMessage(player, BasicUtils.getMessage("InvalidValue"));
+					BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
 				}
 			}else
 			{
-				BasicUtils.sendMessage(player, BasicUtils.getMessage("PlayerOffline"));
+				BasicUtils.sendMessage(player, BasicUtils.getMessage("NoPermission"));
 			}
 		}
 	}
 
-	public void performCommand(ConsoleCommandSender console, String[] args)
+	public void performCommand(final ConsoleCommandSender console, final String[] args)
 	{
 		BasicUtils.sendMessage(console, BasicUtils.getMessage("PlayerCommand"));
 	}
+	
+	public void performCommand(final CommandSender sender, final String[] args){}
 }

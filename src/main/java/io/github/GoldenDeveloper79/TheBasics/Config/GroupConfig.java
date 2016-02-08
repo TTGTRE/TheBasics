@@ -20,31 +20,27 @@ import io.github.GoldenDeveloper79.TheBasics.Modules.ConfigModule;
 
 public class GroupConfig extends ConfigModule
 {
-	private CommentedConfiguration config;
-	
 	public GroupConfig(String fileName)
 	{
 		super(fileName);
-		
-		config = getConfig();
-		
+
 		loadDefaults();
 		load();
-		config.options().copyDefaults(true);
-		config.save();
+		getConfig().options().copyDefaults(true);
+		getConfig().save();
 		load();
 	}
 
 	public void loadDefaults()
 	{
-		config.addDefault("Groups", "");
-		config.addComment("Groups", "#There MUST be a default group.");
+		getConfig().addDefault("Groups", "");
+		getConfig().addComment("Groups", "#There MUST be a default group.");
 		
-		config.addDefault("Ranking.Method", "TIME");
-		config.addDefault("Ranking.Ranks", "");
-		config.addComment("Ranking.Method", "#Different methods coming. (Default=TIME)");
-		config.addComment("Ranking", " ");
-		config.addComment("Ranking.Ranks",
+		getConfig().addDefault("Ranking.Method", "TIME");
+		getConfig().addDefault("Ranking.Ranks", "");
+		getConfig().addComment("Ranking.Method", "#Different methods coming. (Default=TIME)");
+		getConfig().addComment("Ranking", " ");
+		getConfig().addComment("Ranking.Ranks",
 				"#Time in seconds. (New method will include cost in $). To not allow a player to rankup to a group just don't include the rank in this list.",
 				"#Example: Member: 50");
 	}
